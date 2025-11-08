@@ -3,7 +3,7 @@
 		{
 			id: "drag",
 			header: () => null,
-			cell: () => renderSnippet(DragHandle),
+			cell: () => renderSnippet(DragHandle as any, {}),
 		},
 		{
 			id: "select",
@@ -33,12 +33,12 @@
 		{
 			accessorKey: "type",
 			header: "Section Type",
-			cell: ({ row }) => renderSnippet(DataTableType, { row }),
+			cell: ({ row }) => renderSnippet(DataTableType as any, { row }),
 		},
 		{
 			accessorKey: "status",
 			header: "Status",
-			cell: ({ row }) => renderSnippet(DataTableStatus, { row }),
+			cell: ({ row }) => renderSnippet(DataTableStatus as any, { row }),
 		},
 		{
 			accessorKey: "target",
@@ -48,7 +48,7 @@
 						render: () => '<div class="w-full text-right">Target</div>',
 					}))
 				),
-			cell: ({ row }) => renderSnippet(DataTableTarget, { row }),
+			cell: ({ row }) => renderSnippet(DataTableTarget as any, { row }),
 		},
 		{
 			accessorKey: "limit",
@@ -58,7 +58,7 @@
 						render: () => '<div class="w-full text-right">Limit</div>',
 					}))
 				),
-			cell: ({ row }) => renderSnippet(DataTableLimit, { row }),
+			cell: ({ row }) => renderSnippet(DataTableLimit as any, { row }),
 		},
 		{
 			accessorKey: "reviewer",
@@ -67,7 +67,7 @@
 		},
 		{
 			id: "actions",
-			cell: () => renderSnippet(DataTableActions),
+			cell: () => renderSnippet(DataTableActions as any, {}),
 		},
 	];
 </script>

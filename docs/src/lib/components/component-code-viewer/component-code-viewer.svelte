@@ -27,7 +27,22 @@
 <script lang="ts">
 	let { item }: Pick<ComponentCodeViewerContextType, "item"> = $props();
 
-	const tree = $derived(createFileTreeForRegistryItemFiles(item.files));
+	const tree = $derived(
+		createFileTreeForRegistryItemFiles(
+			item.files as Array<{
+				target: string;
+				type:
+					| "registry:file"
+					| "registry:page"
+					| "registry:ui"
+					| "registry:component"
+					| "registry:lib"
+					| "registry:hook"
+					| "registry:theme"
+					| "registry:style";
+			}>
+		)
+	);
 	const highlightedFiles = $derived(item.files);
 
 	function getFirstFileTargetInTree(_tree: typeof tree = tree): string | null {

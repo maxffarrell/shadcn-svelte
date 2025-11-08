@@ -43,6 +43,17 @@
 
 	let { data }: { data: Task[] } = $props();
 
+	// Helper functions to create render snippet configs with type assertions
+	const createColumnHeader = ({ column, title }: { column: any; title: string }) =>
+		renderSnippet(ColumnHeader as any, { column, title });
+	const createTitleCell = ({ labelValue, value }: { labelValue: string; value: string }) =>
+		renderSnippet(TitleCell as any, { labelValue, value });
+	const createStatusCell = ({ value }: { value: string }) =>
+		renderSnippet(StatusCell as any, { value });
+	const createPriorityCell = ({ value }: { value: string }) =>
+		renderSnippet(PriorityCell as any, { value });
+	const createRowActions = ({ row }: { row: any }) => renderSnippet(RowActions as any, { row });
+
 	let rowSelection = $state<RowSelectionState>({});
 	let columnVisibility = $state<VisibilityState>({});
 	let columnFilters = $state<ColumnFiltersState>([]);
@@ -71,12 +82,7 @@
 		},
 		{
 			accessorKey: "id",
-			header: ({ column }) => {
-				return renderSnippet(ColumnHeader, {
-					column,
-					title: "Task",
-				});
-			},
+			header: ({ column }) => createColumnHeader({ column, title: "Task" }),
 			cell: ({ row }) => {
 				const idSnippet = createRawSnippet<[{ id: string }]>((getId) => {
 					const { id } = getId();
@@ -94,50 +100,38 @@
 		},
 		{
 			accessorKey: "title",
-			header: ({ column }) => renderSnippet(ColumnHeader, { column, title: "Title" }),
-			cell: ({ row }) => {
-				return renderSnippet(TitleCell, {
+			header: (column) => createColumnHeader({ column, title: "Title" }),
+			cell: ({ row }) =>
+				createTitleCell({
 					labelValue: row.original.label,
 					value: row.original.title,
-				});
-			},
+				}),
 		},
 		{
 			accessorKey: "status",
-			header: ({ column }) =>
-				renderSnippet(ColumnHeader, {
-					column,
-					title: "Status",
-				}),
-			cell: ({ row }) => {
-				return renderSnippet(StatusCell, {
+			header: ({ column }) => createColumnHeader({ column, title: "Status" }),
+			cell: ({ row }) =>
+				createStatusCell({
 					value: row.original.status,
-				});
-			},
+				}),
 			filterFn: (row, id, value) => {
 				return value.includes(row.getValue(id));
 			},
 		},
 		{
 			accessorKey: "priority",
-			header: ({ column }) => {
-				return renderSnippet(ColumnHeader, {
-					title: "Priority",
-					column,
-				});
-			},
-			cell: ({ row }) => {
-				return renderSnippet(PriorityCell, {
+			header: ({ column }) => createColumnHeader({ column, title: "Priority" }),
+			cell: ({ row }) =>
+				createPriorityCell({
 					value: row.original.priority,
-				});
-			},
+				}),
 			filterFn: (row, id, value) => {
 				return value.includes(row.getValue(id));
 			},
 		},
 		{
 			id: "actions",
-			cell: ({ row }) => renderSnippet(RowActions, { row }),
+			cell: ({ row }) => createRowActions({ row }),
 		},
 	];
 

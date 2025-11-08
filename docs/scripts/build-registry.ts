@@ -16,7 +16,12 @@ import { buildRegistry } from "./registry.js";
 import { baseColors } from "../src/lib/registry/registry-colors.js";
 import { THEME_STYLES_WITH_VARIABLES } from "../src/lib/registry/templates.js";
 import { baseColorsOKLCH } from "../src/lib/registry/registry-base-colors.js";
-import { toJSONSchema } from "zod/v4";
+import { z } from "zod/v3";
+import { zodToJsonSchema } from "zod-to-json-schema";
+
+function toJSONSchema(schema: any) {
+	return zodToJsonSchema(schema);
+}
 
 const prettierConfig = await prettier.resolveConfig(import.meta.url);
 if (!prettierConfig) throw new Error("Failed to resolve prettier config.");

@@ -61,5 +61,21 @@ export const load: PageLoad = async ({ params, data, fetch }) => {
 
 	const blocks = await Promise.all(loadItems);
 
-	return { blocks };
+	return {
+		blocks: blocks as (HighlightedBlock & {
+			files: Array<{
+				target: string;
+				type:
+					| "registry:file"
+					| "registry:page"
+					| "registry:ui"
+					| "registry:component"
+					| "registry:lib"
+					| "registry:hook"
+					| "registry:theme"
+					| "registry:style";
+			}>;
+			component?: Promise<Component>;
+		})[],
+	};
 };

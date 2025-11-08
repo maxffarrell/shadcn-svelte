@@ -73,6 +73,11 @@
 		},
 	];
 
+	// Helper functions to create render snippet configs with type assertions
+	const createEmailHeader = ({ column }: { column: any }) =>
+		renderSnippet(EmailHeader as any, { column });
+	const createActionsCell = ({ row }: { row: any }) => renderSnippet(ActionsCell as any, { row });
+
 	const columns: ColumnDef<Payment>[] = [
 		{
 			id: "select",
@@ -106,7 +111,7 @@
 		},
 		{
 			accessorKey: "email",
-			header: ({ column }) => renderSnippet(EmailHeader, { column }),
+			header: ({ column }) => createEmailHeader({ column }),
 			cell: ({ row }) => {
 				const emailSnippet = createRawSnippet<[{ email: string }]>((getEmail) => {
 					const { email } = getEmail();
@@ -142,7 +147,7 @@
 		{
 			id: "actions",
 			enableHiding: false,
-			cell: ({ row }) => renderSnippet(ActionsCell, { row }),
+			cell: ({ row }) => createActionsCell({ row }),
 		},
 	];
 

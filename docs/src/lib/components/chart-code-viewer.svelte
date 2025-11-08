@@ -65,7 +65,7 @@
 
 {#if !isDesktop.current}
 	<Drawer.Root>
-		<Drawer.Trigger child={Trigger} />
+		<Drawer.Trigger child={Trigger as any} />
 		<Drawer.Content
 			class={cn(
 				"flex max-h-[80vh] flex-col sm:max-h-[90vh] [&>div.bg-muted]:shrink-0",
@@ -84,7 +84,7 @@
 	</Drawer.Root>
 {:else}
 	<Sheet.Root>
-		<Sheet.Trigger child={Trigger} />
+		<Sheet.Trigger child={Trigger as any} />
 		<Sheet.Content
 			side="right"
 			class={cn(

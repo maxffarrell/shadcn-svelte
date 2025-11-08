@@ -1,9 +1,26 @@
 <script lang="ts" module>
+	// Helper functions to create render snippet configs with type assertions
+	const createDragHandle = () => renderSnippet(DragHandle as any, {});
+
+	const createDataTableType = ({ row }: { row: any }) =>
+		renderSnippet(DataTableType as any, { row });
+
+	const createDataTableStatus = ({ row }: { row: any }) =>
+		renderSnippet(DataTableStatus as any, { row });
+
+	const createDataTableTarget = ({ row }: { row: any }) =>
+		renderSnippet(DataTableTarget as any, { row });
+
+	const createDataTableLimit = ({ row }: { row: any }) =>
+		renderSnippet(DataTableLimit as any, { row });
+
+	const createDataTableActions = () => renderSnippet(DataTableActions as any, {});
+
 	export const columns: ColumnDef<Schema>[] = [
 		{
 			id: "drag",
 			header: () => null,
-			cell: () => renderSnippet(DragHandle),
+			cell: createDragHandle,
 		},
 		{
 			id: "select",
@@ -33,12 +50,12 @@
 		{
 			accessorKey: "type",
 			header: "Section Type",
-			cell: ({ row }) => renderSnippet(DataTableType, { row }),
+			cell: createDataTableType,
 		},
 		{
 			accessorKey: "status",
 			header: "Status",
-			cell: ({ row }) => renderSnippet(DataTableStatus, { row }),
+			cell: createDataTableStatus,
 		},
 		{
 			accessorKey: "target",
@@ -46,9 +63,10 @@
 				renderSnippet(
 					createRawSnippet(() => ({
 						render: () => '<div class="w-full text-right">Target</div>',
-					}))
+					})),
+					{}
 				),
-			cell: ({ row }) => renderSnippet(DataTableTarget, { row }),
+			cell: createDataTableTarget,
 		},
 		{
 			accessorKey: "limit",
@@ -56,9 +74,10 @@
 				renderSnippet(
 					createRawSnippet(() => ({
 						render: () => '<div class="w-full text-right">Limit</div>',
-					}))
+					})),
+					{}
 				),
-			cell: ({ row }) => renderSnippet(DataTableLimit, { row }),
+			cell: createDataTableLimit,
 		},
 		{
 			accessorKey: "reviewer",
@@ -67,7 +86,7 @@
 		},
 		{
 			id: "actions",
-			cell: () => renderSnippet(DataTableActions),
+			cell: createDataTableActions,
 		},
 	];
 </script>

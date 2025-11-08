@@ -16,6 +16,19 @@ export const load: PageLoad = async ({ fetch }) => {
 	return {
 		blocks: result.sort(
 			(a, b) => FEATURED_BLOCKS.indexOf(a.name) - FEATURED_BLOCKS.indexOf(b.name)
-		),
+		) as (HighlightedBlock & {
+			files: Array<{
+				target: string;
+				type:
+					| "registry:file"
+					| "registry:page"
+					| "registry:ui"
+					| "registry:component"
+					| "registry:lib"
+					| "registry:hook"
+					| "registry:theme"
+					| "registry:style";
+			}>;
+		})[],
 	};
 };
