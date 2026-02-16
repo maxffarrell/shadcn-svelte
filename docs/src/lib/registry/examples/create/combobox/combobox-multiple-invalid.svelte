@@ -1,61 +1,117 @@
 <script lang="ts">
 	import Example from "../../../../../routes/(app)/(layout)/(create)/components/example.svelte";
-	import * as Command from "$lib/registry/ui/command/index.js";
-	import * as Popover from "$lib/registry/ui/popover/index.js";
+	import * as Combobox from "$lib/registry/ui/combobox/index.js";
 	import * as Field from "$lib/registry/ui/field/index.js";
 	import { Badge } from "$lib/registry/ui/badge/index.js";
 	import IconPlaceholder from "$lib/components/icon-placeholder/icon-placeholder.svelte";
-	import { cn } from "$lib/utils.js";
 
-	const frameworks = ["Next.js", "SvelteKit", "Nuxt.js", "Remix", "Astro"] as const;
+	const frameworks = [
+		{ value: "nextjs", label: "Next.js" },
+		{ value: "sveltekit", label: "SvelteKit" },
+		{ value: "nuxtjs", label: "Nuxt.js" },
+		{ value: "remix", label: "Remix" },
+		{ value: "astro", label: "Astro" },
+	];
 
 	let open = $state(false);
+	let values = $state<string[]>(["nextjs", "sveltekit"]);
+	let searchValue = $state("");
+
 	let openInvalid = $state(false);
-	let values = $state<string[]>([frameworks[0], frameworks[1]]);
-	let valuesInvalid = $state<string[]>([frameworks[0], frameworks[1], frameworks[2]]);
+	let valuesInvalid = $state<string[]>(["nextjs", "sveltekit", "nuxtjs"]);
+	let searchValueInvalid = $state("");
 
-	function toggleValue(framework: (typeof frameworks)[number], target: "default" | "invalid") {
-		const current = target === "default" ? values : valuesInvalid;
-		const setter =
-			target === "default"
-				? (v: string[]) => (values = v)
-				: (v: string[]) => (valuesInvalid = v);
-		setter(
-			current.includes(framework)
-				? current.filter((v) => v !== framework)
-				: [...current, framework]
-		);
-	}
+	const filteredItems = $derived(
+		searchValue === ""
+			? frameworks
+			: frameworks.filter((f) =>
+					f.label.toLowerCase().includes(searchValue.toLowerCase())
+				)
+	);
 
-	function removeValue(e: MouseEvent, framework: string, target: "default" | "invalid") {
+	const filteredItemsInvalid = $derived(
+		searchValueInvalid === ""
+			? frameworks
+			: frameworks.filter((f) =>
+					f.label.toLowerCase().includes(searchValueInvalid.toLowerCase())
+				)
+	);
+
+	const selectedLabels = $derived(
+		frameworks.filter((f) => values.includes(f.value)).map((f) => f.label)
+	);
+
+	const selectedLabelsInvalid = $derived(
+		frameworks.filter((f) => valuesInvalid.includes(f.value)).map((f) => f.label)
+	);
+
+	function removeValue(e: MouseEvent, index: number, target: "default" | "invalid") {
 		e.stopPropagation();
 		if (target === "default") {
-			values = values.filter((v) => v !== framework);
+			values = values.filter((_, i) => i !== index);
 		} else {
-			valuesInvalid = valuesInvalid.filter((v) => v !== framework);
+			valuesInvalid = valuesInvalid.filter((_, i) => i !== index);
 		}
 	}
 </script>
 
 <Example title="Combobox Multiple Invalid">
 	<div class="flex flex-col gap-4">
-		<Popover.Root bind:open>
-			<Popover.Trigger>
-				{#snippet child({ props })}
-					<div
-						{...props}
-						role="combobox"
-						aria-expanded={open}
-						aria-invalid={true}
-						class="border-input bg-background aria-invalid:border-destructive dark:aria-invalid:border-destructive/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 flex min-h-9 w-64 cursor-pointer flex-wrap items-center gap-1.5 rounded-md border px-2.5 py-1.5 text-sm shadow-xs transition-colors focus-within:ring-[3px] focus-within:ring-offset-2 aria-invalid:ring-[3px]"
-					>
-						{#each values as framework (framework)}
+		<div class="flex flex-col gap-2">
+			{#if selectedLabels.length > 0}
+				<div class="flex flex-wrap gap-1.5">
+					{#each selectedLabels as label, i (label)}
+						<Badge
+							variant="secondary"
+							class="gap-1 pr-0.5"
+							onclick={(e) => removeValue(e, i, "default")}
+						>
+							{label}
+							<IconPlaceholder
+								lucide="XIcon"
+								tabler="IconX"
+								hugeicons="Cancel01Icon"
+								phosphor="XIcon"
+								remixicon="RiCloseLine"
+								class="size-3"
+							/>
+						</Badge>
+					{/each}
+				</div>
+			{/if}
+			<Combobox.Root type="multiple" bind:open bind:value={values} items={frameworks}>
+				<Combobox.Input
+					placeholder="Select frameworks..."
+					oninput={(e) => (searchValue = e.currentTarget.value)}
+					class="w-64"
+					aria-invalid="true"
+				/>
+				<Combobox.Content>
+					{#if filteredItems.length === 0}
+						<Combobox.Empty>No items found.</Combobox.Empty>
+					{:else}
+						<Combobox.Group>
+							{#each filteredItems as framework (framework.value)}
+								<Combobox.Item value={framework.value} label={framework.label} />
+							{/each}
+						</Combobox.Group>
+					{/if}
+				</Combobox.Content>
+			</Combobox.Root>
+		</div>
+
+		<Field.Field data-invalid>
+			<Field.Label for="combobox-multiple-invalid">Frameworks</Field.Label>
+			<div class="flex flex-col gap-2">
+				{#if selectedLabelsInvalid.length > 0}
+					<div class="flex flex-wrap gap-1.5">
+						{#each selectedLabelsInvalid as label, i (label)}
 							<Badge
 								variant="secondary"
 								class="gap-1 pr-0.5"
-								onclick={(e) => removeValue(e, framework, "default")}
+								onclick={(e) => removeValue(e, i, "invalid")}
 							>
-								{framework}
+								{label}
 								<IconPlaceholder
 									lucide="XIcon"
 									tabler="IconX"
@@ -67,100 +123,33 @@
 							</Badge>
 						{/each}
 					</div>
-				{/snippet}
-			</Popover.Trigger>
-			<Popover.Content class="w-64 p-0" align="start">
-				<Command.Root>
-					<Command.Input placeholder="Search framework..." />
-					<Command.List>
-						<Command.Empty>No items found.</Command.Empty>
-						<Command.Group value="frameworks">
-							{#each frameworks as framework (framework)}
-								<Command.Item
-									value={framework}
-									onSelect={() => toggleValue(framework, "default")}
-								>
-									<IconPlaceholder
-										lucide="CheckIcon"
-										tabler="IconCheck"
-										hugeicons="Tick02Icon"
-										phosphor="CheckIcon"
-										remixicon="RiCheckLine"
-										class={cn(
-											!values.includes(framework) && "text-transparent"
-										)}
-									/>
-									{framework}
-								</Command.Item>
-							{/each}
-						</Command.Group>
-					</Command.List>
-				</Command.Root>
-			</Popover.Content>
-		</Popover.Root>
-		<Field.Field data-invalid>
-			<Field.Label for="combobox-multiple-invalid">Frameworks</Field.Label>
-			<Popover.Root bind:open={openInvalid}>
-				<Popover.Trigger>
-					{#snippet child({ props })}
-						<div
-							{...props}
-							role="combobox"
-							aria-expanded={openInvalid}
-							aria-invalid={true}
-							id="combobox-multiple-invalid"
-							class="border-input bg-background aria-invalid:border-destructive dark:aria-invalid:border-destructive/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 flex min-h-9 w-64 cursor-pointer flex-wrap items-center gap-1.5 rounded-md border px-2.5 py-1.5 text-sm shadow-xs transition-colors focus-within:ring-[3px] focus-within:ring-offset-2 aria-invalid:ring-[3px]"
-						>
-							{#each valuesInvalid as framework (framework)}
-								<Badge
-									variant="secondary"
-									class="gap-1 pr-0.5"
-									onclick={(e) => removeValue(e, framework, "invalid")}
-								>
-									{framework}
-									<IconPlaceholder
-										lucide="XIcon"
-										tabler="IconX"
-										hugeicons="Cancel01Icon"
-										phosphor="XIcon"
-										remixicon="RiCloseLine"
-										class="size-3"
-									/>
-								</Badge>
-							{/each}
-						</div>
-					{/snippet}
-				</Popover.Trigger>
-				<Popover.Content class="w-64 p-0" align="start">
-					<Command.Root>
-						<Command.Input placeholder="Search framework..." />
-						<Command.List>
-							<Command.Empty>No items found.</Command.Empty>
-							<Command.Group value="frameworks">
-								{#each frameworks as framework (framework)}
-									<Command.Item
-										value={framework}
-										onSelect={() => toggleValue(framework, "invalid")}
-									>
-										<IconPlaceholder
-											lucide="CheckIcon"
-											tabler="IconCheck"
-											hugeicons="Tick02Icon"
-											phosphor="CheckIcon"
-											remixicon="RiCheckLine"
-											class={cn(
-												!valuesInvalid.includes(framework) &&
-													"text-transparent"
-											)}
-										/>
-										{framework}
-									</Command.Item>
+				{/if}
+				<Combobox.Root
+					type="multiple"
+					bind:open={openInvalid}
+					bind:value={valuesInvalid}
+					items={frameworks}
+				>
+					<Combobox.Input
+						placeholder="Select frameworks..."
+						oninput={(e) => (searchValueInvalid = e.currentTarget.value)}
+						class="w-64"
+						aria-invalid
+						id="combobox-multiple-invalid"
+					/>
+					<Combobox.Content>
+						{#if filteredItemsInvalid.length === 0}
+							<Combobox.Empty>No items found.</Combobox.Empty>
+						{:else}
+							<Combobox.Group>
+								{#each filteredItemsInvalid as framework (framework.value)}
+									<Combobox.Item value={framework.value} label={framework.label} />
 								{/each}
-							</Command.Group>
-						</Command.List>
-					</Command.Root>
-				</Popover.Content>
-			</Popover.Root>
+							</Combobox.Group>
+						{/if}
+					</Combobox.Content>
+				</Combobox.Root>
+			</div>
 			<Field.Description>Please select at least one framework.</Field.Description>
 			<Field.Error errors={[{ message: "This field is required." }]} />
 		</Field.Field>

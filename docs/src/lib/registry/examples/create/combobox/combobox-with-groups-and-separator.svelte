@@ -1,114 +1,86 @@
 <script lang="ts">
-	import { tick } from "svelte";
 	import Example from "../../../../../routes/(app)/(layout)/(create)/components/example.svelte";
-	import * as Command from "$lib/registry/ui/command/index.js";
-	import * as Popover from "$lib/registry/ui/popover/index.js";
-	import { Button } from "$lib/registry/ui/button/index.js";
-	import IconPlaceholder from "$lib/components/icon-placeholder/icon-placeholder.svelte";
-	import { cn } from "$lib/utils.js";
+	import * as Combobox from "$lib/registry/ui/combobox/index.js";
 
 	const timezones = [
 		{
-			value: "Americas",
+			continent: "Americas",
 			items: [
-				"(GMT-5) New York",
-				"(GMT-8) Los Angeles",
-				"(GMT-6) Chicago",
-				"(GMT-5) Toronto",
-				"(GMT-8) Vancouver",
-				"(GMT-3) São Paulo",
+				{ value: "ny", label: "(GMT-5) New York" },
+				{ value: "la", label: "(GMT-8) Los Angeles" },
+				{ value: "chicago", label: "(GMT-6) Chicago" },
+				{ value: "toronto", label: "(GMT-5) Toronto" },
+				{ value: "vancouver", label: "(GMT-8) Vancouver" },
+				{ value: "saopaulo", label: "(GMT-3) São Paulo" },
 			],
 		},
 		{
-			value: "Europe",
+			continent: "Europe",
 			items: [
-				"(GMT+0) London",
-				"(GMT+1) Paris",
-				"(GMT+1) Berlin",
-				"(GMT+1) Rome",
-				"(GMT+1) Madrid",
-				"(GMT+1) Amsterdam",
+				{ value: "london", label: "(GMT+0) London" },
+				{ value: "paris", label: "(GMT+1) Paris" },
+				{ value: "berlin", label: "(GMT+1) Berlin" },
+				{ value: "rome", label: "(GMT+1) Rome" },
+				{ value: "madrid", label: "(GMT+1) Madrid" },
+				{ value: "amsterdam", label: "(GMT+1) Amsterdam" },
 			],
 		},
 		{
-			value: "Asia/Pacific",
+			continent: "Asia/Pacific",
 			items: [
-				"(GMT+9) Tokyo",
-				"(GMT+8) Shanghai",
-				"(GMT+8) Singapore",
-				"(GMT+4) Dubai",
-				"(GMT+11) Sydney",
-				"(GMT+9) Seoul",
+				{ value: "tokyo", label: "(GMT+9) Tokyo" },
+				{ value: "shanghai", label: "(GMT+8) Shanghai" },
+				{ value: "singapore", label: "(GMT+8) Singapore" },
+				{ value: "dubai", label: "(GMT+4) Dubai" },
+				{ value: "sydney", label: "(GMT+11) Sydney" },
+				{ value: "seoul", label: "(GMT+9) Seoul" },
 			],
 		},
-	] as const;
+	];
+
+	const allItems = timezones.flatMap((tz) => tz.items);
 
 	let open = $state(false);
-	let value = $state("");
-	let triggerRef = $state<HTMLButtonElement>(null!);
+	let value = $state<string | undefined>(undefined);
+	let searchValue = $state("");
 
-	function closeAndFocusTrigger() {
-		open = false;
-		tick().then(() => {
-			triggerRef?.focus();
-		});
-	}
+	const filteredTimezones = $derived(
+		timezones
+			.map((group) => ({
+				...group,
+				items: group.items.filter((item) =>
+					item.label.toLowerCase().includes(searchValue.toLowerCase())
+				),
+			}))
+			.filter((group) => group.items.length > 0)
+	);
+
+	const hasResults = $derived(filteredTimezones.length > 0);
 </script>
 
 <Example title="With Groups and Separator">
-	<Popover.Root bind:open>
-		<Popover.Trigger bind:ref={triggerRef}>
-			{#snippet child({ props })}
-				<Button
-					{...props}
-					variant="outline"
-					class="w-[200px] justify-between font-normal"
-					role="combobox"
-					aria-expanded={open}
-				>
-					{value || "Select a timezone"}
-					<IconPlaceholder
-						lucide="ChevronDownIcon"
-						tabler="IconChevronDown"
-						hugeicons="ArrowDown01Icon"
-						phosphor="CaretDownIcon"
-						remixicon="RiArrowDownSLine"
-						class="text-muted-foreground size-4 opacity-50"
-					/>
-				</Button>
-			{/snippet}
-		</Popover.Trigger>
-		<Popover.Content class="w-[200px] p-0" align="start">
-			<Command.Root>
-				<Command.Input placeholder="Search timezone..." />
-				<Command.List>
-					<Command.Empty>No timezones found.</Command.Empty>
-					{#each timezones as group (group.value)}
-						<Command.Group heading={group.value} value={group.value}>
-							{#each group.items as item (item)}
-								<Command.Item
-									value={item}
-									onSelect={() => {
-										value = item;
-										closeAndFocusTrigger();
-									}}
-								>
-									<IconPlaceholder
-										lucide="CheckIcon"
-										tabler="IconCheck"
-										hugeicons="Tick02Icon"
-										phosphor="CheckIcon"
-										remixicon="RiCheckLine"
-										class={cn(value !== item && "text-transparent")}
-									/>
-									{item}
-								</Command.Item>
-							{/each}
-						</Command.Group>
-						<Command.Separator />
-					{/each}
-				</Command.List>
-			</Command.Root>
-		</Popover.Content>
-	</Popover.Root>
+	<Combobox.Root type="single" bind:open bind:value items={allItems}>
+		<Combobox.Input
+			placeholder="Search timezone..."
+			oninput={(e) => (searchValue = e.currentTarget.value)}
+			class="w-[200px]"
+		/>
+		<Combobox.Content>
+			{#if !hasResults}
+				<Combobox.Empty>No timezones found.</Combobox.Empty>
+			{:else}
+				{#each filteredTimezones as group, i (group.continent)}
+					{#if i > 0}
+						<Combobox.Separator />
+					{/if}
+					<Combobox.Group>
+						<Combobox.GroupHeading>{group.continent}</Combobox.GroupHeading>
+						{#each group.items as item (item.value)}
+							<Combobox.Item value={item.value} label={item.label} />
+						{/each}
+					</Combobox.Group>
+				{/each}
+			{/if}
+		</Combobox.Content>
+	</Combobox.Root>
 </Example>

@@ -10,12 +10,14 @@
 	let {
 		ref = $bindable(null),
 		class: className,
+		position = "popper",
 		sideOffset = 4,
 		portalProps,
 		children,
 		preventScroll = true,
 		...restProps
 	}: WithoutChild<SelectPrimitive.ContentProps> & {
+		position?: "item-aligned" | "popper";
 		portalProps?: WithoutChildrenOrChild<ComponentProps<typeof SelectPortal>>;
 	} = $props();
 </script>
@@ -28,6 +30,8 @@
 		data-slot="select-content"
 		class={cn(
 			"cn-select-content cn-menu-target relative isolate z-50 overflow-x-hidden overflow-y-auto",
+			position === "popper" &&
+				"data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1",
 			className
 		)}
 		{...restProps}

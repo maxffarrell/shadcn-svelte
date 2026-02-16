@@ -11,7 +11,7 @@
 		{ label: "Japanese", value: "ja" },
 		{ label: "Korean", value: "ko" },
 		{ label: "Chinese", value: "zh" },
-	] as const;
+	];
 
 	const formSchema = z.object({
 		language: z.enum(["en", "fr", "de", "es", "pt", "ru", "ja", "ko", "zh"]),
@@ -20,17 +20,11 @@
 
 <script lang="ts">
 	import { defaults, superForm } from "sveltekit-superforms";
-	import { tick } from "svelte";
-	import CheckIcon from "@lucide/svelte/icons/check";
-	import ChevronsUpDownIcon from "@lucide/svelte/icons/chevrons-up-down";
 	import { zod4 } from "sveltekit-superforms/adapters";
 	import { toast } from "svelte-sonner";
 	import { useId } from "bits-ui";
 	import * as Form from "$lib/registry/ui/form/index.js";
-	import * as Popover from "$lib/registry/ui/popover/index.js";
-	import * as Command from "$lib/registry/ui/command/index.js";
-	import { cn } from "$lib/utils.js";
-	import { buttonVariants } from "$lib/registry/ui/button/index.js";
+	import * as Combobox from "$lib/registry/ui/combobox/index.js";
 
 	const form = superForm(defaults(zod4(formSchema)), {
 		validators: zod4(formSchema),
@@ -46,68 +40,56 @@
 
 	const { form: formData, enhance } = form;
 
-	let open = false;
+	let open = $state(false);
+	let searchValue = $state("");
 
-	// We want to refocus the trigger button when the user selects
-	// an item from the list so users can continue navigating the
-	// rest of the form with the keyboard.
-	function closeAndFocusTrigger(triggerId: string) {
-		open = false;
-		tick().then(() => {
-			document.getElementById(triggerId)?.focus();
-		});
-	}
+	const filteredItems = $derived(
+		searchValue === ""
+			? languages
+			: languages.filter((l) =>
+					l.label.toLowerCase().includes(searchValue.toLowerCase())
+				)
+	);
+
+	const selectedLabel = $derived(
+		languages.find((l) => l.value === $formData.language)?.label ?? "Select language"
+	);
+
 	const triggerId = useId();
 </script>
 
 <form method="POST" class="space-y-6" use:enhance>
 	<Form.Field {form} name="language" class="flex flex-col">
-		<Popover.Root bind:open>
+		<Combobox.Root
+			type="single"
+			bind:open
+			bind:value={$formData.language}
+			items={languages}
+		>
 			<Form.Control id={triggerId}>
 				{#snippet children({ props })}
 					<Form.Label>Language</Form.Label>
-					<Popover.Trigger
-						class={cn(
-							buttonVariants({ variant: "outline" }),
-							"w-[200px] justify-between",
-							!$formData.language && "text-muted-foreground"
-						)}
-						role="combobox"
+					<Combobox.Input
+						placeholder={selectedLabel}
+						oninput={(e) => (searchValue = e.currentTarget.value)}
+						class="w-[200px]"
 						{...props}
-					>
-						{languages.find((f) => f.value === $formData.language)?.label ??
-							"Select language"}
-						<ChevronsUpDownIcon class="opacity-50" />
-					</Popover.Trigger>
+					/>
 					<input hidden value={$formData.language} name={props.name} />
 				{/snippet}
 			</Form.Control>
-			<Popover.Content class="w-[200px] p-0">
-				<Command.Root>
-					<Command.Input autofocus placeholder="Search language..." class="h-9" />
-					<Command.Empty>No language found.</Command.Empty>
-					<Command.Group value="languages">
-						{#each languages as language (language.value)}
-							<Command.Item
-								value={language.label}
-								onSelect={() => {
-									$formData.language = language.value;
-									closeAndFocusTrigger(triggerId);
-								}}
-							>
-								{language.label}
-								<CheckIcon
-									class={cn(
-										"ms-auto",
-										language.value !== $formData.language && "text-transparent"
-									)}
-								/>
-							</Command.Item>
+			<Combobox.Content>
+				{#if filteredItems.length === 0}
+					<Combobox.Empty>No language found.</Combobox.Empty>
+				{:else}
+					<Combobox.Group>
+						{#each filteredItems as language (language.value)}
+							<Combobox.Item value={language.value} label={language.label} />
 						{/each}
-					</Command.Group>
-				</Command.Root>
-			</Popover.Content>
-		</Popover.Root>
+					</Combobox.Group>
+				{/if}
+			</Combobox.Content>
+		</Combobox.Root>
 		<Form.Description>
 			This is the language that will be used in the dashboard.
 		</Form.Description>

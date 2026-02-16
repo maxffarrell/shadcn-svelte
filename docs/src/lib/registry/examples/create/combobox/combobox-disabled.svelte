@@ -1,80 +1,45 @@
 <script lang="ts">
-	import { tick } from "svelte";
 	import Example from "../../../../../routes/(app)/(layout)/(create)/components/example.svelte";
-	import * as Command from "$lib/registry/ui/command/index.js";
-	import * as Popover from "$lib/registry/ui/popover/index.js";
-	import { Button } from "$lib/registry/ui/button/index.js";
-	import IconPlaceholder from "$lib/components/icon-placeholder/icon-placeholder.svelte";
-	import { cn } from "$lib/utils.js";
+	import * as Combobox from "$lib/registry/ui/combobox/index.js";
 
-	const frameworks = ["Next.js", "SvelteKit", "Nuxt.js", "Remix", "Astro"] as const;
+	const frameworks = [
+		{ value: "nextjs", label: "Next.js" },
+		{ value: "sveltekit", label: "SvelteKit" },
+		{ value: "nuxtjs", label: "Nuxt.js" },
+		{ value: "remix", label: "Remix" },
+		{ value: "astro", label: "Astro" },
+	];
 
 	let open = $state(false);
-	let value = $state("");
-	let triggerRef = $state<HTMLButtonElement>(null!);
+	let value = $state<string | undefined>(undefined);
+	let searchValue = $state("");
 
-	const selectedValue = $derived(value || null);
-
-	function closeAndFocusTrigger() {
-		open = false;
-		tick().then(() => {
-			triggerRef?.focus();
-		});
-	}
+	const filteredItems = $derived(
+		searchValue === ""
+			? frameworks
+			: frameworks.filter((f) =>
+					f.label.toLowerCase().includes(searchValue.toLowerCase())
+				)
+	);
 </script>
 
 <Example title="Disabled">
-	<Popover.Root bind:open>
-		<Popover.Trigger bind:ref={triggerRef}>
-			{#snippet child({ props })}
-				<Button
-					{...props}
-					variant="outline"
-					class="w-[200px] justify-between font-normal"
-					role="combobox"
-					aria-expanded={open}
-					disabled
-				>
-					{selectedValue ?? "Select a framework"}
-					<IconPlaceholder
-						lucide="ChevronDownIcon"
-						tabler="IconChevronDown"
-						hugeicons="ArrowDown01Icon"
-						phosphor="CaretDownIcon"
-						remixicon="RiArrowDownSLine"
-						class="text-muted-foreground size-4 opacity-50"
-					/>
-				</Button>
-			{/snippet}
-		</Popover.Trigger>
-		<Popover.Content class="w-[200px] p-0" align="start">
-			<Command.Root>
-				<Command.Input placeholder="Search framework..." />
-				<Command.List>
-					<Command.Empty>No items found.</Command.Empty>
-					<Command.Group value="frameworks">
-						{#each frameworks as framework (framework)}
-							<Command.Item
-								value={framework}
-								onSelect={() => {
-									value = framework;
-									closeAndFocusTrigger();
-								}}
-							>
-								<IconPlaceholder
-									lucide="CheckIcon"
-									tabler="IconCheck"
-									hugeicons="Tick02Icon"
-									phosphor="CheckIcon"
-									remixicon="RiCheckLine"
-									class={cn(value !== framework && "text-transparent")}
-								/>
-								{framework}
-							</Command.Item>
-						{/each}
-					</Command.Group>
-				</Command.List>
-			</Command.Root>
-		</Popover.Content>
-	</Popover.Root>
+	<Combobox.Root type="single" bind:open bind:value items={frameworks} disabled>
+		<Combobox.Input
+			placeholder="Search framework..."
+			oninput={(e) => (searchValue = e.currentTarget.value)}
+			class="w-[200px]"
+		/>
+		<Combobox.Content>
+			{#if filteredItems.length === 0}
+				<Combobox.Empty>No items found.</Combobox.Empty>
+			{:else}
+				<Combobox.Group>
+					{#each filteredItems as framework (framework.value)}
+						<Combobox.Item value={framework.value} label={framework.label} />
+					{/each}
+				</Combobox.Group>
+			{/if}
+		</Combobox.Content>
+	</Combobox.Root>
 </Example>

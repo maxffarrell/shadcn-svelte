@@ -496,6 +496,53 @@
 			]
 		},
 		{
+			"name": "combobox",
+			"type": "registry:ui",
+			"registryDependencies": [],
+			"files": [
+				{
+					"type": "registry:file",
+					"path": "src/lib/registry/ui/combobox/combobox-content.svelte"
+				},
+				{
+					"type": "registry:file",
+					"path": "src/lib/registry/ui/combobox/combobox-empty.svelte"
+				},
+				{
+					"type": "registry:file",
+					"path": "src/lib/registry/ui/combobox/combobox-group-heading.svelte"
+				},
+				{
+					"type": "registry:file",
+					"path": "src/lib/registry/ui/combobox/combobox-group.svelte"
+				},
+				{
+					"type": "registry:file",
+					"path": "src/lib/registry/ui/combobox/combobox-input.svelte"
+				},
+				{
+					"type": "registry:file",
+					"path": "src/lib/registry/ui/combobox/combobox-item.svelte"
+				},
+				{
+					"type": "registry:file",
+					"path": "src/lib/registry/ui/combobox/combobox-separator.svelte"
+				},
+				{
+					"type": "registry:file",
+					"path": "src/lib/registry/ui/combobox/combobox-trigger.svelte"
+				},
+				{
+					"type": "registry:file",
+					"path": "src/lib/registry/ui/combobox/combobox.svelte"
+				},
+				{
+					"type": "registry:file",
+					"path": "src/lib/registry/ui/combobox/index.ts"
+				}
+			]
+		},
+		{
 			"name": "command",
 			"type": "registry:ui",
 			"registryDependencies": ["dialog", "input-group"],

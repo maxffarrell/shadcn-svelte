@@ -16,12 +16,12 @@
 	);
 </script>
 
-<Example title="Item Aligned">
+<Example title="Popper Position">
 	<Select.Root type="single" bind:value={selectedValue}>
 		<Select.Trigger>
 			{selectedLabel}
 		</Select.Trigger>
-		<Select.Content>
+		<Select.Content position="popper">
 			<Select.Group>
 				{#each items as item (item.value)}
 					<Select.Item value={item.value} disabled={item.disabled}>

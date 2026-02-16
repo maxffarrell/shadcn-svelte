@@ -1,89 +1,46 @@
 <script lang="ts">
-	import CheckIcon from "@lucide/svelte/icons/check";
-	import ChevronsUpDownIcon from "@lucide/svelte/icons/chevrons-up-down";
-	import { tick } from "svelte";
-	import * as Command from "$lib/registry/ui/command/index.js";
-	import * as Popover from "$lib/registry/ui/popover/index.js";
-	import { Button } from "$lib/registry/ui/button/index.js";
-	import { cn } from "$lib/utils.js";
+	import * as Combobox from "$lib/registry/ui/combobox/index.js";
 
 	const frameworks = [
-		{
-			value: "sveltekit",
-			label: "SvelteKit",
-		},
-		{
-			value: "next.js",
-			label: "Next.js",
-		},
-		{
-			value: "nuxt.js",
-			label: "Nuxt.js",
-		},
-		{
-			value: "remix",
-			label: "Remix",
-		},
-		{
-			value: "astro",
-			label: "Astro",
-		},
+		{ value: "sveltekit", label: "SvelteKit" },
+		{ value: "nextjs", label: "Next.js" },
+		{ value: "nuxtjs", label: "Nuxt.js" },
+		{ value: "remix", label: "Remix" },
+		{ value: "astro", label: "Astro" },
 	];
 
 	let open = $state(false);
-	let value = $state("");
-	let triggerRef = $state<HTMLButtonElement>(null!);
+	let value = $state<string | undefined>(undefined);
+	let searchValue = $state("");
 
-	const selectedValue = $derived(frameworks.find((f) => f.value === value)?.label);
+	const selectedLabel = $derived(
+		frameworks.find((f) => f.value === value)?.label ?? "Select a framework..."
+	);
 
-	// We want to refocus the trigger button when the user selects
-	// an item from the list so users can continue navigating the
-	// rest of the form with the keyboard.
-	function closeAndFocusTrigger() {
-		open = false;
-		tick().then(() => {
-			triggerRef.focus();
-		});
-	}
+	const filteredItems = $derived(
+		searchValue === ""
+			? frameworks
+			: frameworks.filter((f) =>
+					f.label.toLowerCase().includes(searchValue.toLowerCase())
+				)
+	);
 </script>
 
-<Popover.Root bind:open>
-	<Popover.Trigger bind:ref={triggerRef}>
-		{#snippet child({ props })}
-			<Button
-				{...props}
-				variant="outline"
-				class="w-[200px] justify-between"
-				role="combobox"
-				aria-expanded={open}
-			>
-				{selectedValue || "Select a framework..."}
-				<ChevronsUpDownIcon class="opacity-50" />
-			</Button>
-		{/snippet}
-	</Popover.Trigger>
-	<Popover.Content class="w-[200px] p-0">
-		<Command.Root>
-			<Command.Input placeholder="Search framework..." />
-			<Command.List>
-				<Command.Empty>No framework found.</Command.Empty>
-				<Command.Group value="frameworks">
-					{#each frameworks as framework (framework.value)}
-						<Command.Item
-							value={framework.value}
-							onSelect={() => {
-								value = framework.value;
-								closeAndFocusTrigger();
-							}}
-						>
-							<CheckIcon
-								class={cn(value !== framework.value && "text-transparent")}
-							/>
-							{framework.label}
-						</Command.Item>
-					{/each}
-				</Command.Group>
-			</Command.List>
-		</Command.Root>
-	</Popover.Content>
-</Popover.Root>
+<Combobox.Root type="single" bind:open bind:value items={frameworks}>
+	<Combobox.Input
+		placeholder={selectedLabel}
+		oninput={(e) => (searchValue = e.currentTarget.value)}
+		class="w-[200px]"
+	/>
+	<Combobox.Content>
+		{#if filteredItems.length === 0}
+			<Combobox.Empty>No framework found.</Combobox.Empty>
+		{:else}
+			<Combobox.Group>
+				{#each filteredItems as framework (framework.value)}
+					<Combobox.Item value={framework.value} label={framework.label} />
+				{/each}
+			</Combobox.Group>
+		{/if}
+	</Combobox.Content>
+</Combobox.Root>

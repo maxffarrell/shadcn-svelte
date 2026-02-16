@@ -1,86 +1,79 @@
 <script lang="ts">
 	import Example from "../../../../../routes/(app)/(layout)/(create)/components/example.svelte";
-	import * as Command from "$lib/registry/ui/command/index.js";
-	import * as Popover from "$lib/registry/ui/popover/index.js";
+	import * as Combobox from "$lib/registry/ui/combobox/index.js";
 	import { Badge } from "$lib/registry/ui/badge/index.js";
 	import IconPlaceholder from "$lib/components/icon-placeholder/icon-placeholder.svelte";
-	import { cn } from "$lib/utils.js";
 
-	const frameworks = ["Next.js", "SvelteKit", "Nuxt.js", "Remix", "Astro"] as const;
+	const frameworks = [
+		{ value: "nextjs", label: "Next.js" },
+		{ value: "sveltekit", label: "SvelteKit" },
+		{ value: "nuxtjs", label: "Nuxt.js" },
+		{ value: "remix", label: "Remix" },
+		{ value: "astro", label: "Astro" },
+	];
 
 	let open = $state(false);
-	let values = $state<string[]>([frameworks[0]]);
+	let values = $state<string[]>(["nextjs"]);
+	let searchValue = $state("");
 
-	function toggleValue(framework: (typeof frameworks)[number]) {
-		values = values.includes(framework)
-			? values.filter((v) => v !== framework)
-			: [...values, framework];
-	}
+	const filteredItems = $derived(
+		searchValue === ""
+			? frameworks
+			: frameworks.filter((f) =>
+					f.label.toLowerCase().includes(searchValue.toLowerCase())
+				)
+	);
 
-	function removeValue(e: MouseEvent, framework: string) {
+	const selectedLabels = $derived(
+		frameworks.filter((f) => values.includes(f.value)).map((f) => f.label)
+	);
+
+	function removeValue(e: MouseEvent, index: number) {
 		e.stopPropagation();
-		values = values.filter((v) => v !== framework);
+		values = values.filter((_, i) => i !== index);
 	}
 </script>
 
 <Example title="Combobox Multiple">
-	<Popover.Root bind:open>
-		<Popover.Trigger>
-			{#snippet child({ props })}
-				<div
-					{...props}
-					role="combobox"
-					aria-expanded={open}
-					class="border-input bg-background focus-within:ring-ring flex min-h-9 w-64 cursor-pointer flex-wrap items-center gap-1.5 rounded-md border px-2.5 py-1.5 text-sm shadow-xs transition-colors focus-within:ring-2 focus-within:ring-offset-2"
-				>
-					{#each values as framework (framework)}
-						<Badge
-							variant="secondary"
-							class="gap-1 pr-0.5"
-							onclick={(e) => removeValue(e, framework)}
-							onkeydown={(e) =>
-								e.key === "Enter" &&
-								removeValue(e as unknown as MouseEvent, framework)}
-						>
-							{framework}
-							<IconPlaceholder
-								lucide="XIcon"
-								tabler="IconX"
-								hugeicons="Cancel01Icon"
-								phosphor="XIcon"
-								remixicon="RiCloseLine"
-								class="size-3"
-							/>
-						</Badge>
-					{/each}
-					<span class="text-muted-foreground flex-1 py-1 text-sm"
-						>Select frameworks...</span
+	<div class="flex flex-col gap-2">
+		{#if selectedLabels.length > 0}
+			<div class="flex flex-wrap gap-1.5">
+				{#each selectedLabels as label, i (label)}
+					<Badge
+						variant="secondary"
+						class="gap-1 pr-0.5"
+						onclick={(e) => removeValue(e, i)}
 					>
-				</div>
-			{/snippet}
-		</Popover.Trigger>
-		<Popover.Content class="w-64 p-0" align="start">
-			<Command.Root>
-				<Command.Input placeholder="Search framework..." />
-				<Command.List>
-					<Command.Empty>No items found.</Command.Empty>
-					<Command.Group value="frameworks">
-						{#each frameworks as framework (framework)}
-							<Command.Item value={framework} onSelect={() => toggleValue(framework)}>
-								<IconPlaceholder
-									lucide="CheckIcon"
-									tabler="IconCheck"
-									hugeicons="Tick02Icon"
-									phosphor="CheckIcon"
-									remixicon="RiCheckLine"
-									class={cn(!values.includes(framework) && "text-transparent")}
-								/>
-								{framework}
-							</Command.Item>
+						{label}
+						<IconPlaceholder
+							lucide="XIcon"
+							tabler="IconX"
+							hugeicons="Cancel01Icon"
+							phosphor="XIcon"
+							remixicon="RiCloseLine"
+							class="size-3"
+						/>
+					</Badge>
+				{/each}
+			</div>
+		{/if}
+		<Combobox.Root type="multiple" bind:open bind:value={values} items={frameworks}>
+			<Combobox.Input
+				placeholder="Select frameworks..."
+				oninput={(e) => (searchValue = e.currentTarget.value)}
+				class="w-64"
+			/>
+			<Combobox.Content>
+				{#if filteredItems.length === 0}
+					<Combobox.Empty>No items found.</Combobox.Empty>
+				{:else}
+					<Combobox.Group>
+						{#each filteredItems as framework (framework.value)}
+							<Combobox.Item value={framework.value} label={framework.label} />
 						{/each}
-					</Command.Group>
-				</Command.List>
-			</Command.Root>
-		</Popover.Content>
-	</Popover.Root>
+					</Combobox.Group>
+				{/if}
+			</Combobox.Content>
+		</Combobox.Root>
+	</div>
 </Example>

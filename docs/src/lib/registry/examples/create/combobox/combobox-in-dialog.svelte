@@ -1,30 +1,35 @@
 <script lang="ts">
-	import { tick } from "svelte";
 	import Example from "../../../../../routes/(app)/(layout)/(create)/components/example.svelte";
 	import * as Dialog from "$lib/registry/ui/dialog/index.js";
-	import * as Command from "$lib/registry/ui/command/index.js";
-	import * as Popover from "$lib/registry/ui/popover/index.js";
 	import * as Field from "$lib/registry/ui/field/index.js";
+	import * as Combobox from "$lib/registry/ui/combobox/index.js";
 	import { Button } from "$lib/registry/ui/button/index.js";
-	import IconPlaceholder from "$lib/components/icon-placeholder/icon-placeholder.svelte";
 	import { toast } from "svelte-sonner";
-	import { cn } from "$lib/utils.js";
 
-	const frameworks = ["Next.js", "SvelteKit", "Nuxt.js", "Remix", "Astro"] as const;
+	const frameworks = [
+		{ value: "nextjs", label: "Next.js" },
+		{ value: "sveltekit", label: "SvelteKit" },
+		{ value: "nuxtjs", label: "Nuxt.js" },
+		{ value: "remix", label: "Remix" },
+		{ value: "astro", label: "Astro" },
+	];
 
 	let dialogOpen = $state(false);
 	let comboboxOpen = $state(false);
-	let value = $state("");
-	let triggerRef = $state<HTMLButtonElement>(null!);
+	let value = $state<string | undefined>(undefined);
+	let searchValue = $state("");
 
-	const selectedValue = $derived(value || null);
+	const filteredItems = $derived(
+		searchValue === ""
+			? frameworks
+			: frameworks.filter((f) =>
+					f.label.toLowerCase().includes(searchValue.toLowerCase())
+				)
+	);
 
-	function closeAndFocusTrigger() {
-		comboboxOpen = false;
-		tick().then(() => {
-			triggerRef?.focus();
-		});
-	}
+	const selectedLabel = $derived(
+		frameworks.find((f) => f.value === value)?.label ?? "Select a framework"
+	);
 </script>
 
 <Example title="Combobox in Dialog">
@@ -43,62 +48,25 @@
 			</Dialog.Header>
 			<Field.Field>
 				<Field.Label for="framework-dialog" class="sr-only">Framework</Field.Label>
-				<Popover.Root bind:open={comboboxOpen}>
-					<Popover.Trigger bind:ref={triggerRef}>
-						{#snippet child({ props })}
-							<Button
-								{...props}
-								variant="outline"
-								class="w-full justify-between font-normal"
-								role="combobox"
-								aria-expanded={comboboxOpen}
-								type="button"
-								id="framework-dialog"
-							>
-								{selectedValue ?? "Select a framework"}
-								<IconPlaceholder
-									lucide="ChevronDownIcon"
-									tabler="IconChevronDown"
-									hugeicons="ArrowDown01Icon"
-									phosphor="CaretDownIcon"
-									remixicon="RiArrowDownSLine"
-									class="text-muted-foreground size-4 opacity-50"
-								/>
-							</Button>
-						{/snippet}
-					</Popover.Trigger>
-					<Popover.Content class="w-(--bits-popover-anchor-width) p-0" align="start">
-						<Command.Root>
-							<Command.Input placeholder="Search framework..." />
-							<Command.List>
-								<Command.Empty>No items found.</Command.Empty>
-								<Command.Group value="frameworks">
-									{#each frameworks as framework (framework)}
-										<Command.Item
-											value={framework}
-											onSelect={() => {
-												value = framework;
-												closeAndFocusTrigger();
-											}}
-										>
-											<IconPlaceholder
-												lucide="CheckIcon"
-												tabler="IconCheck"
-												hugeicons="Tick02Icon"
-												phosphor="CheckIcon"
-												remixicon="RiCheckLine"
-												class={cn(
-													value !== framework && "text-transparent"
-												)}
-											/>
-											{framework}
-										</Command.Item>
-									{/each}
-								</Command.Group>
-							</Command.List>
-						</Command.Root>
-					</Popover.Content>
-				</Popover.Root>
+				<Combobox.Root type="single" bind:open={comboboxOpen} bind:value items={frameworks}>
+					<Combobox.Input
+						placeholder={selectedLabel}
+						oninput={(e) => (searchValue = e.currentTarget.value)}
+						class="w-full"
+						id="framework-dialog"
+					/>
+					<Combobox.Content>
+						{#if filteredItems.length === 0}
+							<Combobox.Empty>No items found.</Combobox.Empty>
+						{:else}
+							<Combobox.Group>
+								{#each filteredItems as framework (framework.value)}
+									<Combobox.Item value={framework.value} label={framework.label} />
+								{/each}
+							</Combobox.Group>
+						{/if}
+					</Combobox.Content>
+				</Combobox.Root>
 			</Field.Field>
 			<Dialog.Footer>
 				<Dialog.Close>

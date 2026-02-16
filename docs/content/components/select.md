@@ -77,6 +77,15 @@ Copy and paste the following code into your project.
 
 ## Examples
 
+### Position
+
+The Select supports a `position` prop on `Select.Content` to control dropdown positioning:
+
+- `position="popper"` (default) - Uses Floating UI to position the dropdown relative to the trigger
+- `position="item-aligned"` - Not currently supported by bits-ui. Accepted for API compatibility.
+
+Note: The React version of shadcn/ui (using Radix UI) supports `position="item-aligned"` which aligns the selected item over the trigger. This feature is not available in bits-ui's Select implementation. The popper mode provides standard dropdown positioning.
+
 ### Scrollable
 
 <ComponentPreview name="select-scrollable">
