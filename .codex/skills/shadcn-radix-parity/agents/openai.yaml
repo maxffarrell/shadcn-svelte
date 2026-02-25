@@ -1,0 +1,5 @@
+interface:
+  display_name: "Shadcn Radix Parity"
+  short_description: "Audit and repair shadcn-svelte Radix parity"
+  default_prompt: "Use $shadcn-radix-parity to audit and repair docs/components parity against shadcn/ui v4 Radix."
+
