@@ -17,6 +17,12 @@
 	import { goto } from "$app/navigation";
 	import { UserConfigContext } from "$lib/user-config.svelte.js";
 	import * as Kbd from "$lib/registry/ui/kbd/index.js";
+	import { onMount } from "svelte";
+	import {
+		type SearchResult,
+		createContentIndex,
+		searchContentIndex,
+	} from "$lib/utils/search.js";
 
 	let {
 		colors,
@@ -29,11 +35,41 @@
 	} = $props();
 
 	let open = $state(false);
-	let selectedType = $state<"color" | "page" | "component" | "block" | null>(null);
+	let selectedType = $state<"color" | "page" | "component" | "block" | "search" | null>(null);
 	let copyPayload = $state("");
+	let searchQuery = $state("");
+	let searchResults = $state<SearchResult[]>([]);
+	let searchState = $state<"loading" | "ready">("loading");
+
+	const hasSearchQuery = $derived(searchQuery.trim().length > 0);
 
 	const userConfig = UserConfigContext.get();
 	const clipboard = new UseClipboard();
+
+	onMount(async () => {
+		const content = await fetch("/api/search.json").then((res) => res.json());
+		createContentIndex(content);
+		searchState = "ready";
+	});
+
+	$effect(() => {
+		if (searchState !== "ready") return;
+		searchResults = searchContentIndex(searchQuery);
+		if (searchQuery.trim()) {
+			selectedType = "search";
+			copyPayload = "";
+		}
+	});
+
+	let clearTimeoutId: number | undefined;
+
+	function clearSearchWithDelay() {
+		if (clearTimeoutId) window.clearTimeout(clearTimeoutId);
+		clearTimeoutId = window.setTimeout(() => {
+			searchQuery = "";
+			clearTimeoutId = undefined;
+		}, 300);
+	}
 
 	function handlePageHighlight(isComponent: boolean, item: { href: string; title?: string }) {
 		if (isComponent) {
@@ -127,7 +163,13 @@
 
 <svelte:document onkeydown={handleKeydown} />
 
-<Dialog.Root bind:open>
+<Dialog.Root
+	bind:open
+	onOpenChange={(o) => {
+		if (o) return;
+		clearSearchWithDelay();
+	}}
+>
 	<Dialog.Trigger>
 		{#snippet child({ props })}
 			<Button
@@ -138,11 +180,16 @@
 				)}
 				onclick={() => openCommandMenu()}
 			>
-				<span class="hidden xl:inline-flex">Search documentation...</span>
-				<span class="inline-flex xl:hidden">Search...</span>
-				<!--<div class="absolute end-1.5 top-1.5 hidden gap-1 sm:flex">
-					<Kbd.Root>⌘K</Kbd.Root>
-				</div>-->
+
+
+
+
+
+
+
+
+
+
 			</Button>
 		{/snippet}
 	</Dialog.Trigger>
@@ -154,108 +201,140 @@
 			<Dialog.Title>Search documentation...</Dialog.Title>
 			<Dialog.Description>Search for a command to run...</Dialog.Description>
 		</Dialog.Header>
-		<Command.Root class="rounded-none bg-transparent">
-			<Command.Input placeholder="Search documentation..." />
+		<Command.Root
+			class="rounded-none bg-transparent"
+			shouldFilter={!hasSearchQuery}
+		>
+			<Command.Input
+				placeholder="Search documentation..."
+				bind:value={searchQuery}
+			/>
 			<Command.List tabindex={-1} class="no-scrollbar min-h-80 scroll-pt-2 scroll-pb-1.5">
-				<Command.Empty class="text-muted-foreground py-12 text-center text-sm">
-					No results found.
-				</Command.Empty>
-				{#each sidebarNavItems as group (group.title)}
-					<Command.Group
-						heading={group.title}
-						class="!p-0 [&_[data-command-group-heading]]:scroll-mt-16 [&_[data-command-group-heading]]:!p-3 [&_[data-command-group-heading]]:!pb-1"
-					>
-						{#each group.items as item, i (i)}
-							{@const isComponent = item.href?.includes("/components/") ?? false}
+				{#if hasSearchQuery}
+					{#if searchResults.length === 0}
+						<Command.Empty class="text-muted-foreground py-12 text-center text-sm">
+							No results found.
+						</Command.Empty>
+					{:else}
+						<Command.Group
+							heading="Search Results"
+							class="!p-0 [&_[data-command-group-heading]]:scroll-mt-16 [&_[data-command-group-heading]]:!p-3 [&_[data-command-group-heading]]:!pb-1"
+						>
+							{#each searchResults as result (result.href)}
+								<Command.Item
+									class="data-[selected=true]:border-input data-[selected=true]:bg-input/50 h-auto min-h-9 rounded-md border border-transparent !px-3 font-medium"
+									value={result.title + " " + result.href}
+									onSelect={() => {
+										runCommand(() => goto(result.href));
+									}}
+									data-search-result
+								>
+									<span class="truncate">{result.title}</span>
+								</Command.Item>
+							{/each}
+						</Command.Group>
+					{/if}
+				{:else}
+					<Command.Empty class="text-muted-foreground py-12 text-center text-sm">
+						No results found.
+					</Command.Empty>
+					{#each sidebarNavItems as group (group.title)}
+						<Command.Group
+							heading={group.title}
+							class="!p-0 [&_[data-command-group-heading]]:scroll-mt-16 [&_[data-command-group-heading]]:!p-3 [&_[data-command-group-heading]]:!pb-1"
+						>
+							{#each group.items as item, i (i)}
+								{@const isComponent = item.href?.includes("/components/") ?? false}
 
-							<CommandMenuItem
-								value={item.title?.toString() ? `${group.title} ${item.title}` : ""}
-								keywords={isComponent ? ["component"] : undefined}
-								onHighlight={() =>
-									handlePageHighlight(isComponent, {
-										href: item.href ?? "",
-										title: item.title,
-									})}
-								onSelect={() => {
-									runCommand(() => {
-										if (item.href) {
-											goto(item.href);
-										}
-									});
-								}}
-							>
-								{#if isComponent}
+								<CommandMenuItem
+									value={item.title?.toString() ? `${group.title} ${item.title}` : ""}
+									keywords={isComponent ? ["component"] : undefined}
+									onHighlight={() =>
+										handlePageHighlight(isComponent, {
+											href: item.href ?? "",
+											title: item.title,
+										})}
+									onSelect={() => {
+										runCommand(() => {
+											if (item.href) {
+												goto(item.href);
+											}
+										});
+									}}
+								>
+									{#if isComponent}
+										<div
+											class="border-muted-foreground aspect-square size-4 rounded-full border border-dashed"
+										></div>
+									{:else}
+										<ArrowRightIcon />
+									{/if}
+									{item.title}
+								</CommandMenuItem>
+							{/each}
+						</Command.Group>
+					{/each}
+					{#each colors as colorPalette (colorPalette.name)}
+						<Command.Group
+							heading={colorPalette.name.charAt(0).toUpperCase() +
+								colorPalette.name.slice(1)}
+							class="!p-0 [&_[data-command-group-heading]]:!p-3"
+						>
+							{#each colorPalette.colors as color (color.hex)}
+								<CommandMenuItem
+									value={color.class}
+									keywords={["color", color.name, color.class]}
+									onHighlight={() => handleColorHighlight(color)}
+									onSelect={() => {
+										runCommand(() => clipboard.copy(color.oklch));
+									}}
+								>
 									<div
-										class="border-muted-foreground aspect-square size-4 rounded-full border border-dashed"
+										class="border-ghost aspect-square size-4 rounded-sm bg-(--color) after:rounded-sm"
+										style="--color: {color.oklch};"
 									></div>
-								{:else}
-									<ArrowRightIcon />
-								{/if}
-								{item.title}
-							</CommandMenuItem>
-						{/each}
-					</Command.Group>
-				{/each}
-				{#each colors as colorPalette (colorPalette.name)}
-					<Command.Group
-						heading={colorPalette.name.charAt(0).toUpperCase() +
-							colorPalette.name.slice(1)}
-						class="!p-0 [&_[data-command-group-heading]]:!p-3"
-					>
-						{#each colorPalette.colors as color (color.hex)}
-							<CommandMenuItem
-								value={color.class}
-								keywords={["color", color.name, color.class]}
-								onHighlight={() => handleColorHighlight(color)}
-								onSelect={() => {
-									runCommand(() => clipboard.copy(color.oklch));
-								}}
-							>
-								<div
-									class="border-ghost aspect-square size-4 rounded-sm bg-(--color) after:rounded-sm"
-									style="--color: {color.oklch};"
-								></div>
-								{color.class}
-								<span
-									class="text-muted-foreground ms-auto font-mono text-xs font-normal tabular-nums"
+									{color.class}
+									<span
+										class="text-muted-foreground ms-auto font-mono text-xs font-normal tabular-nums"
+									>
+										{color.oklch}
+									</span>
+								</CommandMenuItem>
+							{/each}
+						</Command.Group>
+					{/each}
+					{#if blocks?.length}
+						<Command.Group
+							heading="Blocks"
+							class="!p-0 [&_[data-command-group-heading]]:!p-3"
+						>
+							{#each blocks as block (block.name)}
+								<CommandMenuItem
+									value={block.name}
+									onHighlight={() => handleBlockHighlight(block)}
+									keywords={[
+										"block",
+										block.name,
+										block.description,
+										...block.categories,
+									]}
+									onSelect={() => {
+										runCommand(() => {
+											goto(`/blocks/${block.categories[0]}#${block.name}`);
+										});
+									}}
 								>
-									{color.oklch}
-								</span>
-							</CommandMenuItem>
-						{/each}
-					</Command.Group>
-				{/each}
-				{#if blocks?.length}
-					<Command.Group
-						heading="Blocks"
-						class="!p-0 [&_[data-command-group-heading]]:!p-3"
-					>
-						{#each blocks as block (block.name)}
-							<CommandMenuItem
-								value={block.name}
-								onHighlight={() => handleBlockHighlight(block)}
-								keywords={[
-									"block",
-									block.name,
-									block.description,
-									...block.categories,
-								]}
-								onSelect={() => {
-									runCommand(() => {
-										goto(`/blocks/${block.categories[0]}#${block.name}`);
-									});
-								}}
-							>
-								<SquareDashedIcon />
-								{block.description}
-								<span
-									class="text-muted-foreground ms-auto font-mono text-xs font-normal tabular-nums"
-								>
-									{block.name}
-								</span>
-							</CommandMenuItem>
-						{/each}
-					</Command.Group>
+									<SquareDashedIcon />
+									{block.description}
+									<span
+										class="text-muted-foreground ms-auto font-mono text-xs font-normal tabular-nums"
+									>
+										{block.name}
+									</span>
+								</CommandMenuItem>
+							{/each}
+						</Command.Group>
+					{/if}
 				{/if}
 			</Command.List>
 		</Command.Root>
@@ -264,7 +343,7 @@
 		>
 			<div class="flex items-center gap-2">
 				<Kbd.Root class="bg-background border"><CornerDownLeftIcon /></Kbd.Root>
-				{#if selectedType === "page" || selectedType === "component"}
+				{#if selectedType === "page" || selectedType === "component" || selectedType === "search"}
 					Go to Page
 				{/if}
 				{#if selectedType === "color"}
