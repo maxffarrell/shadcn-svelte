@@ -43,6 +43,29 @@
 
 	const hasSearchQuery = $derived(searchQuery.trim().length > 0);
 
+	const filteredSidebarGroups = $derived.by(() => {
+		if (!searchQuery.trim()) return [];
+		const q = searchQuery.trim().toLowerCase();
+		return sidebarNavItems
+			.map((group) => ({
+				title: group.title,
+				items: group.items.filter((item) => item.title?.toLowerCase().includes(q)),
+			}))
+			.filter((group) => group.items.length > 0);
+	});
+
+	const sidebarMatchHrefs = $derived(
+		new Set(filteredSidebarGroups.flatMap((g) => g.items.map((i) => i.href)))
+	);
+
+	const deduplicatedSearchResults = $derived(
+		searchResults.filter((r) => !sidebarMatchHrefs.has(r.href))
+	);
+
+	const hasAnyResults = $derived(
+		filteredSidebarGroups.length > 0 || deduplicatedSearchResults.length > 0
+	);
+
 	const userConfig = UserConfigContext.get();
 	const clipboard = new UseClipboard();
 
@@ -180,9 +203,8 @@
 				)}
 				onclick={() => openCommandMenu()}
 			>
-
-
-
+				<span class="hidden xl:inline-flex">Search documentation...</span>
+				<span class="inline-flex xl:hidden">Search...</span>
 
 
 
@@ -211,25 +233,67 @@
 			/>
 			<Command.List tabindex={-1} class="no-scrollbar min-h-80 scroll-pt-2 scroll-pb-1.5">
 				{#if hasSearchQuery}
-					{#if searchResults.length === 0}
+					{#if !hasAnyResults}
 						<Command.Empty class="text-muted-foreground py-12 text-center text-sm">
 							No results found.
 						</Command.Empty>
-					{:else}
+					{/if}
+
+					{#each filteredSidebarGroups as group (group.title)}
+						<Command.Group
+							heading={group.title}
+							class="!p-0 [&_[data-command-group-heading]]:scroll-mt-16 [&_[data-command-group-heading]]:!p-3 [&_[data-command-group-heading]]:!pb-1"
+						>
+							{#each group.items as item (item.href)}
+								{@const isComponent = item.href?.includes("/components/") ?? false}
+								<CommandMenuItem
+									value={`${group.title} ${item.title}`}
+									keywords={isComponent ? ["component"] : undefined}
+									onHighlight={() =>
+										handlePageHighlight(isComponent, {
+											href: item.href ?? "",
+											title: item.title,
+										})}
+									onSelect={() => {
+										runCommand(() => {
+											if (item.href) goto(item.href);
+										});
+									}}
+								>
+									{#if isComponent}
+										<div
+											class="border-muted-foreground aspect-square size-4 rounded-full border border-dashed"
+										></div>
+									{:else}
+										<ArrowRightIcon />
+									{/if}
+									{item.title}
+								</CommandMenuItem>
+							{/each}
+						</Command.Group>
+					{/each}
+
+					{#if deduplicatedSearchResults.length > 0}
 						<Command.Group
 							heading="Search Results"
 							class="!p-0 [&_[data-command-group-heading]]:scroll-mt-16 [&_[data-command-group-heading]]:!p-3 [&_[data-command-group-heading]]:!pb-1"
 						>
-							{#each searchResults as result (result.href)}
+							{#each deduplicatedSearchResults as result (result.href)}
+								{@const displayText = result.title
+									.toLowerCase()
+									.includes(searchQuery.trim().toLowerCase())
+									? result.title
+									: (result.snippet?.replace(/<\/?mark>/g, "") ??
+										result.title)}
 								<Command.Item
-									class="data-[selected=true]:border-input data-[selected=true]:bg-input/50 h-auto min-h-9 rounded-md border border-transparent !px-3 font-medium"
-									value={result.title + " " + result.href}
+									class="data-[selected=true]:border-input data-[selected=true]:bg-input/50 h-9 rounded-md border border-transparent !px-3 font-normal"
+									value={displayText + " " + result.href}
+									keywords={[result.content]}
 									onSelect={() => {
 										runCommand(() => goto(result.href));
 									}}
-									data-search-result
 								>
-									<span class="truncate">{result.title}</span>
+									<div class="line-clamp-1 text-sm">{displayText}</div>
 								</Command.Item>
 							{/each}
 						</Command.Group>
