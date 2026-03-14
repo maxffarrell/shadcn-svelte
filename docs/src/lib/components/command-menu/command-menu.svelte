@@ -276,26 +276,6 @@
 						</Command.Group>
 					{/each}
 
-					{#if deduplicatedSearchResults.length > 0}
-						<Command.Group
-							heading="Search Results"
-							class="!p-0 [&_[data-command-group-heading]]:scroll-mt-16 [&_[data-command-group-heading]]:!p-3 [&_[data-command-group-heading]]:!pb-1"
-						>
-							{#each deduplicatedSearchResults as result (result.href)}
-								<Command.Item
-									class="data-selected:border-input data-selected:bg-input/50 h-9 rounded-md border border-transparent !px-3 font-normal"
-									value={result.title + " " + result.href}
-									keywords={[result.content]}
-									onSelect={() => {
-										runCommand(() => goto(result.href));
-									}}
-								>
-									<div class="line-clamp-1 text-sm">{result.title}</div>
-								</Command.Item>
-							{/each}
-						</Command.Group>
-					{/if}
-
 					{#each filteredColors as colorPalette (colorPalette.name)}
 						<Command.Group
 							heading={colorPalette.name.charAt(0).toUpperCase() + colorPalette.name.slice(1)}
@@ -324,6 +304,26 @@
 							{/each}
 						</Command.Group>
 					{/each}
+
+					{#if deduplicatedSearchResults.length > 0}
+						<Command.Group
+							heading="Search Results"
+							class="!p-0 [&_[data-command-group-heading]]:scroll-mt-16 [&_[data-command-group-heading]]:!p-3 [&_[data-command-group-heading]]:!pb-1"
+						>
+							{#each deduplicatedSearchResults as result (result.href)}
+								<Command.Item
+									class="data-selected:border-input data-selected:bg-input/50 h-9 rounded-md border border-transparent !px-3 font-normal"
+									value={result.title + " " + result.href}
+									keywords={[result.content]}
+									onSelect={() => {
+										runCommand(() => goto(result.href));
+									}}
+								>
+									<div class="line-clamp-1 text-sm">{result.title}</div>
+								</Command.Item>
+							{/each}
+						</Command.Group>
+					{/if}
 				{:else}
 					<Command.Empty class="text-muted-foreground py-12 text-center text-sm">
 						No results found.

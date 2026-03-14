@@ -77,25 +77,15 @@ function highlightMatches(text: string, query: string): string {
 	return highlighted;
 }
 
-function fuzzyMatch(text: string, query: string): boolean {
-	const textLower = text.toLowerCase();
-	const queryLower = query.toLowerCase();
-	if (textLower.includes(queryLower)) return true;
-
-	let queryIndex = 0;
-	for (let i = 0; i < textLower.length && queryIndex < queryLower.length; i++) {
-		if (textLower[i] === queryLower[queryIndex]) {
-			queryIndex++;
-		}
-	}
-	return queryIndex === queryLower.length;
+function substringMatch(text: string, query: string): boolean {
+	return text.toLowerCase().includes(query.toLowerCase());
 }
 
 export function searchContentIndex(query: string): SearchResult[] {
 	if (!query.trim()) return [];
 
-	const titleResults = titleIndex.search(query, { limit: 20, suggest: true });
-	const contentResults = contentIndex.search(query, { limit: 20, suggest: true });
+	const titleResults = titleIndex.search(query, { limit: 20 });
+	const contentResults = contentIndex.search(query, { limit: 20 });
 
 	const resultMap = new Map<FlexSearch.Id, { score: number; source: string }>();
 
@@ -114,10 +104,13 @@ export function searchContentIndex(query: string): SearchResult[] {
 
 	if (resultMap.size === 0) {
 		content.forEach((item, idx) => {
-			if (fuzzyMatch(item.title, query)) {
-				resultMap.set(idx, { score: 8, source: "fuzzy-title" });
-			} else if (fuzzyMatch(item.content, query) || fuzzyMatch(item.description, query)) {
-				resultMap.set(idx, { score: 3, source: "fuzzy-content" });
+			if (substringMatch(item.title, query)) {
+				resultMap.set(idx, { score: 8, source: "substring-title" });
+			} else if (
+				substringMatch(item.content, query) ||
+				substringMatch(item.description, query)
+			) {
+				resultMap.set(idx, { score: 3, source: "substring-content" });
 			}
 		});
 	}
