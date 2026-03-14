@@ -15,6 +15,8 @@ type SearchEntry = {
 	content: string;
 	href: string;
 	category: string;
+	type: "page" | "heading" | "text";
+	pageTitle: string;
 };
 
 function parseFrontmatter(raw: string): { title: string; description: string; body: string } {
@@ -30,14 +32,23 @@ function parseFrontmatter(raw: string): { title: string; description: string; bo
 	return { title, description, body };
 }
 
-function cleanContent(raw: string): string {
+function slugify(text: string): string {
+	return text
+		.toLowerCase()
+		.replace(/[^\w\s-]/g, "")
+		.replace(/\s+/g, "-")
+		.replace(/-+/g, "-")
+		.trim();
+}
+
+function cleanText(raw: string): string {
 	// Remove <script> blocks
 	let content = raw.replace(/<script[\s\S]*?<\/script>/gi, "");
 	// Remove HTML/Svelte tags
 	content = content.replace(/<[^>]+>/g, " ");
-	// Run remove-markdown
+	// Run remove-markdown (replaceLinksWithURL: false keeps display text, not URLs)
 	content = removeMd(content, {
-		replaceLinksWithURL: true,
+		replaceLinksWithURL: false,
 		gfm: true,
 		useImgAltText: true,
 	});
@@ -46,9 +57,8 @@ function cleanContent(raw: string): string {
 	content = content.replace(/`[^`]+`/g, "");
 	// Clean up whitespace
 	content = content.replace(/\s+/g, " ").trim();
-	// Remove remaining markdown syntax
+	// Remove remaining markdown link syntax (keeps display text)
 	content = content.replace(/\[([^\]]+)\]\([^)]+\)/g, "$1");
-	content = content.replace(/#{1,6}\s*/g, "");
 	content = content.replace(/\*{1,2}([^*]+)\*{1,2}/g, "$1");
 
 	return content;
@@ -56,11 +66,8 @@ function cleanContent(raw: string): string {
 
 function deriveHref(filePath: string): string {
 	let rel = path.relative(CONTENT_DIR, filePath);
-	// Remove .md extension
 	rel = rel.replace(/\.md$/, "");
-	// Remove /index suffix
 	rel = rel.replace(/\/index$/, "");
-	// index.md at root → /docs
 	if (rel === "index") return "/docs";
 	return `/docs/${rel}`;
 }
@@ -80,12 +87,109 @@ function deriveCategory(filePath: string): string {
 		changelog: "Changelog",
 	};
 
-	// Files directly in content/ root (index.md, cli.md, theming.md, etc.)
 	if (!rel.includes("/") || firstSegment.endsWith(".md")) {
 		return "Getting Started";
 	}
 
 	return categories[firstSegment] ?? "Getting Started";
+}
+
+function parseIntoSections(
+	body: string,
+	pageTitle: string,
+	pageHref: string,
+	category: string,
+	description: string
+): SearchEntry[] {
+	const entries: SearchEntry[] = [];
+
+	// Split on heading lines (h1–h4)
+	const lines = body.split("\n");
+	const sections: { heading: string | null; level: number; lines: string[] }[] = [];
+	let current: { heading: string | null; level: number; lines: string[] } = {
+		heading: null,
+		level: 0,
+		lines: [],
+	};
+
+	for (const line of lines) {
+		const headingMatch = line.match(/^(#{1,4})\s+(.+)$/);
+		if (headingMatch) {
+			sections.push(current);
+			current = {
+				heading: headingMatch[2].trim(),
+				level: headingMatch[1].length,
+				lines: [],
+			};
+		} else {
+			current.lines.push(line);
+		}
+	}
+	sections.push(current);
+
+	let currentAnchor = "";
+
+	for (const section of sections) {
+		if (section.heading === null) {
+			// Intro text before first heading — index as 'page' entry
+			const introText = cleanText(section.lines.join("\n"));
+			if (introText.trim().length > 10) {
+				entries.push({
+					title: pageTitle,
+					description,
+					content: introText,
+					href: pageHref,
+					category,
+					type: "page",
+					pageTitle,
+				});
+			}
+			continue;
+		}
+
+		const headingText = cleanText(section.heading);
+		if (!headingText.trim()) continue;
+
+		const anchor = slugify(headingText);
+		currentAnchor = anchor;
+		const href = `${pageHref}#${anchor}`;
+
+		// Add heading entry
+		entries.push({
+			title: headingText,
+			description: "",
+			content: headingText,
+			href,
+			category,
+			type: "heading",
+			pageTitle,
+		});
+
+		// Add text entries for paragraphs under this heading
+		const bodyText = cleanText(section.lines.join("\n"));
+		if (bodyText.trim().length > 20) {
+			// Split into paragraphs (double newline in original = blank lines)
+			const paragraphs = bodyText
+				.split(/\s{2,}/)
+				.map((p) => p.trim())
+				.filter((p) => p.length > 20);
+
+			for (const para of paragraphs) {
+				const title = para.length > 120 ? para.slice(0, 120) + "…" : para;
+				entries.push({
+					title,
+					description: "",
+					content: para,
+					href: `${pageHref}#${currentAnchor}`,
+					category,
+					type: "text",
+					pageTitle,
+				});
+			}
+		}
+	}
+
+	return entries;
 }
 
 async function main() {
@@ -99,16 +203,13 @@ async function main() {
 
 		if (!title) continue;
 
-		entries.push({
-			title,
-			description,
-			content: cleanContent(body),
-			href: deriveHref(file),
-			category: deriveCategory(file),
-		});
+		const href = deriveHref(file);
+		const category = deriveCategory(file);
+
+		const sections = parseIntoSections(body, title, href, category, description);
+		entries.push(...sections);
 	}
 
-	// Ensure output directory exists
 	const outputDir = path.dirname(OUTPUT_PATH);
 	fs.mkdirSync(outputDir, { recursive: true });
 

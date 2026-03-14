@@ -6,6 +6,8 @@ export type SearchContent = {
 	description: string;
 	href: string;
 	category: string;
+	type: "page" | "heading" | "text";
+	pageTitle: string;
 };
 
 export type SearchResult = SearchContent & {
