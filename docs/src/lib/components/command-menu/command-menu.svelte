@@ -205,13 +205,6 @@
 			>
 				<span class="hidden xl:inline-flex">Search documentation...</span>
 				<span class="inline-flex xl:hidden">Search...</span>
-
-
-
-
-
-
-
 			</Button>
 		{/snippet}
 	</Dialog.Trigger>
@@ -223,14 +216,8 @@
 			<Dialog.Title>Search documentation...</Dialog.Title>
 			<Dialog.Description>Search for a command to run...</Dialog.Description>
 		</Dialog.Header>
-		<Command.Root
-			class="rounded-none bg-transparent"
-			shouldFilter={!hasSearchQuery}
-		>
-			<Command.Input
-				placeholder="Search documentation..."
-				bind:value={searchQuery}
-			/>
+		<Command.Root class="rounded-none bg-transparent" shouldFilter={!hasSearchQuery}>
+			<Command.Input placeholder="Search documentation..." bind:value={searchQuery} />
 			<Command.List tabindex={-1} class="no-scrollbar min-h-80 scroll-pt-2 scroll-pb-1.5">
 				{#if hasSearchQuery}
 					{#if !hasAnyResults}
@@ -283,10 +270,9 @@
 									.toLowerCase()
 									.includes(searchQuery.trim().toLowerCase())
 									? result.title
-									: (result.snippet?.replace(/<\/?mark>/g, "") ??
-										result.title)}
+									: (result.snippet?.replace(/<\/?mark>/g, "") ?? result.title)}
 								<Command.Item
-									class="data-[selected=true]:border-input data-[selected=true]:bg-input/50 h-9 rounded-md border border-transparent !px-3 font-normal"
+									class="data-selected:border-input data-selected:bg-input/50 h-9 rounded-md border border-transparent !px-3 font-normal"
 									value={displayText + " " + result.href}
 									keywords={[result.content]}
 									onSelect={() => {
@@ -311,7 +297,9 @@
 								{@const isComponent = item.href?.includes("/components/") ?? false}
 
 								<CommandMenuItem
-									value={item.title?.toString() ? `${group.title} ${item.title}` : ""}
+									value={item.title?.toString()
+										? `${group.title} ${item.title}`
+										: ""}
 									keywords={isComponent ? ["component"] : undefined}
 									onHighlight={() =>
 										handlePageHighlight(isComponent, {
