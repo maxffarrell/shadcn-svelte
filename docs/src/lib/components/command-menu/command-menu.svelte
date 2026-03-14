@@ -134,12 +134,12 @@
 				{...props}
 				variant="outline"
 				class={cn(
-					"text-foreground dark:bg-card hover:bg-muted/50 relative h-8 w-full justify-start pl-3 font-normal shadow-none sm:pr-12 md:w-48 lg:w-56 xl:w-64"
+					"text-foreground dark:bg-card hover:bg-muted/50 relative h-8 w-full justify-start pl-3 font-normal shadow-none sm:pr-12 md:w-48 xl:w-64"
 				)}
 				onclick={() => openCommandMenu()}
 			>
-				<span class="hidden lg:inline-flex">Search documentation...</span>
-				<span class="inline-flex lg:hidden">Search...</span>
+				<span class="hidden xl:inline-flex">Search documentation...</span>
+				<span class="inline-flex xl:hidden">Search...</span>
 				<!--<div class="absolute end-1.5 top-1.5 hidden gap-1 sm:flex">
 					<Kbd.Root>⌘K</Kbd.Root>
 				</div>-->
