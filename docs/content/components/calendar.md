@@ -100,7 +100,7 @@ A basic calendar component with a border. We used `class="rounded-lg border"` to
 
 ### Range Calendar
 
-Use the `RangeCalendar` component to enable range selection.
+Pass `mode="range"` to enable range selection. The underlying component is the same `RangeCalendar`.
 
 <ComponentPreview name="calendar-range" class="**:[.preview]:h-auto lg:**:[.preview]:h-[450px]" previewClassName="h-[36rem] md:h-96">
 

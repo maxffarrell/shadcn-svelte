@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { today, getLocalTimeZone } from "@internationalized/date";
-	import { RangeCalendar } from "$lib/registry/ui/range-calendar/index.js";
+	import { Calendar } from "$lib/registry/ui/calendar/index.js";
 	import * as Card from "$lib/registry/ui/card/index.js";
 	import type { DateRange } from "bits-ui";
 
@@ -14,7 +14,8 @@
 
 <Card.Root class="mx-auto w-fit p-0">
 	<Card.Content class="p-0">
-		<RangeCalendar
+		<Calendar
+			mode="range"
 			bind:value
 			numberOfMonths={2}
 			isDateDisabled={(date) => date.compare(today(getLocalTimeZone())) > 0}
