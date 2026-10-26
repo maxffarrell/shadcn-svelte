@@ -7,16 +7,16 @@ links:
 ---
 
 <script>
-	import ComponentPreview from '$lib/components/component-preview.svelte';
-	import PMAddComp from "$lib/components/pm-add-comp.svelte";
-	import PMInstall from "$lib/components/pm-install.svelte";
-	import Steps from "$lib/components/steps.svelte";
-	import Step from "$lib/components/step.svelte";
-	import InstallTabs from "$lib/components/install-tabs.svelte";
-	import ComponentSource from "$lib/components/component-source.svelte";
+	import ComponentPreview from '#lib/components/component-preview.svelte';
+	import PMAddComp from "#lib/components/pm-add-comp.svelte";
+	import PMInstall from "#lib/components/pm-install.svelte";
+	import Steps from "#lib/components/steps.svelte";
+	import Step from "#lib/components/step.svelte";
+	import InstallTabs from "#lib/components/install-tabs.svelte";
+	import ComponentSource from "#lib/components/component-source.svelte";
 	let { viewerData } = $props();
-	import DocsFigure from "$lib/components/docs-figure.svelte";
-	import Callout from "$lib/components/callout.svelte";
+	import DocsFigure from "#lib/components/docs-figure.svelte";
+	import Callout from "#lib/components/callout.svelte";
 </script>
 
 <DocsFigure caption="A sidebar that collapses to icons.">
@@ -142,8 +142,8 @@ A `Sidebar` component is composed of the following parts:
 
 ```svelte showLineNumbers title="src/routes/+layout.svelte"
 <script lang="ts">
-  import * as Sidebar from "$lib/components/ui/sidebar/index.js";
-  import AppSidebar from "$lib/components/app-sidebar.svelte";
+  import * as Sidebar from "#lib/components/ui/sidebar/index.js";
+  import AppSidebar from "#lib/components/app-sidebar.svelte";
 
   let { children } = $props();
 </script>
@@ -159,7 +159,7 @@ A `Sidebar` component is composed of the following parts:
 
 ```svelte showLineNumbers title="src/lib/components/app-sidebar.svelte"
 <script lang="ts">
-  import * as Sidebar from "$lib/components/ui/sidebar/index.js";
+  import * as Sidebar from "#lib/components/ui/sidebar/index.js";
 </script>
 
 <Sidebar.Root>
@@ -186,8 +186,8 @@ Add a `Sidebar.Provider` and `Sidebar.Trigger` at the root of your application.
 
 ```svelte showLineNumbers title="src/routes/+layout.svelte"
 <script lang="ts">
-  import * as Sidebar from "$lib/components/ui/sidebar/index.js";
-  import AppSidebar from "$lib/components/app-sidebar.svelte";
+  import * as Sidebar from "#lib/components/ui/sidebar/index.js";
+  import AppSidebar from "#lib/components/app-sidebar.svelte";
 
   let { children } = $props();
 </script>
@@ -209,7 +209,7 @@ Create a new sidebar component at `src/lib/components/app-sidebar.svelte`.
 
 ```svelte showLineNumbers title="src/lib/components/app-sidebar.svelte"
 <script lang="ts">
-  import * as Sidebar from "$lib/components/ui/sidebar/index.js";
+  import * as Sidebar from "#lib/components/ui/sidebar/index.js";
 </script>
 
 <Sidebar.Root>
@@ -232,7 +232,7 @@ We'll use the `Sidebar.Menu` component in a `Sidebar.Group`.
   import InboxIcon from "@lucide/svelte/icons/inbox";
   import SearchIcon from "@lucide/svelte/icons/search";
   import SettingsIcon from "@lucide/svelte/icons/settings";
-  import * as Sidebar from "$lib/components/ui/sidebar/index.js";
+  import * as Sidebar from "#lib/components/ui/sidebar/index.js";
 
   // Menu items.
   const items = [
@@ -361,7 +361,7 @@ The main `Sidebar` component used to render a collapsible sidebar.
 
 ```svelte showLineNumbers
 <script lang="ts">
-  import * as Sidebar from "$lib/components/ui/sidebar/index.js";
+  import * as Sidebar from "#lib/components/ui/sidebar/index.js";
 </script>
 
 <Sidebar.Root />
@@ -436,7 +436,7 @@ The `useSidebar` function is used to hook into the sidebar context. It returns a
 
 ```svelte showLineNumbers
 <script lang="ts">
-  import { useSidebar } from "$lib/components/ui/sidebar/index.js";
+  import { useSidebar } from "#lib/components/ui/sidebar/index.js";
   const sidebar = useSidebar();
 
   // ...
@@ -948,7 +948,7 @@ To create a custom trigger, you can use the `useSidebar` hook.
 
 ```svelte showLineNumbers
 <script lang="ts">
-  import { useSidebar } from "$lib/components/ui/sidebar/index.js";
+  import { useSidebar } from "#lib/components/ui/sidebar/index.js";
   const sidebar = useSidebar();
 </script>
 
@@ -984,7 +984,7 @@ Use Svelte's [Function Binding](https://svelte.dev/docs/svelte/bind#Function-bin
 
 ```svelte showLineNumbers
 <script lang="ts">
-  import * as Sidebar from "$lib/components/ui/sidebar/index.js";
+  import * as Sidebar from "#lib/components/ui/sidebar/index.js";
 
   let myOpen = $state(true);
 </script>

@@ -1,7 +1,7 @@
 <script lang="ts">
-	import Calendar from "$lib/registry/ui/calendar/calendar.svelte";
-	import * as Select from "$lib/registry/ui/select/index.js";
-	import { Label } from "$lib/registry/ui/label/index.js";
+	import Calendar from "#lib/registry/ui/calendar/calendar.svelte";
+	import * as Select from "#lib/registry/ui/select/index.js";
+	import { Label } from "#lib/registry/ui/label/index.js";
 	import { CalendarDate } from "@internationalized/date";
 	import type { ComponentProps } from "svelte";
 

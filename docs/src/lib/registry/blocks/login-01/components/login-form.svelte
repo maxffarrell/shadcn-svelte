@@ -1,13 +1,13 @@
 <script lang="ts">
-	import { Button } from "$lib/registry/ui/button/index.js";
-	import * as Card from "$lib/registry/ui/card/index.js";
-	import { Input } from "$lib/registry/ui/input/index.js";
+	import { Button } from "#lib/registry/ui/button/index.js";
+	import * as Card from "#lib/registry/ui/card/index.js";
+	import { Input } from "#lib/registry/ui/input/index.js";
 	import {
 		FieldGroup,
 		Field,
 		FieldLabel,
 		FieldDescription,
-	} from "$lib/registry/ui/field/index.js";
+	} from "#lib/registry/ui/field/index.js";
 
 	const id = $props.id();
 </script>

@@ -1,7 +1,7 @@
 <script lang="ts">
-	import * as Empty from "$lib/registry/ui/empty/index.js";
-	import * as InputGroup from "$lib/registry/ui/input-group/index.js";
-	import * as Kbd from "$lib/registry/ui/kbd/index.js";
+	import * as Empty from "#lib/registry/ui/empty/index.js";
+	import * as InputGroup from "#lib/registry/ui/input-group/index.js";
+	import * as Kbd from "#lib/registry/ui/kbd/index.js";
 	import SearchIcon from "@lucide/svelte/icons/search";
 </script>
 

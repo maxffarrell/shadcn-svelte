@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { ScrollArea } from "$lib/registry/ui/scroll-area/index.js";
+	import { ScrollArea } from "#lib/registry/ui/scroll-area/index.js";
 	import { page } from "$app/state";
-	import { registryCategories } from "$lib/registry/registry-categories.js";
+	import { registryCategories } from "#lib/registry/registry-categories.js";
 </script>
 
 {#snippet BlocksNavLink({

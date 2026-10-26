@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { formatDateRange } from "little-date";
 	import PlusIcon from "@lucide/svelte/icons/plus";
-	import { Button } from "$lib/registry/ui/button/index.js";
-	import Calendar from "$lib/registry/ui/calendar/calendar.svelte";
-	import * as Card from "$lib/registry/ui/card/index.js";
+	import { Button } from "#lib/registry/ui/button/index.js";
+	import Calendar from "#lib/registry/ui/calendar/calendar.svelte";
+	import * as Card from "#lib/registry/ui/card/index.js";
 	import { CalendarDate, getLocalTimeZone, type DateValue } from "@internationalized/date";
 
 	const events = [

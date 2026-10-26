@@ -1,8 +1,8 @@
 <script lang="ts">
 	import Example from "../../../../../routes/(app)/(layout)/(create)/components/example.svelte";
-	import * as Card from "$lib/registry/ui/card/index.js";
-	import * as Button from "$lib/registry/ui/button/index.js";
-	import IconPlaceholder from "$lib/components/icon-placeholder/icon-placeholder.svelte";
+	import * as Card from "#lib/registry/ui/card/index.js";
+	import * as Button from "#lib/registry/ui/button/index.js";
+	import IconPlaceholder from "#lib/components/icon-placeholder/icon-placeholder.svelte";
 </script>
 
 <Example title="With Image">

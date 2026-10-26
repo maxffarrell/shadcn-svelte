@@ -1,5 +1,5 @@
 <script lang="ts" module>
-	import type { createFileTreeForRegistryItemFiles } from "$lib/registry/registry-utils.js";
+	import type { createFileTreeForRegistryItemFiles } from "#lib/registry/registry-utils.js";
 	import { Pane } from "paneforge";
 	import { Context } from "runed";
 	import BlockViewerToolbar from "./block-viewer-toolbar.svelte";

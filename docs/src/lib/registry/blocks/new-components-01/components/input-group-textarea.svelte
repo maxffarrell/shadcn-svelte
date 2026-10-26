@@ -1,5 +1,5 @@
 <script lang="ts">
-	import * as InputGroup from "$lib/registry/ui/input-group/index.js";
+	import * as InputGroup from "#lib/registry/ui/input-group/index.js";
 	import CopyIcon from "@lucide/svelte/icons/copy";
 	import CornerDownLeftIcon from "@lucide/svelte/icons/corner-down-left";
 	import RefreshCwIcon from "@lucide/svelte/icons/refresh-cw";

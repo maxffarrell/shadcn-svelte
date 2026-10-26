@@ -4,8 +4,8 @@
 	import TrendingDownIcon from "@lucide/svelte/icons/trending-down";
 	import { curveNatural } from "d3-shape";
 	import { scaleUtc } from "d3-scale";
-	import * as Chart from "$lib/registry/ui/chart/index.js";
-	import * as Card from "$lib/registry/ui/card/index.js";
+	import * as Chart from "#lib/registry/ui/chart/index.js";
+	import * as Card from "#lib/registry/ui/card/index.js";
 
 	const chartData = [
 		{ date: new Date("2024-01-01"), desktop: 186, mobile: 80 },

@@ -1,8 +1,8 @@
 <script lang="ts" module>
-	import { createFileTreeForRegistryItemFiles } from "$lib/registry/registry-utils.js";
+	import { createFileTreeForRegistryItemFiles } from "#lib/registry/registry-utils.js";
 	import type { Pane } from "paneforge";
-	import { ComponentCodeViewerContext } from "$lib/components/component-code-viewer/component-code-viewer.svelte";
-	import ComponentCodeViewerCode from "$lib/components/component-code-viewer/component-code-viewer-code.svelte";
+	import { ComponentCodeViewerContext } from "#lib/components/component-code-viewer/component-code-viewer.svelte";
+	import ComponentCodeViewerCode from "#lib/components/component-code-viewer/component-code-viewer-code.svelte";
 
 	import { MediaQuery } from "svelte/reactivity";
 

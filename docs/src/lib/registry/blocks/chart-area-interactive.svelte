@@ -1,7 +1,7 @@
 <script lang="ts">
-	import * as Chart from "$lib/registry/ui/chart/index.js";
-	import * as Card from "$lib/registry/ui/card/index.js";
-	import * as Select from "$lib/registry/ui/select/index.js";
+	import * as Chart from "#lib/registry/ui/chart/index.js";
+	import * as Card from "#lib/registry/ui/card/index.js";
+	import * as Select from "#lib/registry/ui/select/index.js";
 	import { scaleUtc } from "d3-scale";
 	import { Area, AreaChart, ChartClipPath } from "layerchart";
 	import { curveNatural } from "d3-shape";

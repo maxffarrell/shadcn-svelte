@@ -2,9 +2,9 @@
 	import Example from "../../../../../routes/(app)/(layout)/(create)/components/example.svelte";
 	import { scaleBand } from "d3-scale";
 	import { BarChart } from "layerchart";
-	import * as Chart from "$lib/registry/ui/chart/index.js";
-	import * as Card from "$lib/registry/ui/card/index.js";
-	import IconPlaceholder from "$lib/components/icon-placeholder/icon-placeholder.svelte";
+	import * as Chart from "#lib/registry/ui/chart/index.js";
+	import * as Card from "#lib/registry/ui/card/index.js";
+	import IconPlaceholder from "#lib/components/icon-placeholder/icon-placeholder.svelte";
 
 	const barChartData = [
 		{ month: "January", desktop: 186, mobile: 80 },

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Example from "../../../../../routes/(app)/(layout)/(create)/components/example.svelte";
-	import * as Avatar from "$lib/registry/ui/avatar/index.js";
-	import IconPlaceholder from "$lib/components/icon-placeholder/icon-placeholder.svelte";
+	import * as Avatar from "#lib/registry/ui/avatar/index.js";
+	import IconPlaceholder from "#lib/components/icon-placeholder/icon-placeholder.svelte";
 </script>
 
 <Example title="Group with Icon Count">

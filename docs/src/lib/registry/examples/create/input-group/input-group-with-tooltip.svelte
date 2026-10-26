@@ -1,12 +1,12 @@
 <script lang="ts">
 	import Example from "../../../../../routes/(app)/(layout)/(create)/components/example.svelte";
-	import * as InputGroup from "$lib/registry/ui/input-group/index.js";
-	import * as Field from "$lib/registry/ui/field/index.js";
-	import * as Tooltip from "$lib/registry/ui/tooltip/index.js";
-	import * as DropdownMenu from "$lib/registry/ui/dropdown-menu/index.js";
-	import * as Popover from "$lib/registry/ui/popover/index.js";
-	import * as ButtonGroup from "$lib/registry/ui/button-group/index.js";
-	import IconPlaceholder from "$lib/components/icon-placeholder/icon-placeholder.svelte";
+	import * as InputGroup from "#lib/registry/ui/input-group/index.js";
+	import * as Field from "#lib/registry/ui/field/index.js";
+	import * as Tooltip from "#lib/registry/ui/tooltip/index.js";
+	import * as DropdownMenu from "#lib/registry/ui/dropdown-menu/index.js";
+	import * as Popover from "#lib/registry/ui/popover/index.js";
+	import * as ButtonGroup from "#lib/registry/ui/button-group/index.js";
+	import IconPlaceholder from "#lib/components/icon-placeholder/icon-placeholder.svelte";
 
 	let country = $state("+1");
 </script>

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import * as Alert from "$lib/registry/ui/alert/index.js";
+	import * as Alert from "#lib/registry/ui/alert/index.js";
 	import CheckCircle2Icon from "@lucide/svelte/icons/check-circle-2";
 	import AlertCircleIcon from "@lucide/svelte/icons/alert-circle";
 	import PopcornIcon from "@lucide/svelte/icons/popcorn";

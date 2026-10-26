@@ -6,11 +6,11 @@
 		fonts,
 		RADII,
 		type DesignSystemConfig,
-	} from "$lib/registry/config.js";
-	import { browser } from "$app/environment";
+	} from "#lib/registry/config.js";
+	import { browser } from "$app/env";
 	import { watch } from "runed";
 	import { setupDesignSystem } from "./design-system-provider-state.svelte.js";
-	import { cn } from "$lib/registry/lib/utils.js";
+	import { cn } from "#lib/registry/lib/utils.js";
 	import { toggleMode } from "mode-watcher";
 
 	const uid = $props.id();

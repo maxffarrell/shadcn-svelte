@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Example from "../../../../../routes/(app)/(layout)/(create)/components/example.svelte";
-	import * as Checkbox from "$lib/registry/ui/checkbox/index.js";
-	import * as Table from "$lib/registry/ui/table/index.js";
+	import * as Checkbox from "#lib/registry/ui/checkbox/index.js";
+	import * as Table from "#lib/registry/ui/table/index.js";
 	import { SvelteSet } from "svelte/reactivity";
 
 	const tableData = [

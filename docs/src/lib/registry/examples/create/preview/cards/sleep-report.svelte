@@ -1,8 +1,8 @@
 <script lang="ts">
-	import * as Card from "$lib/registry/ui/card/index.js";
-	import * as Chart from "$lib/registry/ui/chart/index.js";
-	import { Badge } from "$lib/registry/ui/badge/index.js";
-	import { Button } from "$lib/registry/ui/button/index.js";
+	import * as Card from "#lib/registry/ui/card/index.js";
+	import * as Chart from "#lib/registry/ui/chart/index.js";
+	import { Badge } from "#lib/registry/ui/badge/index.js";
+	import { Button } from "#lib/registry/ui/button/index.js";
 	import { scaleBand } from "d3-scale";
 	import { BarChart } from "layerchart";
 

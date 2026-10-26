@@ -1,13 +1,13 @@
 <script lang="ts" module>
-	import { createFileTreeForRegistryItemFiles } from "$lib/registry/registry-utils.js";
+	import { createFileTreeForRegistryItemFiles } from "#lib/registry/registry-utils.js";
 	import type { Pane } from "paneforge";
 	import { Context } from "runed";
 	import ComponentCodeViewerCode from "./component-code-viewer-code.svelte";
 	import CodeIcon from "@lucide/svelte/icons/code";
 
-	import * as Dialog from "$lib/registry/ui/dialog/index.js";
+	import * as Dialog from "#lib/registry/ui/dialog/index.js";
 	import { MediaQuery } from "svelte/reactivity";
-	import { badgeVariants } from "$lib/registry/ui/badge/badge.svelte";
+	import { badgeVariants } from "#lib/registry/ui/badge/badge.svelte";
 	import type { HighlightedBlock } from "../../../routes/api/block/[block]/+server.js";
 
 	type ComponentCodeViewerContextType = {

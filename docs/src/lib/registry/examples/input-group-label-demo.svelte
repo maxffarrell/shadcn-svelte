@@ -1,7 +1,7 @@
 <script lang="ts">
-	import * as InputGroup from "$lib/registry/ui/input-group/index.js";
-	import * as Label from "$lib/registry/ui/label/index.js";
-	import * as Tooltip from "$lib/registry/ui/tooltip/index.js";
+	import * as InputGroup from "#lib/registry/ui/input-group/index.js";
+	import * as Label from "#lib/registry/ui/label/index.js";
+	import * as Tooltip from "#lib/registry/ui/tooltip/index.js";
 	import InfoIcon from "@lucide/svelte/icons/info";
 </script>
 

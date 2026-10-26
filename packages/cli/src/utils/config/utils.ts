@@ -35,7 +35,7 @@ export async function resolveConfig(cwd: string, config: RawConfig): Promise<Res
 	const tsconfig = resolveTSConfig(cwd, config);
 
 	const tsconfigFilename = path.basename(tsconfig.path);
-	if (!tsconfig.config.compilerOptions?.paths) {
+	if (!tsconfig.config.compilerOptions?.paths && !project.getPackageInfo(cwd).imports) {
 		throw error(
 			`Missing ${highlight("paths")} field in your ${highlight(tsconfigFilename)} for path aliases. See: ${color.underline(`${SITE_BASE_URL}/docs/installation/manual#configure-path-aliases`)}`
 		);
@@ -125,10 +125,15 @@ type PromptForAliasesOptions = {
 	uiAlias?: string | undefined;
 };
 export async function promptForAliases(options: PromptForAliasesOptions) {
-	const libAlias = await promptAlias("lib", "$lib", options);
+	const defaultLib = resolveImportAlias({ ...options, importPath: "#lib" }) ? "#lib" : "$lib";
+	const libAlias = await promptAlias("lib", defaultLib, options);
 	const componentAlias = await promptAlias("components", `${libAlias}/components`, options);
 	const uiAlias = await promptAlias("ui", `${componentAlias}/ui`, options);
-	const utilsAlias = await promptAlias("utils", `${libAlias}/utils`, options);
+	const utilsAlias = await promptAlias(
+		"utils",
+		`${libAlias}/utils${libAlias.startsWith("#") ? ".js" : ""}`,
+		options
+	);
 	const hooksAlias = await promptAlias("hooks", `${libAlias}/hooks`, options);
 
 	return {

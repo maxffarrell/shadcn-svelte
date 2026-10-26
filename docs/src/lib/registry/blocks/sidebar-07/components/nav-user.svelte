@@ -1,8 +1,8 @@
 <script lang="ts">
-	import * as Avatar from "$lib/registry/ui/avatar/index.js";
-	import * as DropdownMenu from "$lib/registry/ui/dropdown-menu/index.js";
-	import * as Sidebar from "$lib/registry/ui/sidebar/index.js";
-	import { useSidebar } from "$lib/registry/ui/sidebar/index.js";
+	import * as Avatar from "#lib/registry/ui/avatar/index.js";
+	import * as DropdownMenu from "#lib/registry/ui/dropdown-menu/index.js";
+	import * as Sidebar from "#lib/registry/ui/sidebar/index.js";
+	import { useSidebar } from "#lib/registry/ui/sidebar/index.js";
 	import BadgeCheckIcon from "@lucide/svelte/icons/badge-check";
 	import BellIcon from "@lucide/svelte/icons/bell";
 	import ChevronsUpDownIcon from "@lucide/svelte/icons/chevrons-up-down";

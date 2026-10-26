@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Button } from "$lib/registry/ui/button/index.js";
+	import { Button } from "#lib/registry/ui/button/index.js";
 	import GripVerticalIcon from "@tabler/icons-svelte/icons/grip-vertical";
 	import type { Attachment } from "svelte/attachments";
 

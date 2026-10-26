@@ -1,9 +1,9 @@
 <script lang="ts">
 	import Example from "../../../../../routes/(app)/(layout)/(create)/components/example.svelte";
-	import * as Card from "$lib/registry/ui/card/index.js";
-	import { Badge } from "$lib/registry/ui/badge/index.js";
-	import { Button } from "$lib/registry/ui/button/index.js";
-	import * as Chart from "$lib/registry/ui/chart/index.js";
+	import * as Card from "#lib/registry/ui/card/index.js";
+	import { Badge } from "#lib/registry/ui/badge/index.js";
+	import { Button } from "#lib/registry/ui/button/index.js";
+	import * as Chart from "#lib/registry/ui/chart/index.js";
 	import { AreaChart, Area } from "layerchart";
 	import { curveLinear } from "d3-shape";
 

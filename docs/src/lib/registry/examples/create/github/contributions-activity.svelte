@@ -1,9 +1,9 @@
 <script lang="ts">
 	import Example from "../../../../../routes/(app)/(layout)/(create)/components/example.svelte";
-	import * as Card from "$lib/registry/ui/card/index.js";
-	import * as Field from "$lib/registry/ui/field/index.js";
-	import { Checkbox } from "$lib/registry/ui/checkbox/index.js";
-	import { Button } from "$lib/registry/ui/button/index.js";
+	import * as Card from "#lib/registry/ui/card/index.js";
+	import * as Field from "#lib/registry/ui/field/index.js";
+	import { Checkbox } from "#lib/registry/ui/checkbox/index.js";
+	import { Button } from "#lib/registry/ui/button/index.js";
 </script>
 
 <Example title="Contributions Activity" class="justify-center">

@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { toast } from "svelte-sonner";
 	import { PersistedState } from "runed";
-	import * as Select from "$lib/registry/ui/select/index.js";
-	import { AspectRatio } from "$lib/registry/ui/aspect-ratio/index.js";
-	import { getColors, type ColorPalette } from "$lib/components/colors/colors.js";
+	import * as Select from "#lib/registry/ui/select/index.js";
+	import { AspectRatio } from "#lib/registry/ui/aspect-ratio/index.js";
+	import { getColors, type ColorPalette } from "#lib/components/colors/colors.js";
 	import ClipboardIcon from "@lucide/svelte/icons/clipboard";
 	import CheckIcon from "@lucide/svelte/icons/check";
 	import { scale } from "svelte/transition";

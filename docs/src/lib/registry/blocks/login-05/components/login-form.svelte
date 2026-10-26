@@ -7,10 +7,10 @@
 		FieldLabel,
 		FieldDescription,
 		FieldSeparator,
-	} from "$lib/registry/ui/field/index.js";
-	import { Input } from "$lib/registry/ui/input/index.js";
-	import { Button } from "$lib/registry/ui/button/index.js";
-	import { cn, type WithElementRef } from "$lib/utils.js";
+	} from "#lib/registry/ui/field/index.js";
+	import { Input } from "#lib/registry/ui/input/index.js";
+	import { Button } from "#lib/registry/ui/button/index.js";
+	import { cn, type WithElementRef } from "#lib/utils.js";
 
 	let {
 		ref = $bindable(null),

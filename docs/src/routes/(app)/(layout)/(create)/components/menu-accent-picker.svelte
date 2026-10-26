@@ -1,9 +1,9 @@
 <script lang="ts">
 	import * as Picker from "./picker/index.js";
-	import { useDesignSystem } from "$lib/features/design-system/index.js";
-	import { IsMobile } from "$lib/registry/hooks/is-mobile.svelte.js";
+	import { useDesignSystem } from "#lib/features/design-system/index.js";
+	import { IsMobile } from "#lib/registry/hooks/is-mobile.svelte.js";
 	import LockButton from "./lock-button.svelte";
-	import { MENU_ACCENTS, type MenuAccentValue } from "$lib/registry/config.js";
+	import { MENU_ACCENTS, type MenuAccentValue } from "#lib/registry/config.js";
 
 	type Props = {
 		submenu?: boolean;

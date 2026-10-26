@@ -170,9 +170,9 @@ it("should accurately build the registry template", async () => {
 		    },
 		    {
 		      "content": "<script lang="ts">
-			import { getPokemon } from "$lib/registry/blocks/complex-component/lib/pokemon.js";
+			import { getPokemon } from "#lib/registry/blocks/complex-component/lib/pokemon.js";
 			import * as Card from "$UI$/card/index.js";
-			import PokemonImage from "$lib/registry/blocks/complex-component/components/pokemon-image.svelte";
+			import PokemonImage from "#lib/registry/blocks/complex-component/components/pokemon-image.svelte";
 
 			let { name }: { name: string } = $props();
 		</script>
@@ -199,7 +199,7 @@ it("should accurately build the registry template", async () => {
 		    },
 		    {
 		      "content": "<script lang="ts">
-			import { usePokemonImage } from "$lib/registry/blocks/complex-component/hooks/use-pokemon.svelte";
+			import { usePokemonImage } from "#lib/registry/blocks/complex-component/hooks/use-pokemon.svelte.js";
 
 			let { number, name }: { number: number; name: string } = $props();
 
@@ -673,7 +673,7 @@ it("should accurately build the registry template", async () => {
 		-->
 
 		<script lang="ts">
-			import { cn } from "$UTILS$";
+			import { cn } from "$UTILS$.js";
 			import type { HTMLButtonAttributes } from "svelte/elements";
 
 			let { class: className, step, ...props }: HTMLButtonAttributes & { step: number } = $props();

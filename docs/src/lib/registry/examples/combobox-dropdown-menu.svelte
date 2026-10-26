@@ -5,9 +5,9 @@
 	import TrashIcon from "@lucide/svelte/icons/trash";
 	import UserIcon from "@lucide/svelte/icons/user";
 	import { tick } from "svelte";
-	import * as DropdownMenu from "$lib/registry/ui/dropdown-menu/index.js";
-	import * as Command from "$lib/registry/ui/command/index.js";
-	import { Button } from "$lib/registry/ui/button/index.js";
+	import * as DropdownMenu from "#lib/registry/ui/dropdown-menu/index.js";
+	import * as Command from "#lib/registry/ui/command/index.js";
+	import { Button } from "#lib/registry/ui/button/index.js";
 
 	const labels = [
 		"feature",

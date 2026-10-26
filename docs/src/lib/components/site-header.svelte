@@ -1,13 +1,13 @@
 <script lang="ts">
-	import { Button } from "$lib/registry/ui/button/index.js";
+	import { Button } from "#lib/registry/ui/button/index.js";
 	import MainNav from "./main-nav.svelte";
-	import Separator from "$lib/registry/ui/separator/separator.svelte";
+	import Separator from "#lib/registry/ui/separator/separator.svelte";
 	import GithubLink from "./github-link.svelte";
 	import MobileNav from "./mobile-nav.svelte";
 	import LayoutToggle from "./layout-toggle.svelte";
 	import CommandMenu from "./command-menu/command-menu.svelte";
-	import { getColors } from "$lib/colors.js";
-	import { mainNavItems } from "$lib/navigation.js";
+	import { getColors } from "#lib/colors.js";
+	import { mainNavItems } from "#lib/navigation.js";
 	import PlusIcon from "@lucide/svelte/icons/plus";
 	import SquareTerminal from "@lucide/svelte/icons/square-terminal";
 	import Customizer from "./customizer.svelte";

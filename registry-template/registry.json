@@ -8,7 +8,9 @@
 			"type": "registry:component",
 			"title": "Hello World",
 			"description": "A simple hello world component",
-			"registryDependencies": ["button"],
+			"registryDependencies": [
+				"button"
+			],
 			"files": [
 				{
 					"path": "src/lib/registry/blocks/hello-world/hello-world.svelte",
@@ -24,8 +26,16 @@
 			"type": "registry:component",
 			"title": "Example Form",
 			"description": "A contact form with Zod validation.",
-			"dependencies": ["zod"],
-			"registryDependencies": ["button", "input", "label", "textarea", "card"],
+			"dependencies": [
+				"zod"
+			],
+			"registryDependencies": [
+				"button",
+				"input",
+				"label",
+				"textarea",
+				"card"
+			],
 			"files": [
 				{
 					"path": "src/lib/registry/blocks/example-form/example-form.svelte",
@@ -38,7 +48,9 @@
 			"type": "registry:component",
 			"title": "Complex Component",
 			"description": "A complex component showing hooks, libs and components.",
-			"registryDependencies": ["card"],
+			"registryDependencies": [
+				"card"
+			],
 			"files": [
 				{
 					"path": "src/lib/registry/blocks/complex-component/+page.svelte",
@@ -104,7 +116,9 @@
 			"type": "registry:component",
 			"title": "Checkout Steps",
 			"description": "A checkout steps component.",
-			"registryDependencies": ["local:stepper"],
+			"registryDependencies": [
+				"local:stepper"
+			],
 			"files": [
 				{
 					"path": "src/lib/registry/blocks/checkout-steps/checkout-steps.svelte",
@@ -112,5 +126,12 @@
 				}
 			]
 		}
-	]
+	],
+	"aliases": {
+		"lib": "#lib/registry/lib",
+		"components": "#lib/registry/components",
+		"ui": "#lib/registry/ui",
+		"hooks": "#lib/registry/hooks",
+		"utils": "#lib/utils"
+	}
 }

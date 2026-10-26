@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { STYLES } from "$lib/registry/config.js";
+	import { STYLES } from "#lib/registry/config.js";
 	import LockButton from "./lock-button.svelte";
 	import * as Picker from "./picker/index.js";
-	import { useDesignSystem } from "$lib/features/design-system/index.js";
-	import { IsMobile } from "$lib/registry/hooks/is-mobile.svelte.js";
+	import { useDesignSystem } from "#lib/features/design-system/index.js";
+	import { IsMobile } from "#lib/registry/hooks/is-mobile.svelte.js";
 
 	type Props = {
 		submenu?: boolean;

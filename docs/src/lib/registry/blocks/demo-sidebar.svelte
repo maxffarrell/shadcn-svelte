@@ -4,7 +4,7 @@
 	import InboxIcon from "@lucide/svelte/icons/inbox";
 	import SearchIcon from "@lucide/svelte/icons/search";
 	import SettingsIcon from "@lucide/svelte/icons/settings";
-	import * as Sidebar from "$lib/registry/ui/sidebar/index.js";
+	import * as Sidebar from "#lib/registry/ui/sidebar/index.js";
 
 	// Menu items.
 	const items = [

@@ -8,15 +8,15 @@ links:
 ---
 
 <script>
-  import Callout from "$lib/components/callout.svelte";
+  import Callout from "#lib/components/callout.svelte";
   import InfoIcon from "@lucide/svelte/icons/info";
-	import ComponentPreview from "$lib/components/component-preview.svelte";
-	import ComponentSource from "$lib/components/component-source.svelte";
-	import PMAddComp from "$lib/components/pm-add-comp.svelte";
-	import PMInstall from "$lib/components/pm-install.svelte";
-	import Steps from "$lib/components/steps.svelte";
-	import InstallTabs from "$lib/components/install-tabs.svelte";
-	import Step from "$lib/components/step.svelte";
+	import ComponentPreview from "#lib/components/component-preview.svelte";
+	import ComponentSource from "#lib/components/component-source.svelte";
+	import PMAddComp from "#lib/components/pm-add-comp.svelte";
+	import PMInstall from "#lib/components/pm-install.svelte";
+	import Steps from "#lib/components/steps.svelte";
+	import InstallTabs from "#lib/components/install-tabs.svelte";
+	import Step from "#lib/components/step.svelte";
 
 	let { viewerData, links } = $props();
 </script>
@@ -68,7 +68,7 @@ Copy and paste the following code into your project.
 
 ```svelte
 <script lang="ts">
-  import { Button } from "$lib/components/ui/button/index.js";
+  import { Button } from "#lib/components/ui/button/index.js";
 </script>
 
 <Button variant="outline">Button</Button>
@@ -337,7 +337,7 @@ You can convert the `<button>` into an `<a>` element by simply passing an `href`
 
 ```svelte
 <script lang="ts">
-  import { Button } from "$lib/components/ui/button/index.js";
+  import { Button } from "#lib/components/ui/button/index.js";
 </script>
 
 <Button href="/dashboard">Dashboard</Button>
@@ -347,7 +347,7 @@ Alternatively, you can use the `buttonVariants` helper to create a link that loo
 
 ```svelte
 <script lang="ts">
-  import { buttonVariants } from "$lib/components/ui/button";
+  import { buttonVariants } from "#lib/components/ui/button";
 </script>
 
 <a href="/dashboard" class={buttonVariants({ variant: "outline" })}>

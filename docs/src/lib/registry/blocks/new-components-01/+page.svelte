@@ -13,9 +13,9 @@
 	import NotionPromptForm from "./components/notion-prompt-form.svelte";
 	import SpinnerBadge from "./components/spinner-badge.svelte";
 	import SpinnerEmpty from "./components/spinner-empty.svelte";
-	import { Checkbox } from "$lib/registry/ui/checkbox/index.js";
-	import * as Field from "$lib/registry/ui/field/index.js";
-	import * as Tooltip from "$lib/registry/ui/tooltip/index.js";
+	import { Checkbox } from "#lib/registry/ui/checkbox/index.js";
+	import * as Field from "#lib/registry/ui/field/index.js";
+	import * as Tooltip from "#lib/registry/ui/tooltip/index.js";
 </script>
 
 <Tooltip.Provider>

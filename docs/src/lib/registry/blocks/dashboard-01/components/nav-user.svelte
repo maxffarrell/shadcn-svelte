@@ -4,9 +4,9 @@
 	import LogoutIcon from "@tabler/icons-svelte/icons/logout";
 	import NotificationIcon from "@tabler/icons-svelte/icons/notification";
 	import UserCircleIcon from "@tabler/icons-svelte/icons/user-circle";
-	import * as Avatar from "$lib/registry/ui/avatar/index.js";
-	import * as DropdownMenu from "$lib/registry/ui/dropdown-menu/index.js";
-	import * as Sidebar from "$lib/registry/ui/sidebar/index.js";
+	import * as Avatar from "#lib/registry/ui/avatar/index.js";
+	import * as DropdownMenu from "#lib/registry/ui/dropdown-menu/index.js";
+	import * as Sidebar from "#lib/registry/ui/sidebar/index.js";
 
 	let { user }: { user: { name: string; email: string; avatar: string } } = $props();
 

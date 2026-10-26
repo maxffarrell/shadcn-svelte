@@ -15,14 +15,14 @@
 		getSortedRowModel,
 	} from "@tanstack/table-core";
 	import DataTableToolbar from "./data-table-toolbar.svelte";
-	import { createSvelteTable } from "$lib/registry/ui/data-table/data-table.svelte.js";
-	import FlexRender from "$lib/registry/ui/data-table/flex-render.svelte";
-	import * as Table from "$lib/registry/ui/table/index.js";
+	import { createSvelteTable } from "#lib/registry/ui/data-table/data-table.svelte.js";
+	import FlexRender from "#lib/registry/ui/data-table/flex-render.svelte";
+	import * as Table from "#lib/registry/ui/table/index.js";
 	import { type Task } from "../data/schemas.js";
-	import { renderComponent, renderSnippet } from "$lib/registry/ui/data-table/render-helpers.js";
-	import Checkbox from "$lib/registry/ui/checkbox/checkbox.svelte";
+	import { renderComponent, renderSnippet } from "#lib/registry/ui/data-table/render-helpers.js";
+	import Checkbox from "#lib/registry/ui/checkbox/checkbox.svelte";
 	import { createRawSnippet } from "svelte";
-	import { Button } from "$lib/registry/ui/button/index.js";
+	import { Button } from "#lib/registry/ui/button/index.js";
 	import ColumnHeader from "./data-table-column-header.svelte";
 	import TitleCell from "./data-table-title-cell.svelte";
 	import StatusCell from "./data-table-status-cell.svelte";
@@ -32,7 +32,7 @@
 	import ChevronLeftIcon from "@lucide/svelte/icons/chevron-left";
 	import ChevronsLeftIcon from "@lucide/svelte/icons/chevrons-left";
 	import ChevronsRightIcon from "@lucide/svelte/icons/chevrons-right";
-	import * as Select from "$lib/registry/ui/select/index.js";
+	import * as Select from "#lib/registry/ui/select/index.js";
 
 	let { data }: { data: Task[] } = $props();
 

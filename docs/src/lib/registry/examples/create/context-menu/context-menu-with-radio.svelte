@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Example from "../../../../../routes/(app)/(layout)/(create)/components/example.svelte";
-	import * as ContextMenu from "$lib/registry/ui/context-menu/index.js";
+	import * as ContextMenu from "#lib/registry/ui/context-menu/index.js";
 
 	let user = $state("pedro");
 	let theme = $state("light");

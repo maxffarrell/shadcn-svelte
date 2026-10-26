@@ -7,8 +7,8 @@ import * as svelte from "svelte/compiler";
 import { registryItemSchema, type Registry } from "shadcn-svelte/schema";
 import { fonts } from "../src/lib/registry/fonts.js";
 
-const REGISTRY_DEPENDENCY = "$lib/";
-const UTILS_PATH = "$lib/utils.js";
+const REGISTRY_DEPENDENCY = "#lib/";
+const UTILS_PATH = "#lib/utils.js";
 
 const tsParser = acorn.Parser.extend(tsPlugin());
 

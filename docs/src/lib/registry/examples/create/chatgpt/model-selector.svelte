@@ -1,10 +1,10 @@
 <script lang="ts">
 	import Example from "../../../../../routes/(app)/(layout)/(create)/components/example.svelte";
-	import * as DropdownMenu from "$lib/registry/ui/dropdown-menu/index.js";
-	import { buttonVariants } from "$lib/registry/ui/button/index.js";
-	import * as Item from "$lib/registry/ui/item/index.js";
-	import IconPlaceholder from "$lib/components/icon-placeholder/icon-placeholder.svelte";
-	import { cn } from "$lib/utils.js";
+	import * as DropdownMenu from "#lib/registry/ui/dropdown-menu/index.js";
+	import { buttonVariants } from "#lib/registry/ui/button/index.js";
+	import * as Item from "#lib/registry/ui/item/index.js";
+	import IconPlaceholder from "#lib/components/icon-placeholder/icon-placeholder.svelte";
+	import { cn } from "#lib/utils.js";
 
 	let mode = $state("auto");
 	let model = $state("gpt-5.1");

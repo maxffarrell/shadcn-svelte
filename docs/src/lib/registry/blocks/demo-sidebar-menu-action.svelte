@@ -1,6 +1,6 @@
 <script lang="ts">
-	import * as Sidebar from "$lib/registry/ui/sidebar/index.js";
-	import * as DropdownMenu from "$lib/registry/ui/dropdown-menu/index.js";
+	import * as Sidebar from "#lib/registry/ui/sidebar/index.js";
+	import * as DropdownMenu from "#lib/registry/ui/dropdown-menu/index.js";
 	import EllipsisIcon from "@lucide/svelte/icons/ellipsis";
 	import LifeBuoyIcon from "@lucide/svelte/icons/life-buoy";
 	import SendIcon from "@lucide/svelte/icons/send";

@@ -1,6 +1,6 @@
 <script lang="ts">
-	import * as Chart from "$lib/registry/ui/chart/index.js";
-	import * as Card from "$lib/registry/ui/card/index.js";
+	import * as Chart from "#lib/registry/ui/chart/index.js";
+	import * as Card from "#lib/registry/ui/card/index.js";
 	import { scaleUtc } from "d3-scale";
 	import { BarChart, Highlight } from "layerchart";
 	import { cubicInOut } from "svelte/easing";

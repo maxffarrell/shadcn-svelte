@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { tick } from "svelte";
 	import Example from "../../../../../routes/(app)/(layout)/(create)/components/example.svelte";
-	import * as Command from "$lib/registry/ui/command/index.js";
-	import * as Popover from "$lib/registry/ui/popover/index.js";
-	import { Button } from "$lib/registry/ui/button/index.js";
-	import IconPlaceholder from "$lib/components/icon-placeholder/icon-placeholder.svelte";
-	import { cn } from "$lib/utils.js";
+	import * as Command from "#lib/registry/ui/command/index.js";
+	import * as Popover from "#lib/registry/ui/popover/index.js";
+	import { Button } from "#lib/registry/ui/button/index.js";
+	import IconPlaceholder from "#lib/components/icon-placeholder/icon-placeholder.svelte";
+	import { cn } from "#lib/utils.js";
 
 	const largeListItems = Array.from({ length: 100 }, (_, i) => `Item ${i + 1}`);
 

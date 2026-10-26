@@ -1,5 +1,5 @@
 <script lang="ts">
-	import * as InputOTP from "$lib/registry/ui/input-otp/index.js";
+	import * as InputOTP from "#lib/registry/ui/input-otp/index.js";
 	import { REGEXP_ONLY_DIGITS_AND_CHARS } from "bits-ui";
 </script>
 

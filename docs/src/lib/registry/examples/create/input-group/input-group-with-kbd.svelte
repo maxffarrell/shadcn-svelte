@@ -1,10 +1,10 @@
 <script lang="ts">
 	import Example from "../../../../../routes/(app)/(layout)/(create)/components/example.svelte";
-	import * as InputGroup from "$lib/registry/ui/input-group/index.js";
-	import * as Field from "$lib/registry/ui/field/index.js";
-	import * as Kbd from "$lib/registry/ui/kbd/index.js";
-	import { Spinner } from "$lib/registry/ui/spinner/index.js";
-	import IconPlaceholder from "$lib/components/icon-placeholder/icon-placeholder.svelte";
+	import * as InputGroup from "#lib/registry/ui/input-group/index.js";
+	import * as Field from "#lib/registry/ui/field/index.js";
+	import * as Kbd from "#lib/registry/ui/kbd/index.js";
+	import { Spinner } from "#lib/registry/ui/spinner/index.js";
+	import IconPlaceholder from "#lib/components/icon-placeholder/icon-placeholder.svelte";
 </script>
 
 <Example title="With Kbd">

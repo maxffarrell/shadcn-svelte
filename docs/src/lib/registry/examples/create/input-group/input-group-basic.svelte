@@ -1,8 +1,8 @@
 <script lang="ts">
 	import Example from "../../../../../routes/(app)/(layout)/(create)/components/example.svelte";
-	import { Input } from "$lib/registry/ui/input/index.js";
-	import * as InputGroup from "$lib/registry/ui/input-group/index.js";
-	import * as Field from "$lib/registry/ui/field/index.js";
+	import { Input } from "#lib/registry/ui/input/index.js";
+	import * as InputGroup from "#lib/registry/ui/input-group/index.js";
+	import * as Field from "#lib/registry/ui/field/index.js";
 </script>
 
 <Example title="Basic">

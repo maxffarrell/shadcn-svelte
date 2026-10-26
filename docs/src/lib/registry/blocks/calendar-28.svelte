@@ -2,11 +2,11 @@
 	import CalendarIcon from "@lucide/svelte/icons/calendar";
 	import { CalendarDate, getLocalTimeZone, type DateValue } from "@internationalized/date";
 	import { untrack } from "svelte";
-	import Calendar from "$lib/registry/ui/calendar/calendar.svelte";
-	import { Input } from "$lib/registry/ui/input/index.js";
-	import { Label } from "$lib/registry/ui/label/index.js";
-	import * as Popover from "$lib/registry/ui/popover/index.js";
-	import { Button } from "$lib/registry/ui/button/index.js";
+	import Calendar from "#lib/registry/ui/calendar/calendar.svelte";
+	import { Input } from "#lib/registry/ui/input/index.js";
+	import { Label } from "#lib/registry/ui/label/index.js";
+	import * as Popover from "#lib/registry/ui/popover/index.js";
+	import { Button } from "#lib/registry/ui/button/index.js";
 
 	function formatDate(date: DateValue | undefined) {
 		if (!date) return "";

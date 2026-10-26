@@ -1,6 +1,6 @@
 <script lang="ts">
-	import * as Card from "$lib/registry/ui/card/index.js";
-	import * as Select from "$lib/registry/ui/select/index.js";
+	import * as Card from "#lib/registry/ui/card/index.js";
+	import * as Select from "#lib/registry/ui/select/index.js";
 	import { CalendarDate } from "@internationalized/date";
 	import RangeCalendar from "../ui/range-calendar/range-calendar.svelte";
 	import type { DateRange } from "bits-ui";

@@ -4,7 +4,7 @@
 	import IconCornerDownLeft from "@tabler/icons-svelte/icons/corner-down-left";
 	import IconRefresh from "@tabler/icons-svelte/icons/refresh";
 
-	import * as InputGroup from "$lib/registry/ui/input-group/index.js";
+	import * as InputGroup from "#lib/registry/ui/input-group/index.js";
 </script>
 
 <div class="grid w-full max-w-md gap-4">

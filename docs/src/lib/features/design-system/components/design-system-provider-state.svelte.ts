@@ -9,7 +9,7 @@ import {
 	RADII,
 	STYLES,
 	type FontHeadingValue,
-} from "$lib/registry/config.js";
+} from "#lib/registry/config.js";
 import { Context, PersistedState } from "runed";
 import { SvelteURLSearchParams } from "svelte/reactivity";
 import {
@@ -28,7 +28,7 @@ import {
 } from "shadcn-svelte/preset";
 
 type ChartColorName = (typeof PRESET_CHART_COLORS)[number];
-import { FONTS } from "$lib/fonts.js";
+import { FONTS } from "#lib/fonts.js";
 
 export interface IDesignSystemState extends PresetConfig {
 	preset: string;
@@ -103,12 +103,11 @@ class DesignSystemState implements IDesignSystemState {
 
 	private set system(value: PresetConfig) {
 		this.#preset.current = encodePreset(value);
-		const searchParams = new SvelteURLSearchParams(page.url.searchParams);
+		const searchParams = new SvelteURLSearchParams(page.url.searchParams.toString());
 		searchParams.set("preset", this.#preset.current);
 		goto(`${page.url.pathname}?${searchParams.toString()}${page.url.hash}`, {
-			replaceState: true,
-			noScroll: true,
-			keepFocus: true,
+			replace: true,
+			reset: false,
 		});
 	}
 

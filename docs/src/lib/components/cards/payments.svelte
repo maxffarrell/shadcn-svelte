@@ -8,10 +8,10 @@
 </script>
 
 <script lang="ts">
-	import { Button } from "$lib/registry/ui/button/index.js";
-	import * as Card from "$lib/registry/ui/card/index.js";
-	import { Checkbox } from "$lib/registry/ui/checkbox/index.js";
-	import * as Table from "$lib/registry/ui/table/index.js";
+	import { Button } from "#lib/registry/ui/button/index.js";
+	import * as Card from "#lib/registry/ui/card/index.js";
+	import { Checkbox } from "#lib/registry/ui/checkbox/index.js";
+	import * as Table from "#lib/registry/ui/table/index.js";
 	import {
 		getCoreRowModel,
 		getFilteredRowModel,
@@ -24,10 +24,10 @@
 		type SortingState,
 		type VisibilityState,
 	} from "@tanstack/table-core";
-	import { renderComponent, renderSnippet } from "$lib/registry/ui/data-table/render-helpers.js";
+	import { renderComponent, renderSnippet } from "#lib/registry/ui/data-table/render-helpers.js";
 	import { createRawSnippet } from "svelte";
-	import { createSvelteTable } from "$lib/registry/ui/data-table/data-table.svelte.js";
-	import { FlexRender } from "$lib/registry/ui/data-table/index.js";
+	import { createSvelteTable } from "#lib/registry/ui/data-table/data-table.svelte.js";
+	import { FlexRender } from "#lib/registry/ui/data-table/index.js";
 	import EmailHeader from "./payments-email-header.svelte";
 	import ActionsCell from "./payments-actions-cell.svelte";
 

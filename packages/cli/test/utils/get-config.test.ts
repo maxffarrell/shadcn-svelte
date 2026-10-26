@@ -5,6 +5,15 @@ import { getConf, resolvePath } from "./test-helpers";
 vi.mock("tinyexec");
 
 describe("getConfig", () => {
+	it("resolves package imports without TypeScript paths", async () => {
+		const config = await getConf("config-package-imports");
+		expect(config?.resolvedPaths.lib).toBe(
+			resolvePath("../fixtures/config-package-imports/src/lib")
+		);
+		expect(config?.resolvedPaths.ui).toBe(
+			resolvePath("../fixtures/config-package-imports/src/lib/components/ui")
+		);
+	});
 	it("handles cases where no config is present", async () => {
 		expect(await getConf("config-none")).toEqual(undefined);
 	});

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Calendar as CalendarPrimitive } from "bits-ui";
-	import { cn, type WithoutChildrenOrChild } from "$lib/utils.js";
-	import IconPlaceholder from "$lib/components/icon-placeholder/icon-placeholder.svelte";
+	import { cn, type WithoutChildrenOrChild } from "#lib/utils.js";
+	import IconPlaceholder from "#lib/components/icon-placeholder/icon-placeholder.svelte";
 
 	let {
 		ref = $bindable(null),

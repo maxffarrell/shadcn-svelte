@@ -7,15 +7,15 @@ links:
 ---
 
 <script>
-	import ComponentPreview from "$lib/components/component-preview.svelte";
-	import ComponentSource from "$lib/components/component-source.svelte";
-	import PMAddComp from "$lib/components/pm-add-comp.svelte";
-	import PMInstall from "$lib/components/pm-install.svelte";
-	import Steps from "$lib/components/steps.svelte";
-	import InstallTabs from "$lib/components/install-tabs.svelte";
+	import ComponentPreview from "#lib/components/component-preview.svelte";
+	import ComponentSource from "#lib/components/component-source.svelte";
+	import PMAddComp from "#lib/components/pm-add-comp.svelte";
+	import PMInstall from "#lib/components/pm-install.svelte";
+	import Steps from "#lib/components/steps.svelte";
+	import InstallTabs from "#lib/components/install-tabs.svelte";
 
 	let { viewerData } = $props();
-	import Step from "$lib/components/step.svelte";
+	import Step from "#lib/components/step.svelte";
 </script>
 
 The `Item` component is a straightforward flex container that can house nearly any type of content. Use it to display a title, description, and actions. Group it with the `ItemGroup` component to create a list of items.
@@ -54,7 +54,7 @@ Copy and paste the following code into your project.
 
 ```svelte showLineNumbers
 <script lang="ts">
-  import * as Item from "$lib/components/ui/item/index.js";
+  import * as Item from "#lib/components/ui/item/index.js";
 </script>
 ```
 

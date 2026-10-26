@@ -1,5 +1,5 @@
 <script lang="ts">
-	import * as Sidebar from "$lib/registry/ui/sidebar/index.js";
+	import * as Sidebar from "#lib/registry/ui/sidebar/index.js";
 	import SiteHeader from "./components/site-header.svelte";
 	import AppSidebar from "./components/app-sidebar.svelte";
 </script>

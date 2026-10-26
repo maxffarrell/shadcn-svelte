@@ -4,9 +4,9 @@ description: Configuration for your project.
 ---
 
 <script>
-	import Callout from "$lib/components/callout.svelte";
-	import ComponentPreview from "$lib/components/component-preview.svelte";
-	import PMExecute from "$lib/components/pm-execute.svelte";
+	import Callout from "#lib/components/callout.svelte";
+	import ComponentPreview from "#lib/components/component-preview.svelte";
+	import PMExecute from "#lib/components/pm-execute.svelte";
 </script>
 
 The `components.json` file holds configuration for your project.
@@ -67,9 +67,9 @@ This is used to generate the default color palette for your components. **This c
 
 ## aliases
 
-The CLI uses these values and the `alias` config from your `svelte.config.js` file to place generated components in the correct location.
+The CLI resolves these values using package imports in `package.json` or TypeScript path aliases to place generated components in the correct location.
 
-Path aliases have to be set up in your `svelte.config.js` file.
+For SvelteKit 3, define `#lib` and `#lib/*` in the `imports` field of `package.json`. Existing SvelteKit 2 path aliases remain supported.
 
 ### aliases.lib
 
@@ -78,7 +78,7 @@ Import alias for your library, which is _typically_ where you store your compone
 ```json title="components.json"
 {
   "aliases": {
-    "lib": "$lib"
+    "lib": "#lib"
   }
 }
 ```
@@ -90,7 +90,7 @@ Import alias for your utility functions.
 ```json title="components.json"
 {
   "aliases": {
-    "utils": "$lib/utils"
+    "utils": "#lib/utils.js"
   }
 }
 ```
@@ -102,7 +102,7 @@ Import alias for your components.
 ```json title="components.json"
 {
   "aliases": {
-    "components": "$lib/components"
+    "components": "#lib/components"
   }
 }
 ```
@@ -114,7 +114,7 @@ Import alias for your UI components.
 ```json title="components.json"
 {
   "aliases": {
-    "ui": "$lib/components/ui"
+    "ui": "#lib/components/ui"
   }
 }
 ```
@@ -126,7 +126,7 @@ Import alias for your hooks, which in Svelte 5 are reactive functions/classes wh
 ```json title="components.json"
 {
   "aliases": {
-    "hooks": "$lib/hooks"
+    "hooks": "#lib/hooks"
   }
 }
 ```

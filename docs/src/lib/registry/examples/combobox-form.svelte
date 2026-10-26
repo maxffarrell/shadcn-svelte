@@ -26,11 +26,11 @@
 	import { zod4 } from "sveltekit-superforms/adapters";
 	import { toast } from "svelte-sonner";
 	import { useId } from "bits-ui";
-	import * as Form from "$lib/registry/ui/form/index.js";
-	import * as Popover from "$lib/registry/ui/popover/index.js";
-	import * as Command from "$lib/registry/ui/command/index.js";
-	import { cn } from "$lib/utils.js";
-	import { buttonVariants } from "$lib/registry/ui/button/index.js";
+	import * as Form from "#lib/registry/ui/form/index.js";
+	import * as Popover from "#lib/registry/ui/popover/index.js";
+	import * as Command from "#lib/registry/ui/command/index.js";
+	import { cn } from "#lib/utils.js";
+	import { buttonVariants } from "#lib/registry/ui/button/index.js";
 
 	const form = superForm(defaults(zod4(formSchema)), {
 		validators: zod4(formSchema),

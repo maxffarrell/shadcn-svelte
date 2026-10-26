@@ -3,8 +3,8 @@
 	import EllipsisIcon from "@lucide/svelte/icons/ellipsis";
 	import PlusIcon from "@lucide/svelte/icons/plus";
 
-	import * as Collapsible from "$lib/registry/ui/collapsible/index.js";
-	import * as Sidebar from "$lib/registry/ui/sidebar/index.js";
+	import * as Collapsible from "#lib/registry/ui/collapsible/index.js";
+	import * as Sidebar from "#lib/registry/ui/sidebar/index.js";
 
 	let {
 		workspaces,

@@ -1,8 +1,8 @@
 <script lang="ts">
-	import * as Breadcrumb from "$lib/registry/ui/breadcrumb/index.js";
-	import { Button } from "$lib/registry/ui/button/index.js";
-	import * as Dialog from "$lib/registry/ui/dialog/index.js";
-	import * as Sidebar from "$lib/registry/ui/sidebar/index.js";
+	import * as Breadcrumb from "#lib/registry/ui/breadcrumb/index.js";
+	import { Button } from "#lib/registry/ui/button/index.js";
+	import * as Dialog from "#lib/registry/ui/dialog/index.js";
+	import * as Sidebar from "#lib/registry/ui/sidebar/index.js";
 	import BellIcon from "@lucide/svelte/icons/bell";
 	import CheckIcon from "@lucide/svelte/icons/check";
 	import GlobeIcon from "@lucide/svelte/icons/globe";

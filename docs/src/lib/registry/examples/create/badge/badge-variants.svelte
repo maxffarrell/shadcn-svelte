@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Example from "../../../../../routes/(app)/(layout)/(create)/components/example.svelte";
-	import { Badge } from "$lib/registry/ui/badge/index.js";
+	import { Badge } from "#lib/registry/ui/badge/index.js";
 </script>
 
 <Example title="Variants">

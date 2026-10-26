@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { cn } from "$lib/utils.js";
+	import { cn } from "#lib/utils.js";
 	import { MediaQuery } from "svelte/reactivity";
 	import ChartCopyButton from "./chart-copy-button.svelte";
-	import * as Drawer from "$lib/registry/ui/drawer/index.js";
-	import * as Sheet from "$lib/registry/ui/sheet/index.js";
-	import { Button } from "$lib/registry/ui/button/index.js";
+	import * as Drawer from "#lib/registry/ui/drawer/index.js";
+	import * as Sheet from "#lib/registry/ui/sheet/index.js";
+	import { Button } from "#lib/registry/ui/button/index.js";
 	import type { HTMLAttributes } from "svelte/elements";
 	import { getIconForLanguageExtension } from "./icons/icons.js";
 	import type { HighlightedBlock } from "../../routes/api/block/[block]/+server.js";

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Badge } from "$lib/registry/ui/badge/index.js";
+	import { Badge } from "#lib/registry/ui/badge/index.js";
 	import type { Row } from "@tanstack/table-core";
 	import type { Schema } from "./schemas.js";
 

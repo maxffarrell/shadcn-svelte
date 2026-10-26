@@ -1,10 +1,10 @@
 <script lang="ts">
-	import type { ChangelogPage } from "$lib/docs.js";
-	import { Button } from "$lib/registry/ui/button/index.js";
+	import type { ChangelogPage } from "#lib/docs.js";
+	import { Button } from "#lib/registry/ui/button/index.js";
 	import RssIcon from "@lucide/svelte/icons/rss";
-	import Metadata from "$lib/components/metadata.svelte";
-	import Cta from "$lib/components/cta.svelte";
-	import Ethical from "$lib/components/ethical.svelte";
+	import Metadata from "#lib/components/metadata.svelte";
+	import Cta from "#lib/components/cta.svelte";
+	import Ethical from "#lib/components/ethical.svelte";
 
 	let { data } = $props();
 

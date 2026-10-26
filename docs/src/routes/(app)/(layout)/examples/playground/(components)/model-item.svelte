@@ -2,8 +2,8 @@
 	import type { Command as CommandPrimitive } from "bits-ui";
 	import CheckIcon from "@lucide/svelte/icons/check";
 	import type { Model } from "../(data)/models.js";
-	import * as Command from "$lib/registry/ui/command/index.js";
-	import { cn } from "$lib/utils.js";
+	import * as Command from "#lib/registry/ui/command/index.js";
+	import { cn } from "#lib/utils.js";
 
 	type Props = {
 		model: Model;

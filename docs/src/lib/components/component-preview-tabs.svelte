@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { Component, Snippet } from "svelte";
 	import type { HTMLAttributes } from "svelte/elements";
-	import { cn } from "$lib/utils.js";
+	import { cn } from "#lib/utils.js";
 
 	let {
 		class: className,

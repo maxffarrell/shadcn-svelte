@@ -1,7 +1,7 @@
 <script lang="ts">
-	import * as Card from "$lib/registry/ui/card/index.js";
-	import { Badge } from "$lib/registry/ui/badge/index.js";
-	import * as Chart from "$lib/registry/ui/chart/index.js";
+	import * as Card from "#lib/registry/ui/card/index.js";
+	import { Badge } from "#lib/registry/ui/badge/index.js";
+	import * as Chart from "#lib/registry/ui/chart/index.js";
 	import { AreaChart } from "layerchart";
 	import { curveNatural } from "d3-shape";
 	import { scaleBand } from "d3-scale";

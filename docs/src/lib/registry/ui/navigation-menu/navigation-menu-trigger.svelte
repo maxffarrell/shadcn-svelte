@@ -1,5 +1,5 @@
 <script lang="ts" module>
-	import { cn } from "$lib/utils.js";
+	import { cn } from "#lib/utils.js";
 	import { tv } from "tailwind-variants";
 
 	export const navigationMenuTriggerStyle = tv({
@@ -9,7 +9,7 @@
 
 <script lang="ts">
 	import { NavigationMenu as NavigationMenuPrimitive } from "bits-ui";
-	import IconPlaceholder from "$lib/components/icon-placeholder/icon-placeholder.svelte";
+	import IconPlaceholder from "#lib/components/icon-placeholder/icon-placeholder.svelte";
 	let {
 		ref = $bindable(null),
 		class: className,

@@ -1,8 +1,8 @@
 <svelte:options runes />
 
 <script lang="ts">
-	import { UseClipboard } from "$lib/hooks/use-clipboard.svelte.js";
-	import { Button } from "$lib/registry/ui/button/index.js";
+	import { UseClipboard } from "#lib/hooks/use-clipboard.svelte.js";
+	import { Button } from "#lib/registry/ui/button/index.js";
 	import ClipboardIcon from "@lucide/svelte/icons/clipboard";
 	import CheckIcon from "@lucide/svelte/icons/check";
 	import { BlockViewerContext } from "./block-viewer.svelte";

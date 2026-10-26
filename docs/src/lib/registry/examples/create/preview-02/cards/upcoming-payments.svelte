@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { Badge } from "$lib/registry/ui/badge/index.js";
-	import { Calendar } from "$lib/registry/ui/calendar/index.js";
-	import * as Card from "$lib/registry/ui/card/index.js";
-	import * as Item from "$lib/registry/ui/item/index.js";
+	import { Badge } from "#lib/registry/ui/badge/index.js";
+	import { Calendar } from "#lib/registry/ui/calendar/index.js";
+	import * as Card from "#lib/registry/ui/card/index.js";
+	import * as Item from "#lib/registry/ui/item/index.js";
 	import { getLocalTimeZone, today, type DateValue } from "@internationalized/date";
 
 	let date = $state<DateValue | undefined>(today(getLocalTimeZone()));

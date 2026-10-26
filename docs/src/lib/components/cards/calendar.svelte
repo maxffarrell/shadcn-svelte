@@ -1,6 +1,6 @@
 <script lang="ts">
-	import * as Card from "$lib/registry/ui/card/index.js";
-	import { RangeCalendar } from "$lib/registry/ui/range-calendar/index.js";
+	import * as Card from "#lib/registry/ui/card/index.js";
+	import { RangeCalendar } from "#lib/registry/ui/range-calendar/index.js";
 	import { CalendarDate } from "@internationalized/date";
 
 	const start = new CalendarDate(2025, 6, 5);

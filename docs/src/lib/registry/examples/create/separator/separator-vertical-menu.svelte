@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Example from "../../../../../routes/(app)/(layout)/(create)/components/example.svelte";
-	import { Separator } from "$lib/registry/ui/separator/index.js";
+	import { Separator } from "#lib/registry/ui/separator/index.js";
 </script>
 
 <Example title="Vertical Menu">

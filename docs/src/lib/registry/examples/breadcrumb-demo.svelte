@@ -1,6 +1,6 @@
 <script lang="ts">
-	import * as Breadcrumb from "$lib/registry/ui/breadcrumb/index.js";
-	import * as DropdownMenu from "$lib/registry/ui/dropdown-menu/index.js";
+	import * as Breadcrumb from "#lib/registry/ui/breadcrumb/index.js";
+	import * as DropdownMenu from "#lib/registry/ui/dropdown-menu/index.js";
 </script>
 
 <Breadcrumb.Root>

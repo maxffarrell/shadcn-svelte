@@ -3,9 +3,9 @@
 	import { LineChart } from "layerchart";
 	import { curveLinearClosed } from "d3-shape";
 	import { scaleBand } from "d3-scale";
-	import * as Chart from "$lib/registry/ui/chart/index.js";
-	import * as Card from "$lib/registry/ui/card/index.js";
-	import IconPlaceholder from "$lib/components/icon-placeholder/icon-placeholder.svelte";
+	import * as Chart from "#lib/registry/ui/chart/index.js";
+	import * as Card from "#lib/registry/ui/card/index.js";
+	import IconPlaceholder from "#lib/components/icon-placeholder/icon-placeholder.svelte";
 
 	const radarChartData = [
 		{ month: "January", desktop: 186, mobile: 80 },

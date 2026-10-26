@@ -1,9 +1,8 @@
 <script lang="ts">
-	import { browser } from "$app/environment";
-	import { Button } from "$lib/registry/ui/button/index.js";
-	import * as Command from "$lib/registry/ui/command/index.js";
-	import * as Drawer from "$lib/registry/ui/drawer/index.js";
-	import * as Popover from "$lib/registry/ui/popover/index.js";
+	import { Button } from "#lib/registry/ui/button/index.js";
+	import * as Command from "#lib/registry/ui/command/index.js";
+	import * as Drawer from "#lib/registry/ui/drawer/index.js";
+	import * as Popover from "#lib/registry/ui/popover/index.js";
 	import { onMount } from "svelte";
 
 	type Status = {
@@ -43,11 +42,9 @@
 	}
 
 	onMount(() => {
-		if (browser) {
-			checkScreenSize();
-			window.addEventListener("resize", checkScreenSize);
-			return () => window.removeEventListener("resize", checkScreenSize);
-		}
+		checkScreenSize();
+		window.addEventListener("resize", checkScreenSize);
+		return () => window.removeEventListener("resize", checkScreenSize);
 	});
 
 	function handleStatusSelect(value: string) {

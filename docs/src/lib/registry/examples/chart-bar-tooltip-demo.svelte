@@ -1,5 +1,5 @@
 <script lang="ts">
-	import * as Chart from "$lib/registry/ui/chart/index.js";
+	import * as Chart from "#lib/registry/ui/chart/index.js";
 	import { scaleBand } from "d3-scale";
 	import { BarChart } from "layerchart";
 

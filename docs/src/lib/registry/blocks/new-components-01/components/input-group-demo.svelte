@@ -1,8 +1,8 @@
 <script lang="ts">
-	import * as InputGroup from "$lib/registry/ui/input-group/index.js";
-	import * as DropdownMenu from "$lib/registry/ui/dropdown-menu/index.js";
-	import * as Tooltip from "$lib/registry/ui/tooltip/index.js";
-	import { Separator } from "$lib/registry/ui/separator/index.js";
+	import * as InputGroup from "#lib/registry/ui/input-group/index.js";
+	import * as DropdownMenu from "#lib/registry/ui/dropdown-menu/index.js";
+	import * as Tooltip from "#lib/registry/ui/tooltip/index.js";
+	import { Separator } from "#lib/registry/ui/separator/index.js";
 	import SearchIcon from "@lucide/svelte/icons/search";
 	import ArrowUpIcon from "@lucide/svelte/icons/arrow-up";
 	import InfoIcon from "@lucide/svelte/icons/info";

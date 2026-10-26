@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { Snippet } from "svelte";
 	import type { SVGAttributes } from "svelte/elements";
-	import type { RemixIconIconName } from "$lib/registry/icons/__remixicon__/index.js";
+	import type { RemixIconIconName } from "#lib/registry/icons/__remixicon__/index.js";
 	import { remixiconIconLoader } from "./icon-loader.js";
 
 	type Props = SVGAttributes<SVGSVGElement> & {

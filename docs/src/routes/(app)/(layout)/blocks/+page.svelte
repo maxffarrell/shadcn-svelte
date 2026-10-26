@@ -1,9 +1,9 @@
 <script lang="ts">
 	import type { PageData } from "./$types.js";
-	import { Button } from "$lib/registry/ui/button/index.js";
-	import BlockViewer from "$lib/components/block-viewer.svelte";
-	import { createFileTreeForRegistryItemFiles } from "$lib/registry/registry-utils.js";
-	import ComponentPreview from "$lib/components/component-preview.svelte";
+	import { Button } from "#lib/registry/ui/button/index.js";
+	import BlockViewer from "#lib/components/block-viewer.svelte";
+	import { createFileTreeForRegistryItemFiles } from "#lib/registry/registry-utils.js";
+	import ComponentPreview from "#lib/components/component-preview.svelte";
 
 	let { data }: { data: PageData } = $props();
 </script>

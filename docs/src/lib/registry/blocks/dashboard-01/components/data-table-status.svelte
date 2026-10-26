@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Badge } from "$lib/registry/ui/badge/index.js";
+	import { Badge } from "#lib/registry/ui/badge/index.js";
 	import CircleCheckFilledIcon from "@tabler/icons-svelte/icons/circle-check-filled";
 	import LoaderIcon from "@tabler/icons-svelte/icons/loader";
 	import type { Row } from "@tanstack/table-core";

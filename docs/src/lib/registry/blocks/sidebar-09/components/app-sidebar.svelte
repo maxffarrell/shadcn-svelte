@@ -121,10 +121,10 @@
 
 <script lang="ts">
 	import NavUser from "./nav-user.svelte";
-	import { Label } from "$lib/registry/ui/label/index.js";
-	import { useSidebar } from "$lib/registry/ui/sidebar/context.svelte.js";
-	import * as Sidebar from "$lib/registry/ui/sidebar/index.js";
-	import { Switch } from "$lib/registry/ui/switch/index.js";
+	import { Label } from "#lib/registry/ui/label/index.js";
+	import { useSidebar } from "#lib/registry/ui/sidebar/context.svelte.js";
+	import * as Sidebar from "#lib/registry/ui/sidebar/index.js";
+	import { Switch } from "#lib/registry/ui/switch/index.js";
 	import CommandIcon from "@lucide/svelte/icons/command";
 	import type { ComponentProps } from "svelte";
 

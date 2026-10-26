@@ -1,7 +1,7 @@
 <script lang="ts">
-	import SiteFooter from "$lib/components/site-footer.svelte";
-	import SiteHeader from "$lib/components/site-header.svelte";
-	import * as Tooltip from "$lib/registry/ui/tooltip/index.js";
+	import SiteFooter from "#lib/components/site-footer.svelte";
+	import SiteHeader from "#lib/components/site-header.svelte";
+	import * as Tooltip from "#lib/registry/ui/tooltip/index.js";
 
 	let { children } = $props();
 </script>

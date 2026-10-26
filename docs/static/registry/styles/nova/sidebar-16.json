@@ -47,7 +47,7 @@
 			"target": "nav-user.svelte"
 		},
 		{
-			"content": "<script lang=\"ts\">\n\timport SearchIcon from \"@lucide/svelte/icons/search\";\n\timport { Label } from \"$UI$/label/index.js\";\n\timport * as Sidebar from \"$UI$/sidebar/index.js\";\n\timport type { HTMLFormAttributes } from \"svelte/elements\";\n\timport type { WithElementRef } from \"$UTILS$.js\";\n\n\tlet { ref = $bindable(null), ...restProps }: WithElementRef<HTMLFormAttributes> = $props();\n</script>\n\n<form {...restProps} bind:this={ref}>\n\t<div class=\"relative\">\n\t\t<Label for=\"search\" class=\"sr-only\">Search</Label>\n\t\t<Sidebar.Input id=\"search\" placeholder=\"Type to search...\" class=\"h-8 ps-7\" />\n\t\t<SearchIcon\n\t\t\tclass=\"pointer-events-none absolute start-2 top-1/2 size-4 -translate-y-1/2 opacity-50 select-none\"\n\t\t/>\n\t</div>\n</form>\n",
+			"content": "<script lang=\"ts\">\n\timport SearchIcon from \"@lucide/svelte/icons/search\";\n\timport { Label } from \"$UI$/label/index.js\";\n\timport * as Sidebar from \"$UI$/sidebar/index.js\";\n\timport type { HTMLFormAttributes } from \"svelte/elements\";\n\timport type { WithElementRef } from \"$UTILS$\";\n\n\tlet { ref = $bindable(null), ...restProps }: WithElementRef<HTMLFormAttributes> = $props();\n</script>\n\n<form {...restProps} bind:this={ref}>\n\t<div class=\"relative\">\n\t\t<Label for=\"search\" class=\"sr-only\">Search</Label>\n\t\t<Sidebar.Input id=\"search\" placeholder=\"Type to search...\" class=\"h-8 ps-7\" />\n\t\t<SearchIcon\n\t\t\tclass=\"pointer-events-none absolute start-2 top-1/2 size-4 -translate-y-1/2 opacity-50 select-none\"\n\t\t/>\n\t</div>\n</form>\n",
 			"type": "registry:component",
 			"target": "search-form.svelte"
 		},

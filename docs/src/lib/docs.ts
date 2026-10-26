@@ -7,7 +7,7 @@ import {
 	registry,
 	forms,
 	changelog,
-} from "$content/index.js";
+} from "#content/index.js";
 import { error } from "@sveltejs/kit";
 import type { Component } from "svelte";
 

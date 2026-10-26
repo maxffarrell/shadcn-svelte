@@ -2,8 +2,8 @@
 	import XIcon from "@lucide/svelte/icons/x";
 	import type { Table } from "@tanstack/table-core";
 	import { DataTableFacetedFilter, DataTableViewOptions } from "./index.js";
-	import Button from "$lib/registry/ui/button/button.svelte";
-	import { Input } from "$lib/registry/ui/input/index.js";
+	import Button from "#lib/registry/ui/button/button.svelte";
+	import { Input } from "#lib/registry/ui/input/index.js";
 	import { priorities, statuses } from "../data/data.js";
 
 	let { table }: { table: Table<TData> } = $props();

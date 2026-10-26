@@ -1,8 +1,8 @@
 <script lang="ts">
-	import RangeCalendar from "$lib/registry/ui/range-calendar/range-calendar.svelte";
-	import * as Popover from "$lib/registry/ui/popover/index.js";
-	import { Button } from "$lib/registry/ui/button/index.js";
-	import { Label } from "$lib/registry/ui/label/index.js";
+	import RangeCalendar from "#lib/registry/ui/range-calendar/range-calendar.svelte";
+	import * as Popover from "#lib/registry/ui/popover/index.js";
+	import { Button } from "#lib/registry/ui/button/index.js";
+	import { Label } from "#lib/registry/ui/label/index.js";
 	import ChevronDownIcon from "@lucide/svelte/icons/chevron-down";
 	import { getLocalTimeZone } from "@internationalized/date";
 	import type { DateRange } from "bits-ui";

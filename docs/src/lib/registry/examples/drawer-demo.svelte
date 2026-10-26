@@ -1,8 +1,8 @@
 <script lang="ts">
 	import MinusIcon from "@lucide/svelte/icons/minus";
 	import PlusIcon from "@lucide/svelte/icons/plus";
-	import * as Drawer from "$lib/registry/ui/drawer/index.js";
-	import { Button, buttonVariants } from "$lib/registry/ui/button/index.js";
+	import * as Drawer from "#lib/registry/ui/drawer/index.js";
+	import { Button, buttonVariants } from "#lib/registry/ui/button/index.js";
 	import { BarChart } from "layerchart";
 	import { scaleBand } from "d3-scale";
 	import { cubicInOut } from "svelte/easing";

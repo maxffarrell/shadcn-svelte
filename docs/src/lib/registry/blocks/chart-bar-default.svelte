@@ -2,8 +2,8 @@
 	import { scaleBand } from "d3-scale";
 	import { BarChart } from "layerchart";
 	import TrendingUpIcon from "@lucide/svelte/icons/trending-up";
-	import * as Chart from "$lib/registry/ui/chart/index.js";
-	import * as Card from "$lib/registry/ui/card/index.js";
+	import * as Chart from "#lib/registry/ui/chart/index.js";
+	import * as Card from "#lib/registry/ui/card/index.js";
 	import { cubicInOut } from "svelte/easing";
 
 	const chartData = [

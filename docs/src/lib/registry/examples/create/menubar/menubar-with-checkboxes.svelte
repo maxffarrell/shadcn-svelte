@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Example from "../../../../../routes/(app)/(layout)/(create)/components/example.svelte";
-	import * as Menubar from "$lib/registry/ui/menubar/index.js";
+	import * as Menubar from "#lib/registry/ui/menubar/index.js";
 </script>
 
 <Example title="With Checkboxes">

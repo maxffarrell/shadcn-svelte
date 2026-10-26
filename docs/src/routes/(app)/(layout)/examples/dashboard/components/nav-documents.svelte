@@ -5,8 +5,8 @@
 	import TrashIcon from "@tabler/icons-svelte/icons/trash";
 	import type { Icon } from "@tabler/icons-svelte";
 
-	import * as DropdownMenu from "$lib/registry/ui/dropdown-menu/index.js";
-	import * as Sidebar from "$lib/registry/ui/sidebar/index.js";
+	import * as DropdownMenu from "#lib/registry/ui/dropdown-menu/index.js";
+	import * as Sidebar from "#lib/registry/ui/sidebar/index.js";
 
 	let { items }: { items: { name: string; url: string; icon?: Icon }[] } = $props();
 

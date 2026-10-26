@@ -1,5 +1,5 @@
 <script lang="ts">
-	import * as Sidebar from "$lib/registry/ui/sidebar/index.js";
+	import * as Sidebar from "#lib/registry/ui/sidebar/index.js";
 	import LifeBuoyIcon from "@lucide/svelte/icons/life-buoy";
 	import SendIcon from "@lucide/svelte/icons/send";
 	import FrameIcon from "@lucide/svelte/icons/frame";

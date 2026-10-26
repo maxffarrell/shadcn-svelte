@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Example from "../../../../../routes/(app)/(layout)/(create)/components/example.svelte";
-	import * as Field from "$lib/registry/ui/field/index.js";
-	import * as Select from "$lib/registry/ui/select/index.js";
+	import * as Field from "#lib/registry/ui/field/index.js";
+	import * as Select from "#lib/registry/ui/select/index.js";
 
 	const basicItems = [
 		{ label: "Option 1", value: "option1" },

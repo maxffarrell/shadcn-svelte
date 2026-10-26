@@ -1,8 +1,8 @@
 <script lang="ts">
-	import * as Card from "$lib/registry/ui/card/index.js";
-	import * as Chart from "$lib/registry/ui/chart/index.js";
-	import { Progress } from "$lib/registry/ui/progress/index.js";
-	import { Badge } from "$lib/registry/ui/badge/index.js";
+	import * as Card from "#lib/registry/ui/card/index.js";
+	import * as Chart from "#lib/registry/ui/chart/index.js";
+	import { Progress } from "#lib/registry/ui/progress/index.js";
+	import { Badge } from "#lib/registry/ui/badge/index.js";
 	import { PieChart, Text } from "layerchart";
 
 	const pieChartData = [

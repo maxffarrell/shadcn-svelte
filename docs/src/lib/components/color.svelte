@@ -2,9 +2,9 @@
 	import CheckIcon from "@lucide/svelte/icons/check";
 	import ClipboardIcon from "@lucide/svelte/icons/clipboard";
 	import { toast } from "svelte-sonner";
-	import type { Color } from "$lib/colors.js";
-	import type { UseClipboard } from "$lib/hooks/use-clipboard.svelte.js";
-	import { UserConfigContext } from "$lib/user-config.svelte.js";
+	import type { Color } from "#lib/colors.js";
+	import type { UseClipboard } from "#lib/hooks/use-clipboard.svelte.js";
+	import { UserConfigContext } from "#lib/user-config.svelte.js";
 
 	let { color, clipboard }: { color: Color; clipboard: UseClipboard } = $props();
 

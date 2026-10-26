@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Example from "../../../../../routes/(app)/(layout)/(create)/components/example.svelte";
-	import { Button } from "$lib/registry/ui/button/index.js";
-	import * as HoverCard from "$lib/registry/ui/hover-card/index.js";
+	import { Button } from "#lib/registry/ui/button/index.js";
+	import * as HoverCard from "#lib/registry/ui/hover-card/index.js";
 
 	const HOVER_CARD_SIDES = ["top", "right", "bottom", "left"] as const;
 </script>

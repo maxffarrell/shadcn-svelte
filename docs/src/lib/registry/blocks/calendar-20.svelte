@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { Button } from "$lib/registry/ui/button/index.js";
-	import * as Card from "$lib/registry/ui/card/index.js";
-	import Calendar from "$lib/registry/ui/calendar/calendar.svelte";
+	import { Button } from "#lib/registry/ui/button/index.js";
+	import * as Card from "#lib/registry/ui/card/index.js";
+	import Calendar from "#lib/registry/ui/calendar/calendar.svelte";
 	import { CalendarDate, getLocalTimeZone } from "@internationalized/date";
 
 	let value = $state<CalendarDate | undefined>(new CalendarDate(2025, 6, 12));

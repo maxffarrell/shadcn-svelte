@@ -16,16 +16,16 @@
 	import DataTableCheckbox from "./data-table/data-table-checkbox.svelte";
 	import DataTableEmailButton from "./data-table/data-table-email-button.svelte";
 	import DataTableActions from "./data-table/data-table-actions.svelte";
-	import * as Table from "$lib/registry/ui/table/index.js";
-	import { Button } from "$lib/registry/ui/button/index.js";
-	import * as DropdownMenu from "$lib/registry/ui/dropdown-menu/index.js";
-	import { Input } from "$lib/registry/ui/input/index.js";
+	import * as Table from "#lib/registry/ui/table/index.js";
+	import { Button } from "#lib/registry/ui/button/index.js";
+	import * as DropdownMenu from "#lib/registry/ui/dropdown-menu/index.js";
+	import { Input } from "#lib/registry/ui/input/index.js";
 	import {
 		FlexRender,
 		createSvelteTable,
 		renderComponent,
 		renderSnippet,
-	} from "$lib/registry/ui/data-table/index.js";
+	} from "#lib/registry/ui/data-table/index.js";
 
 	type Payment = {
 		id: string;

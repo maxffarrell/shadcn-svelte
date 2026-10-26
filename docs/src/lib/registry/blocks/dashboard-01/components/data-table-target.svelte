@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { Label } from "$lib/registry/ui/label/index.js";
-	import { Input } from "$lib/registry/ui/input/index.js";
+	import { Label } from "#lib/registry/ui/label/index.js";
+	import { Input } from "#lib/registry/ui/input/index.js";
 	import { toast } from "svelte-sonner";
 	import type { Row } from "@tanstack/table-core";
 	import type { Schema } from "./schemas.js";

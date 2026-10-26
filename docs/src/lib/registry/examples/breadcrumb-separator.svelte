@@ -1,6 +1,6 @@
 <script lang="ts">
 	import SlashIcon from "@lucide/svelte/icons/slash";
-	import * as Breadcrumb from "$lib/registry/ui/breadcrumb/index.js";
+	import * as Breadcrumb from "#lib/registry/ui/breadcrumb/index.js";
 </script>
 
 <Breadcrumb.Root>

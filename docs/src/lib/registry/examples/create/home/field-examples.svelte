@@ -1,14 +1,14 @@
 <script lang="ts">
 	import Example from "../../../../../routes/(app)/(layout)/(create)/components/example.svelte";
-	import * as Field from "$lib/registry/ui/field/index.js";
-	import { Input } from "$lib/registry/ui/input/index.js";
-	import { Button } from "$lib/registry/ui/button/index.js";
-	import { Checkbox } from "$lib/registry/ui/checkbox/index.js";
-	import { Switch } from "$lib/registry/ui/switch/index.js";
-	import { Slider } from "$lib/registry/ui/slider/index.js";
-	import * as RadioGroup from "$lib/registry/ui/radio-group/index.js";
-	import * as ButtonGroup from "$lib/registry/ui/button-group/index.js";
-	import IconPlaceholder from "$lib/components/icon-placeholder/icon-placeholder.svelte";
+	import * as Field from "#lib/registry/ui/field/index.js";
+	import { Input } from "#lib/registry/ui/input/index.js";
+	import { Button } from "#lib/registry/ui/button/index.js";
+	import { Checkbox } from "#lib/registry/ui/checkbox/index.js";
+	import { Switch } from "#lib/registry/ui/switch/index.js";
+	import { Slider } from "#lib/registry/ui/slider/index.js";
+	import * as RadioGroup from "#lib/registry/ui/radio-group/index.js";
+	import * as ButtonGroup from "#lib/registry/ui/button-group/index.js";
+	import IconPlaceholder from "#lib/components/icon-placeholder/icon-placeholder.svelte";
 
 	let gpuCount = $state(8);
 	let value = $state([200, 800]);

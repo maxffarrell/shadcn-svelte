@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { cn, type WithoutChildrenOrChild } from "$lib/utils.js";
+	import { cn, type WithoutChildrenOrChild } from "#lib/utils.js";
 	import { DropdownMenu as DropdownMenuPrimitive } from "bits-ui";
 
 	let {

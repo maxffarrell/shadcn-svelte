@@ -7,9 +7,9 @@
 	import type { Snippet } from "svelte";
 	import SheetPortal from "./sheet-portal.svelte";
 	import SheetOverlay from "./sheet-overlay.svelte";
-	import { Button } from "$lib/registry/ui/button/index.js";
-	import IconPlaceholder from "$lib/components/icon-placeholder/icon-placeholder.svelte";
-	import { cn, type WithoutChildrenOrChild } from "$lib/utils.js";
+	import { Button } from "#lib/registry/ui/button/index.js";
+	import IconPlaceholder from "#lib/components/icon-placeholder/icon-placeholder.svelte";
+	import { cn, type WithoutChildrenOrChild } from "#lib/utils.js";
 	import type { ComponentProps } from "svelte";
 
 	let {

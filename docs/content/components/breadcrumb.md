@@ -7,13 +7,13 @@ links:
 ---
 
 <script>
-	import ComponentPreview from "$lib/components/component-preview.svelte";
-	import ComponentSource from "$lib/components/component-source.svelte";
-	import PMAddComp from "$lib/components/pm-add-comp.svelte";
-	import PMInstall from "$lib/components/pm-install.svelte";
-	import Steps from "$lib/components/steps.svelte";
-	import Step from "$lib/components/step.svelte";
-	import InstallTabs from "$lib/components/install-tabs.svelte";
+	import ComponentPreview from "#lib/components/component-preview.svelte";
+	import ComponentSource from "#lib/components/component-source.svelte";
+	import PMAddComp from "#lib/components/pm-add-comp.svelte";
+	import PMInstall from "#lib/components/pm-install.svelte";
+	import Steps from "#lib/components/steps.svelte";
+	import Step from "#lib/components/step.svelte";
+	import InstallTabs from "#lib/components/install-tabs.svelte";
 
 	let { viewerData } = $props();
 </script>
@@ -50,7 +50,7 @@ Copy and paste the following code into your project.
 
 ```svelte showLineNumbers
 <script lang="ts">
-  import * as Breadcrumb from "$lib/components/ui/breadcrumb/index.js";
+  import * as Breadcrumb from "#lib/components/ui/breadcrumb/index.js";
 </script>
 ```
 
@@ -87,7 +87,7 @@ Use a custom component in the `<slot>` of `<Breadcrumb.Separator />` to create a
 ```svelte showLineNumbers {2,11-13}
 <script lang="ts">
   import SlashIcon from "@lucide/svelte/icons/slash";
-  import * as Breadcrumb from "$lib/components/ui/breadcrumb/index.js";
+  import * as Breadcrumb from "#lib/components/ui/breadcrumb/index.js";
 </script>
 
 <Breadcrumb.Root>
@@ -121,8 +121,8 @@ You can compose `<Breadcrumb.Item />` with a `<DropdownMenu />` to create a drop
 <script lang="ts">
   import ChevronDownIcon from "@lucide/svelte/icons/chevron-down";
   import SlashIcon from "@lucide/svelte/icons/slash";
-  import * as Breadcrumb from "$lib/components/ui/breadcrumb/index.js";
-  import * as DropdownMenu from "$lib/components/ui/dropdown-menu/index.js";
+  import * as Breadcrumb from "#lib/components/ui/breadcrumb/index.js";
+  import * as DropdownMenu from "#lib/components/ui/dropdown-menu/index.js";
 </script>
 
 <!-- ... -->
@@ -156,7 +156,7 @@ We provide a `<Breadcrumb.Ellipsis />` component to show a collapsed state when 
 
 ```svelte showLineNumbers {2,9}
 <script lang="ts">
- import * as Breadcrumb from "$lib/components/ui/breadcrumb/index.js";
+ import * as Breadcrumb from "#lib/components/ui/breadcrumb/index.js";
 </script>
 
 <Breadcrumb.Root>
@@ -184,7 +184,7 @@ To use a link just add the `href` prop to `<Breadcrumb.Link />`.
 
 ```svelte showLineNumbers {2,7-9}
 <script lang="ts">
- import * as Breadcrumb from "$lib/components/ui/breadcrumb/index.js";
+ import * as Breadcrumb from "#lib/components/ui/breadcrumb/index.js";
 </script>
 
 <Breadcrumb.Root>

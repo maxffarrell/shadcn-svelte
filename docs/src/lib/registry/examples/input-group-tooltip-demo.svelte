@@ -1,6 +1,6 @@
 <script lang="ts">
-	import * as InputGroup from "$lib/registry/ui/input-group/index.js";
-	import * as Tooltip from "$lib/registry/ui/tooltip/index.js";
+	import * as InputGroup from "#lib/registry/ui/input-group/index.js";
+	import * as Tooltip from "#lib/registry/ui/tooltip/index.js";
 	import HelpCircleIcon from "@lucide/svelte/icons/help-circle";
 	import InfoIcon from "@lucide/svelte/icons/info";
 </script>

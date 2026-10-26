@@ -162,17 +162,17 @@
 </script>
 
 <script lang="ts">
-	import { baseColors, baseColorsOKLCH } from "$lib/registry/registry-base-colors.js";
+	import { baseColors, baseColorsOKLCH } from "#lib/registry/registry-base-colors.js";
 	import { setTheme } from "mode-watcher";
-	import { ScrollArea } from "$lib/registry/ui/scroll-area/index.js";
-	import { cn } from "$lib/utils.js";
-	import { Button } from "$lib/registry/ui/button/index.js";
-	import { Label } from "$lib/registry/ui/label/index.js";
-	import * as Select from "$lib/registry/ui/select/index.js";
-	import * as Drawer from "$lib/registry/ui/drawer/index.js";
-	import * as Dialog from "$lib/registry/ui/dialog/index.js";
+	import { ScrollArea } from "#lib/registry/ui/scroll-area/index.js";
+	import { cn } from "#lib/utils.js";
+	import { Button } from "#lib/registry/ui/button/index.js";
+	import { Label } from "#lib/registry/ui/label/index.js";
+	import * as Select from "#lib/registry/ui/select/index.js";
+	import * as Drawer from "#lib/registry/ui/drawer/index.js";
+	import * as Dialog from "#lib/registry/ui/dialog/index.js";
 	import type { HTMLAttributes } from "svelte/elements";
-	import { UserConfigContext, type ActiveTheme } from "$lib/user-config.svelte.js";
+	import { UserConfigContext, type ActiveTheme } from "#lib/user-config.svelte.js";
 	import IconCopy from "@tabler/icons-svelte/icons/copy";
 	import ThemeCustomizerCode from "./theme-customizer-code.svelte";
 	interface Props extends HTMLAttributes<HTMLElement> {

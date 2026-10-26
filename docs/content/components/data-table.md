@@ -8,12 +8,12 @@ links:
 ---
 
 <script>
-	import ComponentPreview from "$lib/components/component-preview.svelte";
-	import Callout from "$lib/components/callout.svelte";
-	import PMAddComp from "$lib/components/pm-add-comp.svelte";
-	import PMInstall from "$lib/components/pm-install.svelte";
-	import Steps from "$lib/components/steps.svelte";
-	import Step from "$lib/components/step.svelte";
+	import ComponentPreview from "#lib/components/component-preview.svelte";
+	import Callout from "#lib/components/callout.svelte";
+	import PMAddComp from "#lib/components/pm-add-comp.svelte";
+	import PMInstall from "#lib/components/pm-install.svelte";
+	import Steps from "#lib/components/steps.svelte";
+	import Step from "#lib/components/step.svelte";
 </script>
 
 <ComponentPreview name="data-table-demo">
@@ -164,8 +164,8 @@ Next, we'll create a `<DataTable />` component to render our table.
   import {
     createSvelteTable,
     FlexRender,
-  } from "$lib/components/ui/data-table/index.js";
-  import * as Table from "$lib/components/ui/table/index.js";
+  } from "#lib/components/ui/data-table/index.js";
+  import * as Table from "#lib/components/ui/table/index.js";
 
   type DataTableProps<TData, TValue> = {
     columns: ColumnDef<TData, TValue>[];
@@ -273,7 +273,7 @@ Update the `header` and `cell` definitions for amount as follows:
 ```ts showLineNumbers title="routes/payments/columns.ts"
 import type { ColumnDef } from "@tanstack/table-core";
 import { createRawSnippet } from "svelte";
-import { renderSnippet } from "$lib/components/ui/data-table/index.js";
+import { renderSnippet } from "#lib/components/ui/data-table/index.js";
 
 export const columns: ColumnDef<Payment>[] = [
   {
@@ -330,8 +330,8 @@ We'll start by defining the actions menu in our `data-table-actions.svelte` comp
 ```svelte showLineNumbers title="routes/payments/data-table-actions.svelte"
 <script lang="ts">
   import EllipsisIcon from "@lucide/svelte/icons/ellipsis";
-  import { Button } from "$lib/components/ui/button/index.js";
-  import * as DropdownMenu from "$lib/components/ui/dropdown-menu/index.js";
+  import { Button } from "#lib/components/ui/button/index.js";
+  import * as DropdownMenu from "#lib/components/ui/dropdown-menu/index.js";
 
   let { id }: { id: string } = $props();
 </script>
@@ -370,7 +370,7 @@ Now that we've defined the `<DataTableActions />` component, let's update our `a
 
 ```ts showLineNumbers title="routes/payments/columns.ts"
 import type { ColumnDef } from "@tanstack/table-core";
-import { renderComponent } from "$lib/components/ui/data-table/index.js";
+import { renderComponent } from "#lib/components/ui/data-table/index.js";
 import DataTableActions from "./data-table-actions.svelte";
 
 export const columns: ColumnDef<Payment>[] = [
@@ -446,7 +446,7 @@ We can add pagination controls to our table using the `<Button />` component and
 
 ```svelte showLineNumbers title="routes/payments/data-table.svelte"
 <script lang="ts" generics="TData, TValue">
-  import { Button } from "$lib/components/ui/button/index.js";
+  import { Button } from "#lib/components/ui/button/index.js";
 
   let { columns, data }: DataTableProps<TData, TValue> = $props();
 
@@ -519,7 +519,7 @@ We'll start by creating a component to render a sortable email header button.
 <script lang="ts">
   import type { ComponentProps } from "svelte";
   import ArrowUpDownIcon from "@lucide/svelte/icons/arrow-up-down";
-  import { Button } from "$lib/components/ui/button/index.js";
+  import { Button } from "#lib/components/ui/button/index.js";
 
   let { variant = "ghost", ...restProps }: ComponentProps<typeof Button> =
     $props();
@@ -589,7 +589,7 @@ We can now update the `email` header cell to add sorting controls.
 
 ```ts showLineNumbers title="src/routes/payments/columns.ts"
 import type { ColumnDef } from "@tanstack/table-core";
-import { renderComponent } from "$lib/components/ui/data-table/index.js";
+import { renderComponent } from "#lib/components/ui/data-table/index.js";
 import DataTableEmailButton from "./data-table-email-button.svelte";
 
 export const columns: ColumnDef<Payment>[] = [
@@ -628,7 +628,7 @@ Let's add a search input to filter emails in our table.
     getSortedRowModel,
     getFilteredRowModel,
   } from "@tanstack/table-core";
-  import { Input } from "$lib/components/ui/input/index.js";
+  import { Input } from "#lib/components/ui/input/index.js";
 
   let { columns, data }: DataTableProps<TData, TValue> = $props();
 
@@ -725,7 +725,7 @@ Adding column visibility is fairly simple using `@tanstack/table-core` visibilit
     getSortedRowModel,
     getFilteredRowModel,
   } from "@tanstack/table-core";
-  import * as DropdownMenu from "$lib/components/ui/dropdown-menu/index.js";
+  import * as DropdownMenu from "#lib/components/ui/dropdown-menu/index.js";
 
   let { columns, data }: DataTableProps<TData, TValue> = $props();
 
@@ -844,7 +844,7 @@ We'll start by defining the checkbox component in our `data-table-checkbox.svelt
 ```svelte showLineNumbers title="routes/payments/data-table-checkbox.svelte"
 <script lang="ts">
   import type { ComponentProps } from "svelte";
-  import { Checkbox } from "$lib/components/ui/checkbox/index.js";
+  import { Checkbox } from "#lib/components/ui/checkbox/index.js";
 
   let {
     checked = false,
@@ -862,8 +862,8 @@ Now that we have a new component, we can add a `select` column definition to ren
 
 ```ts showLineNumbers title="routes/payments/columns.ts"
 import type { ColumnDef } from "@tanstack/table-core";
-import { renderComponent } from "$lib/components/ui/data-table/index.js";
-import { Checkbox } from "$lib/components/ui/checkbox/index.js";
+import { renderComponent } from "#lib/components/ui/data-table/index.js";
+import { Checkbox } from "#lib/components/ui/checkbox/index.js";
 
 export const columns: ColumnDef<Payment>[] = [
   // ...
@@ -906,7 +906,7 @@ export const columns: ColumnDef<Payment>[] = [
     getSortedRowModel,
     getFilteredRowModel,
   } from "@tanstack/table-core";
-  import * as DropdownMenu from "$lib/components/ui/dropdown-menu/index.js";
+  import * as DropdownMenu from "#lib/components/ui/dropdown-menu/index.js";
 
   let { columns, data }: DataTableProps<TData, TValue> = $props();
 

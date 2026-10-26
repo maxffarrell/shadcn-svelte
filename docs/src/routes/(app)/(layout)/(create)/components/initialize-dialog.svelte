@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { Button } from "$lib/registry/ui/button/index.js";
-	import * as Dialog from "$lib/registry/ui/dialog/index.js";
-	import { useDesignSystem } from "$lib/features/design-system/index.js";
-	import * as Tooltip from "$lib/registry/ui/tooltip/index.js";
-	import PMExecute from "$lib/components/pm-execute.svelte";
-	import Callout from "$lib/components/callout.svelte";
-	import { UseClipboard } from "$lib/hooks/use-clipboard.svelte.js";
+	import { Button } from "#lib/registry/ui/button/index.js";
+	import * as Dialog from "#lib/registry/ui/dialog/index.js";
+	import { useDesignSystem } from "#lib/features/design-system/index.js";
+	import * as Tooltip from "#lib/registry/ui/tooltip/index.js";
+	import PMExecute from "#lib/components/pm-execute.svelte";
+	import Callout from "#lib/components/callout.svelte";
+	import { UseClipboard } from "#lib/hooks/use-clipboard.svelte.js";
 	import CopyIcon from "@lucide/svelte/icons/copy";
 	import CheckIcon from "@lucide/svelte/icons/check";
 	import BookOpenIcon from "@lucide/svelte/icons/book-open";
@@ -14,8 +14,8 @@
 		InitializeProjectContext,
 		InitializeProjectCtx,
 	} from "./initialize-project-context.svelte.js";
-	import { UserConfigContext } from "$lib/user-config.svelte.js";
-	import { getCommand, type PackageManager } from "$lib/package-manager.js";
+	import { UserConfigContext } from "#lib/user-config.svelte.js";
+	import { getCommand, type PackageManager } from "#lib/package-manager.js";
 
 	let { children }: { children: Snippet } = $props();
 

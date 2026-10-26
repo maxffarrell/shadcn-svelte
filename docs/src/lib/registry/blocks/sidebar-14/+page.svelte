@@ -1,7 +1,7 @@
 <script lang="ts">
 	import AppSidebar from "./components/app-sidebar.svelte";
-	import * as Breadcrumb from "$lib/registry/ui/breadcrumb/index.js";
-	import * as Sidebar from "$lib/registry/ui/sidebar/index.js";
+	import * as Breadcrumb from "#lib/registry/ui/breadcrumb/index.js";
+	import * as Sidebar from "#lib/registry/ui/sidebar/index.js";
 </script>
 
 <Sidebar.Provider>

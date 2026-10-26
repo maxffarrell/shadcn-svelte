@@ -6,11 +6,11 @@
 		getLocalTimeZone,
 		today,
 	} from "@internationalized/date";
-	import { cn } from "$lib/utils.js";
-	import { buttonVariants } from "$lib/registry/ui/button/index.js";
-	import { Calendar } from "$lib/registry/ui/calendar/index.js";
-	import * as Popover from "$lib/registry/ui/popover/index.js";
-	import * as Select from "$lib/registry/ui/select/index.js";
+	import { cn } from "#lib/utils.js";
+	import { buttonVariants } from "#lib/registry/ui/button/index.js";
+	import { Calendar } from "#lib/registry/ui/calendar/index.js";
+	import * as Popover from "#lib/registry/ui/popover/index.js";
+	import * as Select from "#lib/registry/ui/select/index.js";
 
 	const df = new DateFormatter("en-US", {
 		dateStyle: "long",

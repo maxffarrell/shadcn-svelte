@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { ScrollArea } from "$lib/registry/ui/scroll-area/index.js";
+	import { ScrollArea } from "#lib/registry/ui/scroll-area/index.js";
 	import { page } from "$app/state";
-	import { cn } from "$lib/utils.js";
-	import { getColors } from "$lib/colors.js";
+	import { cn } from "#lib/utils.js";
+	import { getColors } from "#lib/colors.js";
 	import type { HTMLAttributes } from "svelte/elements";
 
 	const colors = getColors();

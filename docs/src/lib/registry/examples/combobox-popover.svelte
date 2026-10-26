@@ -6,10 +6,10 @@
 	import CircleXIcon from "@lucide/svelte/icons/circle-x";
 	import { type Component, tick } from "svelte";
 	import { useId } from "bits-ui";
-	import { cn } from "$lib/utils.js";
-	import * as Popover from "$lib/registry/ui/popover/index.js";
-	import * as Command from "$lib/registry/ui/command/index.js";
-	import { buttonVariants } from "$lib/registry/ui/button/index.js";
+	import { cn } from "#lib/utils.js";
+	import * as Popover from "#lib/registry/ui/popover/index.js";
+	import * as Command from "#lib/registry/ui/command/index.js";
+	import { buttonVariants } from "#lib/registry/ui/button/index.js";
 
 	type Status = {
 		value: string;

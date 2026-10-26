@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { tick } from "svelte";
 	import Example from "../../../../../routes/(app)/(layout)/(create)/components/example.svelte";
-	import * as Command from "$lib/registry/ui/command/index.js";
-	import * as Popover from "$lib/registry/ui/popover/index.js";
-	import { Button } from "$lib/registry/ui/button/index.js";
-	import * as Item from "$lib/registry/ui/item/index.js";
-	import IconPlaceholder from "$lib/components/icon-placeholder/icon-placeholder.svelte";
-	import { cn } from "$lib/utils.js";
+	import * as Command from "#lib/registry/ui/command/index.js";
+	import * as Popover from "#lib/registry/ui/popover/index.js";
+	import { Button } from "#lib/registry/ui/button/index.js";
+	import * as Item from "#lib/registry/ui/item/index.js";
+	import IconPlaceholder from "#lib/components/icon-placeholder/icon-placeholder.svelte";
+	import { cn } from "#lib/utils.js";
 
 	const countries = [
 		{ code: "us", value: "united-states", label: "United States", continent: "North America" },

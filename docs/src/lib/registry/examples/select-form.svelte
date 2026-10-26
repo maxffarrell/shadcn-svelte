@@ -10,8 +10,8 @@
 	import { defaults, superForm } from "sveltekit-superforms";
 	import { zod4 } from "sveltekit-superforms/adapters";
 	import { toast } from "svelte-sonner";
-	import * as Form from "$lib/registry/ui/form/index.js";
-	import * as Select from "$lib/registry/ui/select/index.js";
+	import * as Form from "#lib/registry/ui/form/index.js";
+	import * as Select from "#lib/registry/ui/select/index.js";
 
 	const form = superForm(defaults(zod4(formSchema)), {
 		validators: zod4(formSchema),

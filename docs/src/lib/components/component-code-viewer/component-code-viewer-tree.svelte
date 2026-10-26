@@ -1,9 +1,9 @@
 <script lang="ts">
-	import type { FileTree } from "$lib/registry/registry-utils.js";
+	import type { FileTree } from "#lib/registry/registry-utils.js";
 	import ComponentCodeViewerTree from "./component-code-viewer-tree.svelte";
 	import { ComponentCodeViewerContext } from "./component-code-viewer.svelte";
-	import * as Sidebar from "$lib/registry/ui/sidebar/index.js";
-	import * as Collapsible from "$lib/registry/ui/collapsible/index.js";
+	import * as Sidebar from "#lib/registry/ui/sidebar/index.js";
+	import * as Collapsible from "#lib/registry/ui/collapsible/index.js";
 	import ChevronRightIcon from "@lucide/svelte/icons/chevron-right";
 	import FileIcon from "@lucide/svelte/icons/file";
 	import FolderIcon from "@lucide/svelte/icons/folder";

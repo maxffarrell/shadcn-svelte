@@ -1,6 +1,6 @@
 <script lang="ts">
-	import RangeCalendar from "$lib/registry/ui/range-calendar/range-calendar.svelte";
-	import RangeCalendarDay from "$lib/registry/ui/range-calendar/range-calendar-day.svelte";
+	import RangeCalendar from "#lib/registry/ui/range-calendar/range-calendar.svelte";
+	import RangeCalendarDay from "#lib/registry/ui/range-calendar/range-calendar-day.svelte";
 	import { CalendarDate, isWeekend } from "@internationalized/date";
 	import type { DateRange } from "bits-ui";
 

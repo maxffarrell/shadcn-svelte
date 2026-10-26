@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Example from "../../../../../routes/(app)/(layout)/(create)/components/example.svelte";
-	import * as Carousel from "$lib/registry/ui/carousel/index.js";
-	import * as Card from "$lib/registry/ui/card/index.js";
+	import * as Carousel from "#lib/registry/ui/carousel/index.js";
+	import * as Card from "#lib/registry/ui/card/index.js";
 </script>
 
 <Example title="With Gap">

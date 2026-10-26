@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Example from "../../../../../routes/(app)/(layout)/(create)/components/example.svelte";
-	import * as Resizable from "$lib/registry/ui/resizable/index.js";
+	import * as Resizable from "#lib/registry/ui/resizable/index.js";
 </script>
 
 <Example title="With Handle">

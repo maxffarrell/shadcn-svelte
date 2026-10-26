@@ -1,7 +1,7 @@
 <script lang="ts">
-	import * as Card from "$lib/registry/ui/card/index.js";
-	import * as FieldGroup from "$lib/registry/ui/field/index.js";
-	import * as Tooltip from "$lib/registry/ui/tooltip/index.js";
+	import * as Card from "#lib/registry/ui/card/index.js";
+	import * as FieldGroup from "#lib/registry/ui/field/index.js";
+	import * as Tooltip from "#lib/registry/ui/tooltip/index.js";
 	import RadiusPicker from "./radius-picker.svelte";
 	import StylePicker from "./style-picker.svelte";
 	import ThemePicker from "./theme-picker.svelte";
@@ -15,11 +15,11 @@
 	import CopyPreset from "./copy-preset.svelte";
 	import OpenPreset from "./open-preset.svelte";
 	import MainMenu from "./main-menu.svelte";
-	import Cta from "$lib/components/cta.svelte";
-	import Ethical from "$lib/components/ethical.svelte";
-	import Separator from "$lib/registry/ui/separator/separator.svelte";
-	import { FONT_HEADING_OPTIONS, FONTS } from "$lib/fonts.js";
-	import { Button } from "$lib/registry/ui/button/index.js";
+	import Cta from "#lib/components/cta.svelte";
+	import Ethical from "#lib/components/ethical.svelte";
+	import Separator from "#lib/registry/ui/separator/separator.svelte";
+	import { FONT_HEADING_OPTIONS, FONTS } from "#lib/fonts.js";
+	import { Button } from "#lib/registry/ui/button/index.js";
 	import SquareTerminal from "@lucide/svelte/icons/square-terminal";
 	import { InitializeProjectCtx } from "./initialize-project-context.svelte.js";
 

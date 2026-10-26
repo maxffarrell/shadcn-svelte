@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Calendar from "$lib/registry/ui/calendar/calendar.svelte";
+	import Calendar from "#lib/registry/ui/calendar/calendar.svelte";
 	import { CalendarDate, type DateValue } from "@internationalized/date";
 
 	let value = $state<CalendarDate[]>([

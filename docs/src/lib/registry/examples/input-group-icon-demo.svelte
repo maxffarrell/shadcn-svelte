@@ -1,5 +1,5 @@
 <script lang="ts">
-	import * as InputGroup from "$lib/registry/ui/input-group/index.js";
+	import * as InputGroup from "#lib/registry/ui/input-group/index.js";
 	import CheckIcon from "@lucide/svelte/icons/check";
 	import CreditCardIcon from "@lucide/svelte/icons/credit-card";
 	import InfoIcon from "@lucide/svelte/icons/info";

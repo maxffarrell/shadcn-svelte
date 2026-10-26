@@ -1,9 +1,9 @@
 <script lang="ts">
-	import Calendar from "$lib/registry/ui/calendar/calendar.svelte";
-	import * as Popover from "$lib/registry/ui/popover/index.js";
-	import { Button } from "$lib/registry/ui/button/index.js";
-	import { Label } from "$lib/registry/ui/label/index.js";
-	import { Input } from "$lib/registry/ui/input/index.js";
+	import Calendar from "#lib/registry/ui/calendar/calendar.svelte";
+	import * as Popover from "#lib/registry/ui/popover/index.js";
+	import { Button } from "#lib/registry/ui/button/index.js";
+	import { Label } from "#lib/registry/ui/label/index.js";
+	import { Input } from "#lib/registry/ui/input/index.js";
 	import ChevronDownIcon from "@lucide/svelte/icons/chevron-down";
 	import { getLocalTimeZone } from "@internationalized/date";
 	import type { CalendarDate } from "@internationalized/date";

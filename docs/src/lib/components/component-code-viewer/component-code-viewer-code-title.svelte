@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { ComponentCodeViewerContext } from "./component-code-viewer.svelte";
-	import * as Select from "$lib/registry/ui/select/index.js";
+	import * as Select from "#lib/registry/ui/select/index.js";
 	import { getIconForLanguageExtension } from "../icons/icons.js";
 	import ComponentCodeViewerCopyCodeButton from "./component-code-viewer-copy-code-button.svelte";
 

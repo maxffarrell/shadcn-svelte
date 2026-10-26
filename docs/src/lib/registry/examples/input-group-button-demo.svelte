@@ -4,9 +4,9 @@
 	import IconInfoCircle from "@tabler/icons-svelte/icons/info-circle";
 	import IconStar from "@tabler/icons-svelte/icons/star";
 
-	import * as InputGroup from "$lib/registry/ui/input-group/index.js";
-	import * as Popover from "$lib/registry/ui/popover/index.js";
-	import { UseClipboard } from "$lib/hooks/use-clipboard.svelte.js";
+	import * as InputGroup from "#lib/registry/ui/input-group/index.js";
+	import * as Popover from "#lib/registry/ui/popover/index.js";
+	import { UseClipboard } from "#lib/hooks/use-clipboard.svelte.js";
 
 	let isFavorite = $state(false);
 

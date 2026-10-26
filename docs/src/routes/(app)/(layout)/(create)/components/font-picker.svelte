@@ -1,8 +1,8 @@
 <script lang="ts">
 	import * as Picker from "./picker/index.js";
-	import { FONTS } from "$lib/fonts.js";
-	import { useDesignSystem } from "$lib/features/design-system/index.js";
-	import { IsMobile } from "$lib/registry/hooks/is-mobile.svelte.js";
+	import { FONTS } from "#lib/fonts.js";
+	import { useDesignSystem } from "#lib/features/design-system/index.js";
+	import { IsMobile } from "#lib/registry/hooks/is-mobile.svelte.js";
 	import LockButton from "./lock-button.svelte";
 
 	type FontPickerOption = {

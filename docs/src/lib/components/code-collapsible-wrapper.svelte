@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { cn } from "$lib/utils.js";
-	import { Button } from "$lib/registry/ui/button/index.js";
-	import * as Collapsible from "$lib/registry/ui/collapsible/index.js";
-	import { Separator } from "$lib/registry/ui/separator/index.js";
+	import { cn } from "#lib/utils.js";
+	import { Button } from "#lib/registry/ui/button/index.js";
+	import * as Collapsible from "#lib/registry/ui/collapsible/index.js";
+	import { Separator } from "#lib/registry/ui/separator/index.js";
 	import type { ComponentProps } from "svelte";
 
 	let {

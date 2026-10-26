@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { buttonVariants } from "$lib/registry/ui/button/button.svelte";
-	import * as DropdownMenu from "$lib/registry/ui/dropdown-menu/index.js";
-	import * as Tooltip from "$lib/registry/ui/tooltip/index.js";
+	import { buttonVariants } from "#lib/registry/ui/button/button.svelte";
+	import * as DropdownMenu from "#lib/registry/ui/dropdown-menu/index.js";
+	import * as Tooltip from "#lib/registry/ui/tooltip/index.js";
 	import IconPlaceholder from "./icon-placeholder/icon-placeholder.svelte";
 	import StylePicker from "../../routes/(app)/(layout)/(create)/components/style-picker.svelte";
 	import BaseColorPicker from "../../routes/(app)/(layout)/(create)/components/base-color-picker.svelte";
@@ -13,15 +13,15 @@
 	import MenuColorPicker from "../../routes/(app)/(layout)/(create)/components/menu-color-picker.svelte";
 	import MenuAccentPicker from "../../routes/(app)/(layout)/(create)/components/menu-accent-picker.svelte";
 	import CustomizerControls from "../../routes/(app)/(layout)/(create)/components/customizer-controls.svelte";
-	import { FONT_HEADING_OPTIONS, FONTS } from "$lib/fonts.js";
-	import { cn } from "$lib/utils.js";
+	import { FONT_HEADING_OPTIONS, FONTS } from "#lib/fonts.js";
+	import { cn } from "#lib/utils.js";
 	import ModeSwitcher from "./mode-switcher.svelte";
 	import { setMode, mode } from "mode-watcher";
-	import * as Kbd from "$lib/registry/ui/kbd/index.js";
+	import * as Kbd from "#lib/registry/ui/kbd/index.js";
 	import UndoIcon from "@lucide/svelte/icons/undo";
 	import RedoIcon from "@lucide/svelte/icons/redo";
-	import { useDesignSystem } from "$lib/features/design-system/index.js";
-	import { useIsMac } from "$lib/hooks/use-is-mac.svelte.js";
+	import { useDesignSystem } from "#lib/features/design-system/index.js";
+	import { useIsMac } from "#lib/hooks/use-is-mac.svelte.js";
 
 	const isMac = useIsMac();
 	const designSystem = useDesignSystem();

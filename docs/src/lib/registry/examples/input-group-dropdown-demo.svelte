@@ -1,6 +1,6 @@
 <script lang="ts">
-	import * as DropdownMenu from "$lib/registry/ui/dropdown-menu/index.js";
-	import * as InputGroup from "$lib/registry/ui/input-group/index.js";
+	import * as DropdownMenu from "#lib/registry/ui/dropdown-menu/index.js";
+	import * as InputGroup from "#lib/registry/ui/input-group/index.js";
 	import ChevronDownIcon from "@lucide/svelte/icons/chevron-down";
 	import MoreHorizontalIcon from "@lucide/svelte/icons/more-horizontal";
 </script>

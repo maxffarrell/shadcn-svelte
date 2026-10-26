@@ -1,15 +1,15 @@
 <script lang="ts">
 	import type { Command } from "package-manager-detector";
-	import * as Tabs from "$lib/registry/ui/tabs/index.js";
-	import { Button } from "$lib/registry/ui/button/index.js";
-	import * as Tooltip from "$lib/registry/ui/tooltip/index.js";
-	import { getCommand, PACKAGE_MANAGERS, type PackageManager } from "$lib/package-manager.js";
-	import { UseClipboard } from "$lib/hooks/use-clipboard.svelte.js";
+	import * as Tabs from "#lib/registry/ui/tabs/index.js";
+	import { Button } from "#lib/registry/ui/button/index.js";
+	import * as Tooltip from "#lib/registry/ui/tooltip/index.js";
+	import { getCommand, PACKAGE_MANAGERS, type PackageManager } from "#lib/package-manager.js";
+	import { UseClipboard } from "#lib/hooks/use-clipboard.svelte.js";
 	import TerminalIcon from "@lucide/svelte/icons/terminal";
 	import CopyIcon from "@tabler/icons-svelte/icons/copy";
 	import CheckIcon from "@tabler/icons-svelte/icons/check";
-	import { UserConfigContext } from "$lib/user-config.svelte.js";
-	import { cn } from "$lib/utils.js";
+	import { UserConfigContext } from "#lib/user-config.svelte.js";
+	import { cn } from "#lib/utils.js";
 
 	const {
 		type,

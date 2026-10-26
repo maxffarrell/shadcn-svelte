@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { cn } from "$lib/utils.js";
+	import { cn } from "#lib/utils.js";
 	import ChartCodeViewer from "./chart-code-viewer.svelte";
-	import { Separator } from "$lib/registry/ui/separator/index.js";
+	import { Separator } from "#lib/registry/ui/separator/index.js";
 	import AreaChartIcon from "@lucide/svelte/icons/area-chart";
 	import BarChartBigIcon from "@lucide/svelte/icons/bar-chart-big";
 	import HexagonIcon from "@lucide/svelte/icons/hexagon";

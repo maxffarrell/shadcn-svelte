@@ -1,10 +1,10 @@
 <script lang="ts">
 	import * as Picker from "./picker/index.js";
-	import { useDesignSystem } from "$lib/features/design-system/index.js";
-	import { IsMobile } from "$lib/registry/hooks/is-mobile.svelte.js";
+	import { useDesignSystem } from "#lib/features/design-system/index.js";
+	import { IsMobile } from "#lib/registry/hooks/is-mobile.svelte.js";
 	import LockButton from "./lock-button.svelte";
 	import { mode } from "mode-watcher";
-	import { BASE_THEMES, THEMES, type BaseTheme, type Theme } from "$lib/registry/config.js";
+	import { BASE_THEMES, THEMES, type BaseTheme, type Theme } from "#lib/registry/config.js";
 
 	type Props = {
 		submenu?: boolean;

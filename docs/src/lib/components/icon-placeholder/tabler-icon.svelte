@@ -1,8 +1,8 @@
 <script lang="ts">
 	import type { Snippet } from "svelte";
 	import type { SVGAttributes } from "svelte/elements";
-	import type { TablerIconName } from "$lib/registry/icons/__tabler__/index.js";
-	import { cn } from "$lib/utils.js";
+	import type { TablerIconName } from "#lib/registry/icons/__tabler__/index.js";
+	import { cn } from "#lib/utils.js";
 	import { tablerIconLoader } from "./icon-loader.js";
 
 	type Props = SVGAttributes<SVGSVGElement> & {

@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { UseClipboard } from "$lib/hooks/use-clipboard.svelte.js";
+	import { UseClipboard } from "#lib/hooks/use-clipboard.svelte.js";
 	import { ComponentCodeViewerContext } from "./component-code-viewer.svelte";
-	import { Button } from "$lib/registry/ui/button/index.js";
+	import { Button } from "#lib/registry/ui/button/index.js";
 	import CopyIcon from "@tabler/icons-svelte/icons/copy";
 	import CheckIcon from "@tabler/icons-svelte/icons/check";
-	import { cn } from "$lib/utils.js";
+	import { cn } from "#lib/utils.js";
 	import type { ComponentProps } from "svelte";
 
 	let { class: className }: ComponentProps<typeof Button> = $props();

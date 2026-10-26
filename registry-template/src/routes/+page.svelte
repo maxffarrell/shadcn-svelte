@@ -1,8 +1,8 @@
 <script lang="ts">
-	import HelloWorld from "$lib/registry/blocks/hello-world/hello-world.svelte";
-	import ExampleForm from "$lib/registry/blocks/example-form/example-form.svelte";
-	import PokemonPage from "$lib/registry/blocks/complex-component/+page.svelte";
-	import ExampleCard from "$lib/registry/blocks/example-with-css/example-card.svelte";
+	import HelloWorld from "#lib/registry/blocks/hello-world/hello-world.svelte";
+	import ExampleForm from "#lib/registry/blocks/example-form/example-form.svelte";
+	import PokemonPage from "#lib/registry/blocks/complex-component/+page.svelte";
+	import ExampleCard from "#lib/registry/blocks/example-with-css/example-card.svelte";
 
 	// This page displays items from the custom registry.
 	// You are free to implement this with your design as needed.

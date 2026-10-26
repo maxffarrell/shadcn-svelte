@@ -1,6 +1,6 @@
 <script lang="ts">
-	import * as Card from "$lib/registry/ui/card/index.js";
-	import * as Chart from "$lib/registry/ui/chart/index.js";
+	import * as Card from "#lib/registry/ui/card/index.js";
+	import * as Chart from "#lib/registry/ui/chart/index.js";
 	import { ArcChart, Text } from "layerchart";
 	import TrendingUpIcon from "@lucide/svelte/icons/trending-up";
 

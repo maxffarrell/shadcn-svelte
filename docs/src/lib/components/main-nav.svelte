@@ -1,9 +1,9 @@
 <script lang="ts">
-	import Button from "$lib/registry/ui/button/button.svelte";
-	import { cn } from "$lib/utils.js";
+	import Button from "#lib/registry/ui/button/button.svelte";
+	import { cn } from "#lib/utils.js";
 	import type { HTMLAttributes } from "svelte/elements";
 	import { page } from "$app/state";
-	import type { NavItem } from "$lib/navigation.js";
+	import type { NavItem } from "#lib/navigation.js";
 
 	let {
 		items,

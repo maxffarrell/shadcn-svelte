@@ -1,9 +1,9 @@
 <script lang="ts">
-	import * as Command from "$lib/registry/ui/command/index.js";
+	import * as Command from "#lib/registry/ui/command/index.js";
 	import { goto } from "$app/navigation";
 	import { page } from "$app/state";
 	import { groupItemsByType } from "../lib/utils.js";
-	import { examples } from "$lib/registry/examples/create/index.js";
+	import { examples } from "#lib/registry/examples/create/index.js";
 	import type { Snippet } from "svelte";
 	import { ActionMenuContext, ActionMenuCtx } from "./action-menu-context.svelte.js";
 

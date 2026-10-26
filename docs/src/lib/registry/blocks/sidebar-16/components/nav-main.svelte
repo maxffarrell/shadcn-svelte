@@ -1,8 +1,8 @@
 <script lang="ts">
 	import type { Component } from "svelte";
 	import ChevronRightIcon from "@lucide/svelte/icons/chevron-right";
-	import * as Sidebar from "$lib/registry/ui/sidebar/index.js";
-	import * as Collapsible from "$lib/registry/ui/collapsible/index.js";
+	import * as Sidebar from "#lib/registry/ui/sidebar/index.js";
+	import * as Collapsible from "#lib/registry/ui/collapsible/index.js";
 
 	let {
 		items,

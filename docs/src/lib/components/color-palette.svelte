@@ -1,6 +1,6 @@
 <script lang="ts">
-	import type { ColorPalette } from "$lib/colors.js";
-	import { UseClipboard } from "$lib/hooks/use-clipboard.svelte.js";
+	import type { ColorPalette } from "#lib/colors.js";
+	import { UseClipboard } from "#lib/hooks/use-clipboard.svelte.js";
 	import ColorFormatSelector from "./color-format-selector.svelte";
 	import Color from "./color.svelte";
 

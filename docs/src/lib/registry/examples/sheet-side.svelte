@@ -1,7 +1,7 @@
 <script lang="ts">
-	import * as Sheet from "$lib/registry/ui/sheet/index.js";
-	import { buttonVariants } from "$lib/registry/ui/button/index.js";
-	import { Button } from "$lib/registry/ui/button/index.js";
+	import * as Sheet from "#lib/registry/ui/sheet/index.js";
+	import { buttonVariants } from "#lib/registry/ui/button/index.js";
+	import { Button } from "#lib/registry/ui/button/index.js";
 
 	const SHEET_SIDES = ["top", "right", "bottom", "left"] as const;
 </script>
