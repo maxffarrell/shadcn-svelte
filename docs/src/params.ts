@@ -1,10 +1,8 @@
 import { defineParams } from "@sveltejs/kit/params";
-import { isBlock, type BlockName } from "#lib/blocks.js";
+import { blocks } from "./__registry__/blocks.ts";
 
-const matchView = (param: string): param is BlockName => {
-	return isBlock(param);
-};
+type BlockName = (typeof blocks)[number];
 
 export const params = defineParams({
-	view: (param) => (matchView(param) ? param : undefined),
+	view: (param) => (blocks.includes(param as BlockName) ? (param as BlockName) : undefined),
 });
