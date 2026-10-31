@@ -8,13 +8,19 @@ allowBuilds:
   esbuild: true
   sharp: true
   workerd: true
+  "@tailwindcss/oxide": true
 
 catalog:
   "@sveltejs/kit": ^2.60.1
   "@sveltejs/vite-plugin-svelte": ^6.2.4
   svelte: ^5.57.2
   svelte-check: ^4.7.4
-  tsdown: ^0.22.14
-  typescript: ^6.0.3
-  "@typescript/native": npm:typescript@7.1.0-beta
+  tsdown: ^0.23.4
+  typescript: 7.1.0-beta
   vite: ^7.3.1
+
+# Keep peer dependency resolution from silently reinstalling the legacy compiler.
+overrides:
+  typescript: 7.1.0-beta
+  # 0.29 detects the 7.1 declaration API; older releases only recognize 7.0.
+  rolldown-plugin-dts: 0.29.0

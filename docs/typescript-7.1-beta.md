@@ -1,34 +1,58 @@
-# TypeScript 7.1 beta experiment
+# TypeScript 7.1 beta migration experiment
 
-Date: 2026-10-31. Baseline: `fe4b0ad3b8b30c6745346db008c3307b5afeabb1`. Candidate: exact `typescript@7.1.0-beta` (the published beta tag at measurement time).
+Status: **blocked experimental migration; do not merge yet**. Candidate uses only `typescript@7.1.0-beta` in the workspace dependency graph. Baseline upstream is `fe4b0ad3b8b30c6745346db008c3307b5afeabb1`. Measurements: 2026-10-31.
 
-## Method
+## Final dependency setup
 
-Linux x86_64 cloud VM, 5 visible Intel Xeon Platinum 8573C CPUs, Node 24.22.1, pnpm 12.14.0. Three consecutive fresh command processes (except the final BPC hybrid build, which is one validation run), with dependencies already installed, retaining generated files and compiler/build caches. Times include pnpm startup and all script steps. These are exploratory wall-clock observations, not controlled performance claims: baseline project installs/builds/checks overlapped and shared CPU; caches were not reset. Re-run serially on an idle machine before drawing a performance conclusion. Memory is not compared because the harness records cumulative child high-water marks. No browser runtime or editor latency was measured.
+The workspace catalog pins TypeScript to `7.1.0-beta`; the former `@typescript/native` alias and TypeScript 6 fallback are removed. Docs use the same catalog as the other workspace packages. A TypeScript override prevents incompatible peer dependencies from silently installing TypeScript 5 or 6. This override deliberately does not imply those tools support TypeScript 7.
 
-| Command / variant         | Seconds (all recorded runs) | Median seconds | Exit codes |
-| ------------------------- | --------------------------- | -------------- | ---------- |
-| shadcn-baseline-build-cli | 7.803, 8.238, 8.831         | 8.238          | 0, 0, 0    |
-| shadcn-baseline-check     | 46.578, 59.454, 57.733      | 57.733         | 0, 0, 0    |
-| shadcn-beta-build-cli     | 0.329, 0.361, 0.338         | 0.338          | 1, 1, 1    |
-| shadcn-beta-check         | 1.234, 0.133, 0.107         | 0.133          | 1, 1, 1    |
-| shadcn-hybrid-build-cli   | 7.457, 7.405, 7.709         | 7.457          | 0, 0, 0    |
-| shadcn-hybrid-check       | 22.47, 22.951, 21.038       | 22.470         | 1, 1, 1    |
+`tsdown` is upgraded from 0.22.14 to 0.23.4. Its declaration plugin is overridden to `rolldown-plugin-dts@0.29.0`, which recognizes the TypeScript 7.1 declaration API. The older plugin chooses the classic generator and crashes at `ts.sys.useCaseSensitiveFileNames`. The new combination successfully emits the CLI's JavaScript and `.d.mts` declarations using TypeScript 7.1.
 
-## Compatibility and interpretation
+`pnpm list -r typescript --depth Infinity --json` confirms that the final resolved graph contains only `7.1.0-beta`. No source strictness settings, diagnostics, declaration generation, or lint checks have been disabled. Incompatible peer warnings are expected. The standalone `repro` project and CLI test fixtures are outside the workspace compiler migration; their fixture manifests still describe older consumer projects.
 
-Upstream uses TypeScript 6.0.3 via the workspace catalog, with docs separately on 5.9.3. The final setup retains TypeScript 6 in the catalog for tooling, moves docs onto that catalog, and installs the beta as `@typescript/native`. Docs and primitives use `svelte-check --tsgo`; plain TypeScript package checks and declaration builds still use TypeScript 6. This is a native Svelte-check trial, not a complete removal of TypeScript 6. Baseline full checks pass with 0 errors and 0 warnings.
+## Successful performance comparison
+
+Linux x86_64 cloud VM, 5 visible Intel Xeon Platinum 8573C CPUs, Node 24.22.1, pnpm 12.14.0. Three fresh processes per compiler, sequentially on the same CLI sources and dependency graph, with no concurrent benchmark/build jobs and no compiler-output cache reset. Command: `node <compiler>/bin/tsc --noEmit`, working directory `packages/cli`.
+
+The TS6 reference compiler was retained on disk from the previous baseline installation solely for this A/B measurement. It is absent from the candidate dependency graph. Results exclude pnpm startup. The reference is TypeScript 6.0.3; the candidate is 7.1.0-beta.
+
+| Command                                        | Seconds             | Median  | Result   |
+| ---------------------------------------------- | ------------------- | ------- | -------- |
+| Isolated CLI check, TS6                        | 2.620, 2.433, 2.463 | 2.463 s | All pass |
+| Isolated CLI check, TS7.1                      | 0.459, 0.447, 0.462 | 0.459 s | All pass |
+| CLI build, TS7.1 + updated declaration tooling | 0.981, 0.916, 0.968 | 0.968 s | All pass |
+
+For the isolated CLI check, TS7.1 used **81.4% less elapsed time (about 5.37x faster)**. These are small-sample warm-filesystem observations on shared hardware, not guarantees. The build has no directly comparable isolated TS6 build baseline; the earlier full-package-build baseline measures a different command. Compiler/runtime versions and declaration tooling changed, so no whole-project or browser-runtime speedup is claimed. Memory was not compared.
+
+## Validation and remaining blockers
+
+| Validation                                        | Result                                                                                                                                                                                                                |
+| ------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Frozen install with `--ignore-scripts`            | Pass; manifest and lockfile agree                                                                                                                                                                                     |
+| CLI `tsc --noEmit`                                | Pass                                                                                                                                                                                                                  |
+| Parity, sv add-on, registry add-on `tsc --noEmit` | All pass                                                                                                                                                                                                              |
+| CLI `tsdown --minify`, including declarations     | Pass, three measured runs                                                                                                                                                                                             |
+| Full workspace `pnpm check`                       | Fails: svelte-check explicitly requires TypeScript 6 plus native TypeScript 7                                                                                                                                         |
+| Primitives `svelte-package`                       | Fails: svelte2tsx `emitDts is not compatible with TypeScript 7.1.0-beta`                                                                                                                                              |
+| Full package build `pnpm build:cli`               | Fails at primitives packaging; standalone CLI build passes                                                                                                                                                            |
+| ESLint on CLI entry                               | Fails: typescript-eslint explicitly rejects TypeScript 7's API                                                                                                                                                        |
+| CLI tests                                         | 259 passed, 8 failed in 2 files; failures concern proxy expectations under the inherited proxy environment. A matching baseline test run was not performed, so these are not claimed as proven pre-existing failures. |
+
+The latest releases checked during this experiment still declare legacy API requirements: svelte-check 4.7.7 supports TypeScript 5/6, svelte2tsx 0.7.62 supports TypeScript 4.9/5/6, @sveltejs/package 3.0.2 requires TypeScript 6, and typescript-eslint 8.72.1 requires TypeScript below 6.1. Upgrading those packages therefore does not offer a supported TS7-only migration today. The branch retains the repository's existing Svelte and lint tool versions and exposes their failures. Completing the migration requires upstream support or a separately reviewed replacement of the Svelte checking, declaration-emission, and linting toolchain. Normal postinstall invokes the full build and remains blocked; installation currently requires `--ignore-scripts`.
+
+The full docs website build was not measured in this final setup. Failed startup timings are compatibility observations, not speedups.
+
+## Earlier experiments
+
+The raw results file also retains earlier baseline/direct-replacement/dual-install observations for traceability. They are **not the final configuration**. The original full workspace check passed with zero errors and warnings, median 57.733 s. A dual-install experiment with `svelte-check --tsgo` took a median 22.470 s but reported 139 errors in 79 docs files; diagnostics parity was not achieved, so that difference was not counted as a speedup. The earlier measurements overlapped other installs/builds/checks and retained generated/compiler caches.
 
 ## Reproduction
 
-Use the Node and pnpm versions above. On each revision, run `pnpm install --frozen-lockfile`, then run each measured command three times, recording wall time and exit status. BPC commands: `pnpm check`, `pnpm build`. shadcn-svelte commands: `pnpm check`, `pnpm build:cli` (package builds, not the full documentation website build). A failed check is a compatibility result and must not be interpreted as a speedup.
+1. Use Node 24.22.1 and pnpm 12.14.0.
+2. Run `pnpm install --frozen-lockfile --ignore-scripts`.
+3. Run `pnpm -F shadcn-svelte check` and `pnpm -F shadcn-svelte build` three times each.
+4. Run `pnpm -r -F './packages/cli' -F './packages/parity' -F './sv-addons/*' check`.
+5. Run `pnpm check`, `pnpm build:cli`, `pnpm -F @shadcn-svelte/primitives package`, and `pnpm exec eslint packages/cli/src/index.ts --no-config-lookup --config eslint.config.js` to reproduce the remaining blockers.
+6. For the isolated check A/B, invoke the two exact compiler binaries directly against `packages/cli/tsconfig.json` from `packages/cli`, retaining the same sources and dependency graph. Install the TS6 reference compiler in a separate temporary directory rather than adding it to this workspace.
 
-## Findings
-
-Direct replacement (`beta` rows) fails installation/postinstall in the CLI build with `Cannot read properties of undefined (reading 'useCaseSensitiveFileNames')`. After linking with `pnpm install --frozen-lockfile --ignore-scripts`, svelte-check explicitly rejects TypeScript 7 as its only API dependency and recommends TypeScript 6 plus the native alias and `--tsgo`. Failed startup times must not be interpreted as performance gains.
-
-The final supported dual-install setup is labelled `hybrid`. Native checks pass for primitives, but docs report 139 errors and 0 warnings in 79 files, compared with 0 errors at baseline. Most errors are implicit-any callback/snippet parameters; there are also unused `@ts-expect-error` directives. Example: `docs/src/routes/(app)/(layout)/examples/dashboard/components/data-table.svelte` reports implicit-any `row`, `col`, `e`, and an unused expect-error. This could reflect compiler or Svelte transform differences and has not been attributed to a compiler bug. No strictness settings or diagnostics were suppressed. The full-check elapsed-time change is not an equivalent successful-workload speedup. Keep this draft blocked on diagnostics parity.
-
-Raw wall times and exit codes are recorded in `typescript-7.1-beta-results.json`. `baseline` is the original revision, `beta` is the rejected direct replacement, and `hybrid` is the final TypeScript 6 API plus 7.1 beta checker setup.
-
-All three hybrid checks consistently report the same 139 errors. The full-check median falls from 57.733 to 22.470 s (61.1% less elapsed time), but diagnostic differences make this an invalid parity speedup claim. Package-build median is 7.457 s versus 8.238 s (9.5% less); these builds still use TypeScript 6 for API/declaration work, so this is noise-sensitive validation rather than evidence of faster TypeScript 7 builds. The full docs website build was not measured.
+Raw wall times and exit codes, with distinct labels for each experiment, are recorded in `typescript-7.1-beta-results.json`.
