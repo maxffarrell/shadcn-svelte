@@ -1,0 +1,110 @@
+[
+	{
+		"label": "shadcn-baseline-build-cli",
+		"run": 0,
+		"seconds": 7.803,
+		"exit": 0
+	},
+	{
+		"label": "shadcn-baseline-build-cli",
+		"run": 1,
+		"seconds": 8.238,
+		"exit": 0
+	},
+	{
+		"label": "shadcn-baseline-build-cli",
+		"run": 2,
+		"seconds": 8.831,
+		"exit": 0
+	},
+	{
+		"label": "shadcn-baseline-check",
+		"run": 0,
+		"seconds": 46.578,
+		"exit": 0
+	},
+	{
+		"label": "shadcn-baseline-check",
+		"run": 1,
+		"seconds": 59.454,
+		"exit": 0
+	},
+	{
+		"label": "shadcn-baseline-check",
+		"run": 2,
+		"seconds": 57.733,
+		"exit": 0
+	},
+	{
+		"label": "shadcn-beta-build-cli",
+		"run": 0,
+		"seconds": 0.329,
+		"exit": 1
+	},
+	{
+		"label": "shadcn-beta-build-cli",
+		"run": 1,
+		"seconds": 0.361,
+		"exit": 1
+	},
+	{
+		"label": "shadcn-beta-build-cli",
+		"run": 2,
+		"seconds": 0.338,
+		"exit": 1
+	},
+	{
+		"label": "shadcn-beta-check",
+		"run": 0,
+		"seconds": 1.234,
+		"exit": 1
+	},
+	{
+		"label": "shadcn-beta-check",
+		"run": 1,
+		"seconds": 0.133,
+		"exit": 1
+	},
+	{
+		"label": "shadcn-beta-check",
+		"run": 2,
+		"seconds": 0.107,
+		"exit": 1
+	},
+	{
+		"label": "shadcn-hybrid-build-cli",
+		"run": 0,
+		"seconds": 7.457,
+		"exit": 0
+	},
+	{
+		"label": "shadcn-hybrid-build-cli",
+		"run": 1,
+		"seconds": 7.405,
+		"exit": 0
+	},
+	{
+		"label": "shadcn-hybrid-build-cli",
+		"run": 2,
+		"seconds": 7.709,
+		"exit": 0
+	},
+	{
+		"label": "shadcn-hybrid-check",
+		"run": 0,
+		"seconds": 22.47,
+		"exit": 1
+	},
+	{
+		"label": "shadcn-hybrid-check",
+		"run": 1,
+		"seconds": 22.951,
+		"exit": 1
+	},
+	{
+		"label": "shadcn-hybrid-check",
+		"run": 2,
+		"seconds": 21.038,
+		"exit": 1
+	}
+]

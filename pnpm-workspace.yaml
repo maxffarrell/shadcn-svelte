@@ -16,4 +16,5 @@ catalog:
   svelte-check: ^4.7.4
   tsdown: ^0.22.14
   typescript: ^6.0.3
+  "@typescript/native": npm:typescript@7.1.0-beta
   vite: ^7.3.1
