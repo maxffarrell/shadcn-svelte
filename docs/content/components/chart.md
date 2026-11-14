@@ -21,7 +21,7 @@ links:
 	let { viewerData } = $props();
 </script>
 
-<ComponentPreview name="chart-bar-interactive" class="-mt-2 [&_.preview]:p-0 [&_.preview]:border-t [&_.preview>div]:shadow-none [&_.preview]:border-none [&_.preview>div]:w-full [&_.preview]:lg:min-h-[404px] [&_[data-slot='card-footer']]:hidden [&_[data-slot='card']]:py-0 [&_[data-slot='card-header'].border-b]:pb-0 [&_[data-slot='card']]:bg-background [&_[data-slot='card']]:border-none" hideCode>
+<ComponentPreview name="chart-demo" class="theme-blue -mt-2 [&_.preview]:p-0 [&_.preview>div]:w-full [&_.preview>div]:shadow-none [&_.preview>div]:border-none [&_.preview]:lg:min-h-[404px]" hideCode>
 
 <div></div>
 
@@ -133,7 +133,7 @@ The following data represents the number of desktop and mobile users for each mo
 
 <Callout class="mt-4">
 
-**Note:** Your data can be in any shape. You are not limited to the shape of the data below. Use the `dataKey` prop to map your data to the chart.
+**Note:** Your data can be in any shape. You are not limited to the shape of the data below. Use the `x` prop and `series` keys to map your data to the chart.
 
 </Callout>
 
@@ -175,7 +175,7 @@ The chart config holds configuration for the chart. This is where you place huma
 
 You can now build your chart using LayerChart components. We're using the `BarChart` component in this example, which is one of LayerChart's "Simplified Charts".
 
-These components handle a lot of the common chart scaffolding for you, while allowing you to customize them to your liking.
+The example groups two bars per month. Set `props.bars.motion` to `Chart.defaultBarMotion` to grow the bars from the baseline while respecting reduced motion.
 
 {#if viewerData}
 <ComponentSource item={viewerData} data-llm-ignore/>
@@ -189,47 +189,19 @@ These components handle a lot of the common chart scaffolding for you, while all
 
 </Steps>
 
-We now have a group-stacked bar chart with an x axis and a grid.
+### Add a Grid
 
-### Adjusting the Axis Ticks
+Enable horizontal grid lines with `grid={{ x: false, y: true }}`.
 
-Our bar chart is currently displaying the full month name for each tick on the x axis. Let's shorten it to just the first three letters.
+<ComponentPreview name="chart-bar-grid-demo" class="[&_.preview]:p-4">
 
-<Steps>
+<div></div>
 
-### Add a custom formatter to the x axis
+</ComponentPreview>
 
-The `props` prop is how you can pass custom props to the various components that make up the chart. Here we're passing a custom formatter to the x axis.
+### Add an Axis
 
-```svelte showLineNumbers {21-25}
-<Chart.Container config={chartConfig} class="min-h-[200px] w-full">
-  <BarChart
-    data={chartData}
-    xScale={scaleBand().padding(0.25)}
-    x="month"
-    axis="x"
-    tooltipContext={false}
-    seriesLayout="group"
-    series={[
-      {
-        key: "desktop",
-        label: chartConfig.desktop.label,
-        color: chartConfig.desktop.color,
-      },
-      {
-        key: "mobile",
-        label: chartConfig.mobile.label,
-        color: chartConfig.mobile.color,
-      },
-    ]}
-    props={{
-      xAxis: {
-        format: (d) => d.slice(0, 3),
-      },
-    }}
-  />
-</Chart.Container>
-```
+Set `axis="x"` to show month labels. Use `props.xAxis.format` to shorten each label to three letters.
 
 <ComponentPreview name="chart-bar-axis-tick-demo" class="[&_.preview]:p-4">
 
@@ -237,52 +209,9 @@ The `props` prop is how you can pass custom props to the various components that
 
 </ComponentPreview>
 
-</Steps>
-
 ### Add Tooltip
 
-So far we've only used the `BarChart` component from LayerChart. They look great out of the box thanks to some customizations in the `chart` component.
-
-To add a tooltip, we'll use the custom `Chart.Tooltip` component from `chart`.
-
-<Steps>
-
-### Add the `Chart.Tooltip` component to the chart
-
-We'll replace the `tooltipContext={false}` prop with the `tooltip` snippet where we'll place the `Chart.Tooltip` component.
-
-```svelte showLineNumbers {26-28}
-<Chart.Container config={chartConfig} class="min-h-[200px] w-full">
-  <BarChart
-    data={chartData}
-    xScale={scaleBand().padding(0.25)}
-    x="month"
-    axis="x"
-    seriesLayout="group"
-    series={[
-      {
-        key: "desktop",
-        label: chartConfig.desktop.label,
-        color: chartConfig.desktop.color,
-      },
-      {
-        key: "mobile",
-        label: chartConfig.mobile.label,
-        color: chartConfig.mobile.color,
-      },
-    ]}
-    props={{
-      xAxis: {
-        format: (d) => d.slice(0, 3),
-      },
-    }}
-  >
-    {#snippet tooltip()}
-      <Chart.Tooltip />
-    {/snippet}
-  </BarChart>
-</Chart.Container>
-```
+Enable the tooltip context by removing `tooltipContext={false}`. Render `Chart.Tooltip` in the `tooltip` snippet.
 
 <ComponentPreview name="chart-bar-tooltip-demo" class="[&_.preview]:p-4">
 
@@ -290,57 +219,15 @@ We'll replace the `tooltipContext={false}` prop with the `tooltip` snippet where
 
 </ComponentPreview>
 
-</Steps>
-
 ### Add Legend
 
-<Steps>
-
-### Set the `legend` prop to `true`
-
-The `legend` prop is used to show a legend for the chart. We are working with LayerChart to add a payload similar to the tooltip so we can more easily create a custom legend.
-
-```svelte showLineNumbers {8}
-<Chart.Container config={chartConfig} class="min-h-[200px] w-full">
-  <BarChart
-    data={chartData}
-    xScale={scaleBand().padding(0.25)}
-    x="month"
-    axis="x"
-    seriesLayout="group"
-    legend
-    series={[
-      {
-        key: "desktop",
-        label: chartConfig.desktop.label,
-        color: chartConfig.desktop.color,
-      },
-      {
-        key: "mobile",
-        label: chartConfig.mobile.label,
-        color: chartConfig.mobile.color,
-      },
-    ]}
-    props={{
-      xAxis: {
-        format: (d) => d.slice(0, 3),
-      },
-    }}
-  >
-    {#snippet tooltip()}
-      <Chart.Tooltip />
-    {/snippet}
-  </BarChart>
-</Chart.Container>
-```
+Set the `legend` prop to show the series labels and colors.
 
 <ComponentPreview name="chart-bar-legend-demo" class="[&_.preview]:p-4">
 
 <div></div>
 
 </ComponentPreview>
-
-</Steps>
 
 Done. You've built your first chart! What's next?
 
@@ -528,3 +415,13 @@ To use a custom key for tooltip label and names, use the `labelKey` and `nameKey
 ```
 
 This will use `Total Visitors` for label and `Chrome` and `Safari` for the tooltip names.
+
+## RTL
+
+Set `dir="rtl"` on the container and enable `xReverse` on the chart to show categories from right to left.
+
+<ComponentPreview name="chart-rtl-demo" class="[&_.preview]:p-4">
+
+<div></div>
+
+</ComponentPreview>
