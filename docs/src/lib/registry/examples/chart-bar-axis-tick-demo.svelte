@@ -45,6 +45,7 @@
 			},
 		]}
 		props={{
+			bars: { motion: Chart.defaultBarMotion },
 			xAxis: {
 				format: (d) => d.slice(0, 3),
 			},

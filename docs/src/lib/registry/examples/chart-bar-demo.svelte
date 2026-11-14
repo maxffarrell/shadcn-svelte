@@ -31,6 +31,7 @@
 		x="month"
 		axis="x"
 		seriesLayout="group"
+		props={{ bars: { motion: Chart.defaultBarMotion } }}
 		tooltipContext={false}
 		series={[
 			{

@@ -2,7 +2,7 @@
 	import TrendingUpIcon from "@lucide/svelte/icons/trending-up";
 	import { scaleBand } from "d3-scale";
 	import { curveNatural } from "d3-shape";
-	import { LineChart, Spline, ChartClipPath, Points, Circle } from "layerchart";
+	import { LineChart, Spline, Points, Circle } from "layerchart";
 	import * as Card from "$lib/registry/ui/card/index.js";
 	import * as Chart from "$lib/registry/ui/chart/index.js";
 
@@ -49,9 +49,12 @@
 				}}
 			>
 				{#snippet marks()}
-					<ChartClipPath initialWidth={0} motion={Chart.defaultClipMotion}>
-						<Spline curve={curveNatural} strokeWidth={2} stroke="var(--color-visitors)" />
-					</ChartClipPath>
+					<Spline
+						draw={Chart.lineDraw()}
+						curve={curveNatural}
+						strokeWidth={2}
+						stroke="var(--color-visitors)"
+					/>
 				{/snippet}
 				{#snippet points()}
 					<Points>

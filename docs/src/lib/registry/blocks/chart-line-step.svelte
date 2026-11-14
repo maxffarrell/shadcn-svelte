@@ -2,7 +2,7 @@
 	import TrendingUpIcon from "@lucide/svelte/icons/trending-up";
 	import { scaleUtc } from "d3-scale";
 	import { curveStep } from "d3-shape";
-	import { LineChart, Spline, ChartClipPath } from "layerchart";
+	import { LineChart, Spline } from "layerchart";
 	import * as Card from "$lib/registry/ui/card/index.js";
 	import * as Chart from "$lib/registry/ui/chart/index.js";
 
@@ -47,11 +47,15 @@
 				}}
 			>
 				{#snippet marks({ context })}
-					<ChartClipPath initialWidth={0} motion={Chart.defaultClipMotion}>
-						{#each context.series.visibleSeries as s (s.key)}
-							<Spline seriesKey={s.key} curve={curveStep} strokeWidth={2} {...s.props} />
-						{/each}
-					</ChartClipPath>
+					{#each context.series.visibleSeries as s (s.key)}
+						<Spline
+							draw={Chart.lineDraw()}
+							seriesKey={s.key}
+							curve={curveStep}
+							strokeWidth={2}
+							{...s.props}
+						/>
+					{/each}
 				{/snippet}
 				{#snippet tooltip()}
 					<Chart.Tooltip hideLabel />

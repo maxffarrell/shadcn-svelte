@@ -9,6 +9,7 @@ export {
 	defaultMotion,
 	defaultBarMotion,
 	defaultClipMotion,
+	lineDraw,
 	defaultRadarScale,
 } from "./easing.js";
 

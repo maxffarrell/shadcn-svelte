@@ -66,6 +66,11 @@ export const defaultClipMotion = {
 	width: { type: "tween", duration: () => (prefersReducedMotion.current ? 0 : 1500), easing: ease },
 } as const;
 
+/** Draw a line along its length, with the same timing as an area reveal. */
+export function lineDraw() {
+	return { duration: prefersReducedMotion.current ? 0 : 1500, easing: ease };
+}
+
 /** Default tweened options for radar chart scale animation */
 export const defaultRadarScale = {
 	duration: () => (prefersReducedMotion.current ? 0 : 1500),
